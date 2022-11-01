@@ -10,14 +10,12 @@ import java.io.FileWriter;
 
 public class ReadTextFromURL {
 
-	public static void main(String[] args) {
+	public static void readURL(String url) {
 
 		try {
 
-			URL url = new URL("https://fenix.iscte-iul.pt/publico/publicPersonICalendar.do?method=iCalendar&username=tmmfo1@iscte.pt&password=oN93nFF9kYTy0A5nUzsLh3wWkwPPkxJeZlYWXHbqGQNgQq2r57pTpOPlpPzcx1gjfgjFReV1Wp3OjNe1SdVSg8NuGDUy06UQ17URCUFVbRAeucNLayOdmeTHk3wEn96g\r\n"
-					+ "\r\n"
-					+ "");
-
+			URL url1 = new URL(url);
+			
 			try {
 				File myObj = new File("file.txt");
 				if (myObj.createNewFile()) {
@@ -31,7 +29,7 @@ public class ReadTextFromURL {
 			}
 
 
-			BufferedReader in = new BufferedReader(new InputStreamReader(url.openStream()));
+			BufferedReader in = new BufferedReader(new InputStreamReader(url1.openStream()));
 
 			String line;
 			FileWriter myWriter = new FileWriter("file.txt");
@@ -53,4 +51,8 @@ public class ReadTextFromURL {
 			System.out.println("I/O Error: " + e.getMessage());
 		}
 	}
+	public static void main(String args[]){
+		readURL("https://fenix.iscte-iul.pt/publico/publicPersonICalendar.do?method=iCalendar&username=tmmfo1@iscte.pt&password=oN93nFF9kYTy0A5nUzsLh3wWkwPPkxJeZlYWXHbqGQNgQq2r57pTpOPlpPzcx1gjfgjFReV1Wp3OjNe1SdVSg8NuGDUy06UQ17URCUFVbRAeucNLayOdmeTHk3wEn96g");
+	}
+	
 }
