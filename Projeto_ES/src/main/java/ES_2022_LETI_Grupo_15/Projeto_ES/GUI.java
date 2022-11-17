@@ -30,6 +30,7 @@ public class GUI extends JFrame implements ActionListener {
 	JComboBox<Integer> numeroMembros = new JComboBox<Integer>();
 	JLabel label;
 	JComboBox<String> alturaDoDia = new JComboBox<String>();
+	JComboBox<String> periocidade = new JComboBox<String>();
 
 	GUI(){		
 
@@ -98,6 +99,15 @@ public class GUI extends JFrame implements ActionListener {
 		alturaDoDia.addItem("Manhã");
 		alturaDoDia.addItem("Tarde");
 		alturaDoDia.addItem("Noite");
+		
+		periocidade.setSize(200, 200);
+		periocidade.setLocation(600, 400);
+		periocidade.addActionListener(this);
+		this.setVisible(true);
+		this.add(periocidade);
+
+		periocidade.addItem("uma só vez");
+		periocidade.addItem("periódica");
 
 		this.setTitle("Meeting planner");
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
