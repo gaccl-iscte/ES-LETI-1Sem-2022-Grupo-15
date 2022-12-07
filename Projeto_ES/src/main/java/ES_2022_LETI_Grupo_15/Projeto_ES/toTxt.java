@@ -10,7 +10,7 @@ import java.nio.channels.ReadableByteChannel;
 
 public class toTxt {
 
-	static void convert(String urlStr, String file) throws IOException {
+	public static void convert(String urlStr, String file) throws IOException {
 		URL url = new URL(urlStr);
 		ReadableByteChannel rbc = Channels.newChannel(url.openStream());
 		FileOutputStream fos = new FileOutputStream(file);
@@ -19,7 +19,7 @@ public class toTxt {
 		rbc.close();
 	}
 
-	static void convert(File file, String result) throws IOException {  
+	public static void convert(File file, String result) throws IOException {  
 		FileInputStream fin = new FileInputStream(file);
 		ReadableByteChannel rbc = Channels.newChannel(fin);
 		FileOutputStream fos = new FileOutputStream(result);
