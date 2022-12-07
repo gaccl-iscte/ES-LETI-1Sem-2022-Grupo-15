@@ -162,6 +162,67 @@ public class GenerateMetting extends JFrame implements ActionListener{
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		// TODO Auto-generated method stub
-		
+		if(e.getSource() == gerar) {
+			if(data.isVisible()) {
+				if(!isDateValid(data.getDate())) {
+					System.out.println("erro");
+				}else {
+					this.setVisible(false);
+					new Metting();
+					periodicidade.getSelectedItem();
+					tempo.getSelectedItem();
+					duracao.getValue();
+				}
+			}else {
+				this.setVisible(false);
+				new Metting();
+				periodicidade.getSelectedItem();
+				tempo.getSelectedItem();
+				duracao.getValue();
+			}
+		}else if(e.getSource() == auto) {
+			lblperiodicidade.setVisible(true);
+			periodicidade.setVisible(true);
+			lblduracao.setVisible(true);
+			duracao.setVisible(true);
+			lbltempo.setVisible(true);
+			tempo.setVisible(true);
+			gerar.setVisible(true);
+			lbldata.setVisible(false);
+			data.setVisible(false);
+			lblhora.setVisible(false);
+			hora.setVisible(false);
+		}else if(e.getSource() == manual) {
+			lbltempo.setVisible(false);
+			tempo.setVisible(false);
+			lblperiodicidade.setVisible(true);
+			periodicidade.setVisible(true);
+			lblduracao.setVisible(true);
+			duracao.setVisible(true);
+			gerar.setVisible(true);
+			lbldata.setVisible(true);
+			data.setVisible(true);
+			lblhora.setVisible(true);
+			hora.setVisible(true);
+		}
+	}
+
+	public JFrame getFrameInstance() {
+		return this;
+	}
+
+	final static String DATE_FORMAT = "dd/MM/yyyy";
+
+	public static boolean isDateValid(Date date) {
+		DateFormat df = new SimpleDateFormat(DATE_FORMAT);
+		df.setLenient(false);
+		//Date data = df.parse(date);
+		if(date == null) {
+			return false;
+		}
+		if(date.before(new Date())){
+			return false;
+		}
+		return true;
 	}
 }

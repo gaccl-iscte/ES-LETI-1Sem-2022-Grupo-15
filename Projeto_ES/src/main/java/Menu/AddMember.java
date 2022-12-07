@@ -16,6 +16,7 @@ import javax.swing.JCheckBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
+import javax.swing.text.BadLocationException;
 
 import ES_2022_LETI_Grupo_15.Projeto_ES.toTxt;
 import ES_2022_LETI_Grupo_15.Projeto_ES.txtToObject;
@@ -153,12 +154,17 @@ public class AddMember extends JFrame implements ActionListener{
 				try {
 					files2Metting = txtToObject.convert(filesMetting, nomesMetting);					
 					files2 = txtToObject.convert(files, nomes);
-					
+
 				} catch (FileNotFoundException e1) {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
 				}
-				new GenerateMetting();
+				try {
+					new GenerateMetting();
+				} catch (BadLocationException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
 			}
 		}
 	}
