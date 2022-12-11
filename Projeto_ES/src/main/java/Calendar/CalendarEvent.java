@@ -21,6 +21,7 @@ public class CalendarEvent {
 	private String text;
 	private Color color;
 	private ArrayList<String> nomes;
+	private double x;
 
 	public CalendarEvent(LocalDate date, LocalTime start, LocalTime end, String text, ArrayList<String> nomes) {
 		this(date, start, end, text, nomes, DEFAULT_COLOR);
@@ -92,6 +93,14 @@ public class CalendarEvent {
 	public Color getColor() {
 		return color;
 	}
+	
+	public double getX() {
+        return this.x;
+    }
+
+    public void setX(double d) {
+        this.x = d;
+    }
 	
 //	public int compareTo(CalendarEvent o) {
 //	    return getDate().compareTo(o.getDate());

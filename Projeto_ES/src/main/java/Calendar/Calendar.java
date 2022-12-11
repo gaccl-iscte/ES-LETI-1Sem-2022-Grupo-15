@@ -215,6 +215,7 @@ public abstract class Calendar extends JComponent {
 		drawTodayShade();
 		drawGrid();
 		drawTimes();
+		setXEvents();
 		drawEvents();
 		drawCurrentTimeLine();
 	}
@@ -333,11 +334,12 @@ public abstract class Calendar extends JComponent {
 
 			//AQUI
 
-			Rectangle2D rect = new Rectangle2D.Double(x, y0, dayWidth, (timeToPixel(event.getEnd()) - timeToPixel(event.getStart())));
+			Rectangle2D rect = new Rectangle2D.Double(x, y0, dayWidth/getNumEvents(event), (timeToPixel(event.getEnd()) - timeToPixel(event.getStart())));
 			Color origColor = g2.getColor();
 			g2.setColor(event.getColor());
 			g2.fill(rect);
 			g2.setColor(origColor);
+			g2.drawRect((int)x, (int)y0, (int)dayWidth / getNumEvents(event), (int)(timeToPixel(event.getEnd()) - timeToPixel(event.getStart())));
 
 			// Draw time header
 
@@ -372,6 +374,61 @@ public abstract class Calendar extends JComponent {
 			g2.setFont(origFont);            
 		}
 	}
+
+
+	private int getNumEvents(CalendarEvent e) {
+		int count = 1;
+		ArrayList<CalendarEvent> equal = new ArrayList<>();
+		equal.add(e);
+		for(CalendarEvent event : events) {
+			if(event.getDate().equals(e.getDate()) && !event.equals(e)) {
+				if(event.getStart().isAfter(e.getStart()) && event.getEnd().isBefore(e.getEnd())
+						|| event.getStart().isBefore(e.getEnd()) && event.getEnd().isAfter(e.getEnd())
+						||event.getStart().isBefore(e.getStart()) && event.getEnd().isAfter(e.getStart())
+						||event.getStart().equals(e.getStart()) && event.getEnd().equals(e.getEnd())
+						||event.getStart().equals(e.getStart()) && event.getEnd().isBefore(e.getEnd())
+						|| event.getStart().equals(e.getStart()) && event.getEnd().isAfter(e.getEnd())){
+					count++;
+					equal.add(event);
+				}
+			}
+		}
+		for(CalendarEvent event : equal) {
+			for(CalendarEvent event1 : equal) {
+				if(event.getStart().equals(event1.getEnd())) {
+					count --;
+				}
+			}
+		}
+		return count;
+	}
+
+	private void setXEvents() {
+		for(CalendarEvent event : events) {
+			ArrayList<CalendarEvent> equal = new ArrayList<>();
+			equal.add(event);
+			for(CalendarEvent e : events) {
+				if(event.getDate().equals(e.getDate()) && !event.equals(e)) {
+					if(event.getStart().isAfter(e.getStart()) && event.getEnd().isBefore(e.getEnd())
+							|| event.getStart().isBefore(e.getEnd()) && event.getEnd().isAfter(e.getEnd())
+							|| event.getStart().isBefore(e.getStart()) && event.getEnd().isAfter(e.getStart())
+							|| event.getStart().equals(e.getStart()) && event.getEnd().equals(e.getEnd())
+							|| event.getStart().equals(e.getStart()) && event.getEnd().isBefore(e.getEnd())
+							|| event.getStart().equals(e.getStart()) && event.getEnd().isAfter(e.getEnd())){
+						equal.add(e);
+					}
+				}
+			}
+			double i = 0;
+			for(int x = 0; x<equal.size(); x++) {
+				equal.get(x).setX(dayToPixel(equal.get(x).getDate().getDayOfWeek())+i);
+				i = i + dayWidth / getNumEvents(event);
+			}
+		}
+	}
+
+
+
 
 	protected double getDayWidth() {
 		return dayWidth;
