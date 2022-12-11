@@ -231,31 +231,22 @@ public class txtToObject {
 			// verificar se as datas são iguais
 			if(event.getDate().equals(date)) {
 
-				if(event.getStart().isAfter(start) && event.getEnd().isBefore(end) && !Collections.disjoint(event.getNomes(), nomes)) {
-					// começa antes acaba depois
-					return false;
+				if(event.getStart().isAfter(start) && event.getEnd().isBefore(end) && !Collections.disjoint(event.getNomes(), nomes) 
 
-				} else if (event.getStart().isBefore(end) && event.getEnd().isAfter(end) && !Collections.disjoint(event.getNomes(), nomes)) {
-					// começa antes acaba dentro
-					return false;
+						|| event.getStart().isBefore(end) && event.getEnd().isAfter(end) && !Collections.disjoint(event.getNomes(), nomes) 
 
-				} else if (event.getStart().isBefore(start) && event.getEnd().isAfter(start) && !Collections.disjoint(event.getNomes(), nomes)) {
-					// começa dentro acaba depois
-					return false;
-				} else if (event.getStart().equals(start) && event.getEnd().equals(end) && !Collections.disjoint(event.getNomes(), nomes)) {
-					// horas iguais
-					return false;
-				} else if (event.getStart().equals(start) && event.getEnd().isBefore(end) && !Collections.disjoint(event.getNomes(), nomes)) {
-					// começo igual acaba depois
-					return false;
-				} else if (event.getStart().equals(start) && event.getEnd().isAfter(end) && !Collections.disjoint(event.getNomes(), nomes)) {
-					// começo igual acaba dentro
-					return false;
-				} else if (event.getStart().isBefore(start) && event.getEnd().equals(end) && !Collections.disjoint(event.getNomes(), nomes)) {
-					// começa antes acaba igual
-					return false;
-				} else if (event.getStart().isAfter(start) && event.getEnd().equals(end) && !Collections.disjoint(event.getNomes(), nomes)) {
-					// começa dentro acaba igual
+						|| event.getStart().isBefore(start) && event.getEnd().isAfter(start) && !Collections.disjoint(event.getNomes(), nomes)
+
+						|| event.getStart().equals(start) && event.getEnd().equals(end) && !Collections.disjoint(event.getNomes(), nomes)
+
+						|| event.getStart().equals(start) && event.getEnd().isBefore(end) && !Collections.disjoint(event.getNomes(), nomes) 
+
+						|| event.getStart().equals(start) && event.getEnd().isAfter(end) && !Collections.disjoint(event.getNomes(), nomes)
+
+						|| event.getStart().isBefore(start) && event.getEnd().equals(end) && !Collections.disjoint(event.getNomes(), nomes)
+
+						|| event.getStart().isAfter(start) && event.getEnd().equals(end) && !Collections.disjoint(event.getNomes(), nomes)) {
+
 					return false;
 				}
 			}
