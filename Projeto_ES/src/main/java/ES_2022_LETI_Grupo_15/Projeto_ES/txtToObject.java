@@ -216,4 +216,52 @@ public class txtToObject {
 
 	}
 
+	public static Boolean availableOrNot(String dataI, String dataF, ArrayList<CalendarEvent> eventos, ArrayList<String> nomes) throws FileNotFoundException, ParseException {
+
+		// converter as strings em datas
+		String[] dtstart = dataI.split(" ");
+		LocalDate date = LocalDate.parse(dtstart[0]);
+		LocalTime start = LocalTime.parse(dtstart[1]);
+
+		String[] dtend = dataF.split(" ");
+		LocalTime end = LocalTime.parse(dtend[1]);
+
+		for(CalendarEvent event : eventos) {
+
+			// verificar se as datas são iguais
+			if(event.getDate().equals(date)) {
+
+				if(event.getStart().isAfter(start) && event.getEnd().isBefore(end) && !Collections.disjoint(event.getNomes(), nomes)) {
+					// começa antes acaba depois
+					return false;
+
+				} else if (event.getStart().isBefore(end) && event.getEnd().isAfter(end) && !Collections.disjoint(event.getNomes(), nomes)) {
+					// começa antes acaba dentro
+					return false;
+
+				} else if (event.getStart().isBefore(start) && event.getEnd().isAfter(start) && !Collections.disjoint(event.getNomes(), nomes)) {
+					// começa dentro acaba depois
+					return false;
+				} else if (event.getStart().equals(start) && event.getEnd().equals(end) && !Collections.disjoint(event.getNomes(), nomes)) {
+					// horas iguais
+					return false;
+				} else if (event.getStart().equals(start) && event.getEnd().isBefore(end) && !Collections.disjoint(event.getNomes(), nomes)) {
+					// começo igual acaba depois
+					return false;
+				} else if (event.getStart().equals(start) && event.getEnd().isAfter(end) && !Collections.disjoint(event.getNomes(), nomes)) {
+					// começo igual acaba dentro
+					return false;
+				} else if (event.getStart().isBefore(start) && event.getEnd().equals(end) && !Collections.disjoint(event.getNomes(), nomes)) {
+					// começa antes acaba igual
+					return false;
+				} else if (event.getStart().isAfter(start) && event.getEnd().equals(end) && !Collections.disjoint(event.getNomes(), nomes)) {
+					// começa dentro acaba igual
+					return false;
+				}
+			}
+		}
+
+		return true;
+	}
+
 }
