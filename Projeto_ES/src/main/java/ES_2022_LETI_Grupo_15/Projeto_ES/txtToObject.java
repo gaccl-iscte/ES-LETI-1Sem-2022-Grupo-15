@@ -6,8 +6,10 @@ import java.io.PrintStream;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.time.DayOfWeek;
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.time.temporal.ChronoField;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
@@ -255,4 +257,124 @@ public class txtToObject {
 		return true;
 	}
 
+	public static ArrayList<CalendarEvent> addEvent(ArrayList<CalendarEvent> eventos, ArrayList<String> nomes, String data, String inicio, String duracao) throws ParseException, FileNotFoundException {
+
+		PrintStream out = new PrintStream("Horário.txt");
+		System.setOut(out);
+
+		LocalDate date = LocalDate.parse(data);
+		LocalTime start = LocalTime.parse(inicio);
+		LocalTime duration = LocalTime.parse(duracao);
+
+		int result = duration.get(ChronoField.MINUTE_OF_DAY);
+
+		LocalTime end = start.plusMinutes(result);
+		String dateToString = date.toString() + " " + start.toString();
+		String endToString = date.toString() + " " + end.toString();
+
+		if(availableOrNot(dateToString, endToString, eventos, nomes)) {
+
+			CalendarEvent reuniao = new CalendarEvent(date, start, end, "Reunião", nomes);
+
+			eventos.add(reuniao);
+
+			eventos.sort(Comparator.comparing(CalendarEvent::getDate).thenComparing(CalendarEvent::getStart));
+
+		}
+
+		eventos.forEach(x -> System.out.println(x.toString()));
+		return eventos;
+	}
+
+	public static CalendarEvent findBestTime(ArrayList<CalendarEvent> eventos, String duracao, String alturaDoDia, ArrayList<String> nomes, LocalDate data) throws FileNotFoundException, ParseException {
+
+		LocalDate hoje = data;
+
+		if(DayOfWeek.from(hoje).getValue() == 6 || DayOfWeek.from(hoje).getValue() == 7) {
+
+			hoje = hoje.plusDays(8 - DayOfWeek.from(hoje).getValue());
+		}
+
+		int day = DayOfWeek.from(hoje).getValue();
+		CalendarEvent reuniao = null;
+
+		// manhã - 08:00 às 14:00
+		// tarde - 14:00 às 20:00
+
+		int horaI = 0;
+		int horaF = 0;
+		if(alturaDoDia.equals("Manhã")) {
+			horaI = 8;
+			horaF = 14;
+		} else {
+			horaI = 14;
+			horaF = 20;
+		}
+
+		LocalDate dateFinal = hoje;
+
+		int x = 0;
+		int z = getNumberEventsOfDay(eventos, nomes, hoje);
+
+		for(int i = 1 ; i < 6-day ; i++) {
+
+			hoje = hoje.plusDays(1);
+			x = 0;
+
+			x = getNumberEventsOfDay(eventos, nomes, hoje);
+
+			if(x < z) {
+
+				z = x;				
+				dateFinal = hoje;
+			}
+		}
+
+		outerloop:
+			for(int h = horaI ; h < horaF ; h++) 
+				for(int m = 0; m < 60 ; m=m+15) {
+
+					String dataI = dateFinal.toString();
+					LocalTime inicio = LocalTime.of(h, m);
+					LocalTime fim = null;
+					String timeI = inicio.toString();
+
+					dataI = dataI + " " + timeI;
+
+					LocalTime duration = LocalTime.parse(duracao);
+					int result = duration.get(ChronoField.MINUTE_OF_DAY);
+
+					fim = inicio.plusMinutes(result);
+
+					String dataF = dateFinal.toString() + " " + fim.toString();
+
+					if(availableOrNot(dataI, dataF, eventos, nomes)) {
+						reuniao = new CalendarEvent(dateFinal, inicio, fim, "Reunião", nomes);
+						break outerloop;
+					}
+				}
+
+		return reuniao;
+	}
+
+	public static int getNumberEventsOfDay(ArrayList<CalendarEvent> eventos, ArrayList<String> nomes, LocalDate date) {
+
+		int x = 0;
+
+		for(CalendarEvent e : eventos) {
+
+			if(nomes == null) {
+
+				if(e.getDate().equals(date)) {
+					x++;
+				}
+			} else {
+				if(e.getDate().equals(date) && !Collections.disjoint(e.getNomes(), nomes)) {
+					x++;
+				}
+			}
+		}
+
+		return x;
+	}
 }
