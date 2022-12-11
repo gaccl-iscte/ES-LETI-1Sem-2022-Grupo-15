@@ -329,7 +329,7 @@ public abstract class Calendar extends JComponent {
 		for (CalendarEvent event : events) {
 			if (!dateInRange(event.getDate())) continue;
 
-			x = dayToPixel(event.getDate().getDayOfWeek());
+			x = event.getX();
 			y0 = timeToPixel(event.getStart());
 
 			//AQUI
