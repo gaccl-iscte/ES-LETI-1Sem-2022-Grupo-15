@@ -377,4 +377,36 @@ public class txtToObject {
 
 		return x;
 	}
+
+	public static ArrayList<CalendarEvent> periodicity(ArrayList<CalendarEvent> eventos, ArrayList<String> nomes, LocalDate data, int semanas, String duracao, String alturaDoDia) throws FileNotFoundException, ParseException {
+
+		CalendarEvent reuniao = null;
+		try {
+			reuniao = findBestTime(eventos, duracao, alturaDoDia, nomes, data);
+		} catch (FileNotFoundException | ParseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		eventos.add(reuniao);
+
+		for(int i = 0; i < semanas ; i++) {
+
+			int addDays = 8 - DayOfWeek.from(data).getValue();
+
+			LocalDate dataWithWeeks = data.plusDays(addDays + 7*i);
+
+			reuniao = findBestTime(eventos, duracao, alturaDoDia, nomes, dataWithWeeks);
+
+			eventos.add(reuniao);		
+
+		}
+
+		PrintStream out = new PrintStream("Horário.txt");
+		System.setOut(out);
+
+		eventos.sort(Comparator.comparing(CalendarEvent::getDate).thenComparing(CalendarEvent::getStart));
+		eventos.forEach(x -> System.out.println(x.toString()));
+
+		return eventos;
+	}
 }
