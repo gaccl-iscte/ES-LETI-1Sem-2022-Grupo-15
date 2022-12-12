@@ -8,6 +8,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.FileNotFoundException;
 import java.text.ParseException;
+import java.time.LocalDate;
 import java.util.ArrayList;
 
 import javax.swing.ImageIcon;
@@ -17,8 +18,9 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.SwingConstants;
 
-import DayCalendar.DayCalendarTest;
 import MonthCalendar.Main;
+import DayCalendar.DayCalendarTest;
+import ES_2022_LETI_Grupo_15.Projeto_ES.txtToObject;
 import WeekCalendar.WeekCalendarTest;
 
 public class Members extends JFrame implements ActionListener{
@@ -105,12 +107,17 @@ public class Members extends JFrame implements ActionListener{
 			this.setVisible(false);
 			Metting.getInstance().getFrameInstance().setVisible(true);
 		}else if(e.getSource() == mensal) {
-			new Main();
+			try {
+				new Main(txtToObject.getList(file, member), member);
+			} catch (FileNotFoundException | ParseException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
 		}else if(e.getSource() == semanal) {
 			try {
 				member.add((String) members.getSelectedItem());
 				file.add(AddMember.files2.get(members.getSelectedIndex()));
-				new WeekCalendarTest(file, member);
+				new WeekCalendarTest(txtToObject.getList(file, member));
 				file.remove(0);
 				member.remove(0);
 			} catch (FileNotFoundException | ParseException e1) {
@@ -121,7 +128,7 @@ public class Members extends JFrame implements ActionListener{
 			try {
 				member.add((String) members.getSelectedItem());
 				file.add(AddMember.files2.get(members.getSelectedIndex()));
-				new DayCalendarTest(file, member);
+				new DayCalendarTest(txtToObject.getList(file, member), LocalDate.now());
 				file.remove(0);
 				member.remove(0);
 			} catch (FileNotFoundException | ParseException e1) {

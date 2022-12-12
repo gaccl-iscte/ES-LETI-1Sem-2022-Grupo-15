@@ -1,13 +1,23 @@
 package MonthCalendar;
 
 import java.awt.Dimension;
+import java.util.ArrayList;
+
+import Calendar.CalendarEvent;
+
+
 
 public class Main extends javax.swing.JFrame {
 
+	static ArrayList<CalendarEvent> eventos;
+	static ArrayList<String> nomes;
+	
     /**
      * Creates new form Main
      */
-    public Main() {
+    public Main(ArrayList<CalendarEvent> eventos, ArrayList<String> nomes) {
+    	Main.eventos = eventos;
+    	Main.nomes = nomes;
         initComponents();
         this.setVisible(true);
     }
@@ -97,7 +107,7 @@ public class Main extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new Main().setVisible(true);
+                new Main(eventos, nomes).setVisible(true);
             }
         });
     }

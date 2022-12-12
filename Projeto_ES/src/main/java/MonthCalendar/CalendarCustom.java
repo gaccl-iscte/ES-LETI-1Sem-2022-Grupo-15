@@ -14,7 +14,7 @@ public class CalendarCustom extends javax.swing.JPanel {
     public CalendarCustom() {
         initComponents();
         thisMonth();
-        slide.show(new PanelDate(5, 2021), PanelSlide.AnimateType.TO_RIGHT);
+        slide.show(new PanelDate(month, year), PanelSlide.AnimateType.TO_RIGHT);
         showMonthYear();
         new Thread(new Runnable() {
             @Override

@@ -8,6 +8,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.FileNotFoundException;
 import java.text.ParseException;
+import java.time.LocalDate;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -109,12 +110,12 @@ public class Metting extends JFrame implements ActionListener{
 		// TODO Auto-generated method stub
 		if(e.getSource() == mensal) {
 
-			Main calendar = new Main();
+			new Main(GenerateMetting.events, AddMember.nomesMetting);
 
 		}else if(e.getSource() == semanal) {
 
 			try {
-				new WeekCalendarTest(AddMember.files2Metting, AddMember.nomesMetting);
+				new WeekCalendarTest(GenerateMetting.events);
 			} catch (FileNotFoundException | ParseException e1) {
 				// TODO Auto-generated catch block
 				e1.printStackTrace();
@@ -123,7 +124,7 @@ public class Metting extends JFrame implements ActionListener{
 		}else if(e.getSource() == diario) {		
 
 			try {
-				new DayCalendarTest(AddMember.files2Metting, AddMember.nomesMetting);
+				new DayCalendarTest(GenerateMetting.events, LocalDate.now());
 			} catch (FileNotFoundException | ParseException e1) {
 				// TODO Auto-generated catch block
 				e1.printStackTrace();

@@ -6,10 +6,15 @@ import java.awt.Graphics2D;
 import java.awt.RenderingHints;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.FileNotFoundException;
+import java.text.ParseException;
+import java.time.LocalDate;
+import java.time.ZoneId;
 import java.util.Date;
 
 import javax.swing.JButton;
 import javax.swing.JLabel;
+
 
 
 public class Cell extends JButton {
@@ -42,15 +47,15 @@ public class Cell extends JButton {
 
     public void currentMonth(boolean act) {
         if (act) {
-            setForeground(new Color(68, 68, 68));
+            setForeground(new Color(0, 0, 0));
         } else {
-            setForeground(new Color(169, 169, 169));
+            setForeground(new Color(68, 68, 68));
         }
     }
 
     public void setAsToDay() {
         isToDay = true;
-        setForeground(Color.WHITE);
+        setForeground(Color.RED);
     }
 
     @Override
@@ -72,7 +77,7 @@ public class Cell extends JButton {
     
     static class open implements ActionListener{
 		public void actionPerformed (ActionEvent e){
-				System.out.println("open");
+
 		}
 	}
 

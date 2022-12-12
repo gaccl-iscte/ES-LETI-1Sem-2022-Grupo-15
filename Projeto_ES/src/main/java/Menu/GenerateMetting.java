@@ -6,8 +6,14 @@ import java.awt.Font;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.FileNotFoundException;
 import java.text.DateFormat;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.LocalTime;
+import java.time.ZoneId;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import javax.swing.ImageIcon;
@@ -20,6 +26,10 @@ import javax.swing.SpinnerDateModel;
 import javax.swing.text.BadLocationException;
 import org.jdesktop.swingx.JXDatePicker;
 
+import Calendar.CalendarEvent;
+import ES_2022_LETI_Grupo_15.Projeto_ES.txtToObject;
+
+
 
 public class GenerateMetting extends JFrame implements ActionListener{
 
@@ -30,6 +40,7 @@ public class GenerateMetting extends JFrame implements ActionListener{
 	JSpinner duracao, hora;
 	JXDatePicker data;
 	public static GenerateMetting instance;
+	static ArrayList<CalendarEvent> events;
 
 	public static GenerateMetting getInstance() throws BadLocationException {
 		if(instance == null) 
@@ -140,7 +151,9 @@ public class GenerateMetting extends JFrame implements ActionListener{
 		this.add(lblduracao);
 		lblduracao.setVisible(false);
 
-		duracao = new JSpinner(sm);
+		Date date1 = new Date();
+		SpinnerDateModel sm1 = new SpinnerDateModel(date1, null, null, Calendar.SECOND);
+		duracao = new JSpinner(sm1);
 		JSpinner.DateEditor de1 = new JSpinner.DateEditor(duracao, "HH:mm");
 		de1.getTextField().setEditable( false );
 		duracao.setEditor(de1);
@@ -159,26 +172,44 @@ public class GenerateMetting extends JFrame implements ActionListener{
 		this.setVisible(true);				
 	}
 
+	SimpleDateFormat format = new SimpleDateFormat("HH:mm");
+	SimpleDateFormat format1 = new SimpleDateFormat("yyyy-MM-dd");
+
+	
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		// TODO Auto-generated method stub
 		if(e.getSource() == gerar) {
-			if(data.isVisible()) {
-				if(!isDateValid(data.getDate())) {
+			if(!periodicidade.isVisible()) {					
 					System.out.println("erro");
-				}else {
-					this.setVisible(false);
-					new Metting();
-					periodicidade.getSelectedItem();
-					tempo.getSelectedItem();
-					duracao.getValue();
-				}
 			}else {
-				this.setVisible(false);
-				new Metting();
+				String horas = null;
 				periodicidade.getSelectedItem();
-				tempo.getSelectedItem();
-				duracao.getValue();
+				horas = format.format(duracao.getValue());
+				if(data.isVisible()) {
+					String horasI = null;
+					String dia = null;
+					horasI = format.format(hora.getValue());
+					dia = format1.format(data.getDate());
+					try {
+						events = txtToObject.addEvent(txtToObject.getList(AddMember.files2Metting, AddMember.nomesMetting), AddMember.nomesMetting, dia, horasI, horas);
+						new Metting();
+						this.setVisible(false);
+					} catch (FileNotFoundException | ParseException e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
+					}
+
+				}else {
+					try {
+						events = txtToObject.findBestTime(txtToObject.getList(AddMember.files2Metting, AddMember.nomesMetting), horas, tempo.getSelectedItem().toString(), AddMember.nomesMetting, LocalDate.now());
+						new Metting();
+						this.setVisible(false);
+					} catch (FileNotFoundException | ParseException e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
+					}
+				}
 			}
 		}else if(e.getSource() == auto) {
 			lblperiodicidade.setVisible(true);
@@ -209,20 +240,5 @@ public class GenerateMetting extends JFrame implements ActionListener{
 
 	public JFrame getFrameInstance() {
 		return this;
-	}
-
-	final static String DATE_FORMAT = "dd/MM/yyyy";
-
-	public static boolean isDateValid(Date date) {
-		DateFormat df = new SimpleDateFormat(DATE_FORMAT);
-		df.setLenient(false);
-		//Date data = df.parse(date);
-		if(date == null) {
-			return false;
-		}
-		if(date.before(new Date())){
-			return false;
-		}
-		return true;
 	}
 }

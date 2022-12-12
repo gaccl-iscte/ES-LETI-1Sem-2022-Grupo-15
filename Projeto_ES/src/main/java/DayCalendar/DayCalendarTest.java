@@ -4,7 +4,6 @@ import javax.swing.*;
 
 import Calendar.Calendar;
 import Calendar.CalendarEvent;
-import ES_2022_LETI_Grupo_15.Projeto_ES.txtToObject;
 
 import java.awt.*;
 import java.io.FileNotFoundException;
@@ -14,14 +13,12 @@ import java.time.LocalTime;
 import java.util.ArrayList;
 
 public class DayCalendarTest {
-    public DayCalendarTest(ArrayList<String> files, ArrayList<String> nomes) throws FileNotFoundException, ParseException {
+    public DayCalendarTest(ArrayList<CalendarEvent> events, LocalDate data) throws FileNotFoundException, ParseException {
         JFrame frm = new JFrame();
         ImageIcon image = new ImageIcon("iscte_logo.png");
-		frm.setIconImage(image.getImage());
+		frm.setIconImage(image.getImage());       
 
-        ArrayList<CalendarEvent> events = txtToObject.getList(files, nomes);
-
-        DayCalendar cal = new DayCalendar(events);
+        DayCalendar cal = new DayCalendar(events, data);
 
         cal.addCalendarEventClickListener(e -> System.out.println(e.getCalendarEvent()));
         cal.addCalendarEmptyClickListener(e -> {
