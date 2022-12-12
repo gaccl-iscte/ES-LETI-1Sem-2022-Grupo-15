@@ -87,8 +87,6 @@ public class txtToObject {
 
 		ArrayList<CalendarEvent> eventos = new ArrayList<>();
 
-		//		String nome = primeiro + " " + ultimo;
-
 		SimpleDateFormat format = new SimpleDateFormat("yyyyMMdd HHmmss");
 		DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");  
 
@@ -204,12 +202,9 @@ public class txtToObject {
 			scanner.close();
 		}
 
-		Comparator<CalendarEvent> comparatorAsc = (prod1, prod2) -> prod1.getDate()
-				.compareTo(prod2.getDate());
+		eventos.sort(Comparator.comparing(CalendarEvent::getDate).thenComparing(CalendarEvent::getStart));
 
-		Collections.sort(eventos, comparatorAsc);
-
-		PrintStream out = new PrintStream("teste1.txt");
+		PrintStream out = new PrintStream("Horário.txt");
 		System.setOut(out);
 
 		eventos.forEach(x -> System.out.println(x.toString()));
@@ -283,10 +278,11 @@ public class txtToObject {
 		}
 
 		eventos.forEach(x -> System.out.println(x.toString()));
+
 		return eventos;
 	}
 
-	public static CalendarEvent findBestTime(ArrayList<CalendarEvent> eventos, String duracao, String alturaDoDia, ArrayList<String> nomes, LocalDate data) throws FileNotFoundException, ParseException {
+	public static ArrayList<CalendarEvent> findBestTime(ArrayList<CalendarEvent> eventos, String duracao, String alturaDoDia, ArrayList<String> nomes, LocalDate data) throws FileNotFoundException, ParseException {
 
 		LocalDate hoje = data;
 
@@ -354,7 +350,9 @@ public class txtToObject {
 					}
 				}
 
-		return reuniao;
+		eventos.add(reuniao);
+		eventos.sort(Comparator.comparing(CalendarEvent::getDate).thenComparing(CalendarEvent::getStart));
+		return eventos;
 	}
 
 	public static int getNumberEventsOfDay(ArrayList<CalendarEvent> eventos, ArrayList<String> nomes, LocalDate date) {
@@ -382,7 +380,7 @@ public class txtToObject {
 
 		CalendarEvent reuniao = null;
 		try {
-			reuniao = findBestTime(eventos, duracao, alturaDoDia, nomes, data);
+			eventos = findBestTime(eventos, duracao, alturaDoDia, nomes, data);
 		} catch (FileNotFoundException | ParseException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -395,9 +393,7 @@ public class txtToObject {
 
 			LocalDate dataWithWeeks = data.plusDays(addDays + 7*i);
 
-			reuniao = findBestTime(eventos, duracao, alturaDoDia, nomes, dataWithWeeks);
-
-			eventos.add(reuniao);		
+			eventos = findBestTime(eventos, duracao, alturaDoDia, nomes, dataWithWeeks);
 
 		}
 
