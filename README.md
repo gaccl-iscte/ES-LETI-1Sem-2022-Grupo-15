@@ -12,6 +12,7 @@ Membros do grupo:
 
 -Tiago Felício | Nº 99213 | Turma ET-C1
 
+
 Explicação das funcionalidades:
 O nosso projeto permite aos utilizadores:
 1. Adicionar um certo número de membros
@@ -32,6 +33,7 @@ O nosso projeto permite aos utilizadores:
 16. Visualizar a taxa de ocupação nos calendários através do auxilio de cores, sendo que quanto mais clara a cor mais disponivel estará o horário e ao contrário se esta for mais escura
 
 Concluindo, todas as funcionalidades pedidas foram implementadas.
+
 
 Foram ainda implementadas algumas funcionalidades, além das principais que nos foram propostas:
 1. Botões de "Back" para permitir ao utilizador navegar no menu conforme a sua vontade
