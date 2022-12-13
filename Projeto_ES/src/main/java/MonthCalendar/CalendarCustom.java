@@ -1,3 +1,6 @@
+/*
+ * 
+ */
 package MonthCalendar;
 
 import javax.swing.JPanel;
@@ -6,11 +9,21 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class CalendarCustom.
+ */
 public class CalendarCustom extends javax.swing.JPanel {
 
+    /** The month. */
     private int month;
+    
+    /** The year. */
     private int year;
 
+    /**
+     * Instantiates a new calendar custom.
+     */
     public CalendarCustom() {
         initComponents();
         thisMonth();
@@ -37,6 +50,9 @@ public class CalendarCustom extends javax.swing.JPanel {
         }).start();
     }
 
+    /**
+     * Inits the components.
+     */
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -155,6 +171,11 @@ public class CalendarCustom extends javax.swing.JPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
 
+    /**
+     * Cmd next action performed.
+     *
+     * @param evt the evt
+     */
     private void cmdNextActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmdNextActionPerformed
         if (month == 12) {
             month = 1;
@@ -166,6 +187,11 @@ public class CalendarCustom extends javax.swing.JPanel {
         showMonthYear();
     }//GEN-LAST:event_cmdNextActionPerformed
 
+    /**
+     * Cmd back action performed.
+     *
+     * @param evt the evt
+     */
     private void cmdBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmdBackActionPerformed
         if (month == 1) {
             month = 12;
@@ -177,6 +203,9 @@ public class CalendarCustom extends javax.swing.JPanel {
         showMonthYear();
     }//GEN-LAST:event_cmdBackActionPerformed
 
+    /**
+     * This month.
+     */
     private void thisMonth() {
         Calendar calendar = Calendar.getInstance();
         calendar.setTime(new Date());   //  today
@@ -184,6 +213,9 @@ public class CalendarCustom extends javax.swing.JPanel {
         year = calendar.get(Calendar.YEAR);
     }
 
+    /**
+     * Show month year.
+     */
     private void showMonthYear() {
     	String[] months =  {"Janeiro", "Fevereiro", "Março", "Abril", "Maio", "Junho", "Julho", "Agosto", "Setembro", "Outubro", "Novembro", "Dezembro"};
         Calendar calendar = Calendar.getInstance();
@@ -194,14 +226,29 @@ public class CalendarCustom extends javax.swing.JPanel {
         lbMonthYear.setText(months[month-1] + " - " +df.format(calendar.getTime()));
     }
 
+    /** The cmd back. */
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton cmdBack;
+    
+    /** The cmd next. */
     private javax.swing.JButton cmdNext;
+    
+    /** The j layered pane 1. */
     private javax.swing.JLayeredPane jLayeredPane1;
+    
+    /** The lb date. */
     private javax.swing.JLabel lbDate;
+    
+    /** The lb month year. */
     private javax.swing.JLabel lbMonthYear;
+    
+    /** The lb time. */
     private javax.swing.JLabel lbTime;
+    
+    /** The lb type. */
     private javax.swing.JLabel lbType;
+    
+    /** The slide. */
     private MonthCalendar.PanelSlide slide;
     // End of variables declaration//GEN-END:variables
 }

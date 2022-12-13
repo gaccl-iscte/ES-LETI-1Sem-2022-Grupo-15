@@ -1,3 +1,6 @@
+/*
+ * 
+ */
 package Menu;
 
 import java.awt.Color;
@@ -26,12 +29,24 @@ import DayCalendar.DayCalendarTest;
 import ES_2022_LETI_Grupo_15.Projeto_ES.txtToObject;
 import WeekCalendar.WeekCalendarTest;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class Members.
+ */
 public class Members extends JFrame implements ActionListener{
 
+	/** The lblcalendar. */
 	JLabel lblmembers, lblselect, lblcalendar;
+	
+	/** The txt. */
 	JButton mensal, semanal, diario, back, txt;
+	
+	/** The members. */
 	JComboBox<String> members = new JComboBox<String>();
 
+	/**
+	 * Instantiates a new members.
+	 */
 	Members(){
 		ImageIcon image = new ImageIcon("iscte_logo.png");
 		this.setIconImage(image.getImage());
@@ -107,6 +122,11 @@ public class Members extends JFrame implements ActionListener{
 		this.setVisible(true);
 	}
 
+	/**
+	 * Action performed.
+	 *
+	 * @param e the e
+	 */
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		// TODO Auto-generated method stub

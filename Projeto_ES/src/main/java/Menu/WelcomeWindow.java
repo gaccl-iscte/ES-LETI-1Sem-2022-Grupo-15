@@ -1,3 +1,6 @@
+/*
+ * 
+ */
 package Menu;
 
 import java.awt.Color;
@@ -11,11 +14,21 @@ import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class WelcomeWindow.
+ */
 public class WelcomeWindow extends JFrame implements ActionListener{
 	
+	/** The members. */
 	JLabel welcome, members;
+	
+	/** The numero membros. */
 	JComboBox<Integer> numeroMembros = new JComboBox<Integer>();
 
+	/**
+	 * Instantiates a new welcome window.
+	 */
 	WelcomeWindow(){
 		ImageIcon image = new ImageIcon("iscte_logo.png");
 		this.setIconImage(image.getImage());
@@ -55,6 +68,11 @@ public class WelcomeWindow extends JFrame implements ActionListener{
 	}
 
 
+	/**
+	 * Action performed.
+	 *
+	 * @param e the e
+	 */
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		// TODO Auto-generated method stub

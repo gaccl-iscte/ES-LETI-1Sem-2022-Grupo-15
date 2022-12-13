@@ -1,3 +1,6 @@
+/*
+ * 
+ */
 package MonthCalendar;
 
 import java.awt.Color;

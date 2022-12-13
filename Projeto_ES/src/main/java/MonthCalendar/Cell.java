@@ -1,3 +1,6 @@
+/*
+ * 
+ */
 package MonthCalendar;
 
 import java.awt.Color;
@@ -17,12 +20,24 @@ import javax.swing.JLabel;
 
 
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class Cell.
+ */
 public class Cell extends JButton {
 
+    /** The date. */
     private Date date;
+    
+    /** The title. */
     private boolean title;
+    
+    /** The is to day. */
     private boolean isToDay;
 
+    /**
+     * Instantiates a new cell.
+     */
     public Cell() {
         setContentAreaFilled(false);
         setBorder(null);
@@ -30,21 +45,45 @@ public class Cell extends JButton {
         addActionListener(new open());
     }
 
+    /**
+     * As title.
+     */
     public void asTitle() {
         title = true;
     }
 
+    /**
+     * Checks if is title.
+     *
+     * @return true, if is title
+     */
     public boolean isTitle() {
         return title;
     }
 
+    /**
+     * Sets the date.
+     *
+     * @param date the new date
+     */
     public void setDate(Date date) {
         this.date = date;
     }
+    
+    /**
+     * Gets the date.
+     *
+     * @return the date
+     */
     public Date getDate() {
     	return date;
     }
 
+    /**
+     * Current month.
+     *
+     * @param act the act
+     */
     public void currentMonth(boolean act) {
         if (act) {
             setForeground(new Color(0, 0, 0));
@@ -53,11 +92,19 @@ public class Cell extends JButton {
         }
     }
 
+    /**
+     * Sets the as to day.
+     */
     public void setAsToDay() {
         isToDay = true;
         setForeground(Color.RED);
     }
 
+    /**
+     * Paint component.
+     *
+     * @param grphcs the grphcs
+     */
     @Override
     protected void paintComponent(Graphics grphcs) {
         if (title) {
@@ -75,7 +122,16 @@ public class Cell extends JButton {
         super.paintComponent(grphcs);
     }
     
+    /**
+     * The Class open.
+     */
     static class open implements ActionListener{
+		
+		/**
+		 * Action performed.
+		 *
+		 * @param e the e
+		 */
 		public void actionPerformed (ActionEvent e){
 
 		}

@@ -1,3 +1,6 @@
+/*
+ * 
+ */
 package ES_2022_LETI_Grupo_15.Projeto_ES;
 
 import java.io.File;
@@ -18,10 +21,23 @@ import java.util.Scanner;
 import org.apache.commons.lang3.StringUtils;
 import Calendar.CalendarEvent;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class txtToObject.
+ */
 public class txtToObject {
 
+	/** The reuniao final. */
 	public static CalendarEvent reuniaoFinal = null;
 
+	/**
+	 * Convert.
+	 *
+	 * @param files the files
+	 * @param nomes the nomes
+	 * @return the array list
+	 * @throws FileNotFoundException the file not found exception
+	 */
 	public static ArrayList<String> convert(ArrayList<String> files, ArrayList<String> nomes) throws FileNotFoundException {
 
 		//		for(int i = 0 ; i < nomes.size() ; i++) {
@@ -84,6 +100,16 @@ public class txtToObject {
 
 		return files2;
 	}
+	
+	/**
+	 * Gets the list.
+	 *
+	 * @param files2 the files 2
+	 * @param nomes the nomes
+	 * @return the list
+	 * @throws FileNotFoundException the file not found exception
+	 * @throws ParseException the parse exception
+	 */
 	public static ArrayList<CalendarEvent> getList(ArrayList<String> files2, ArrayList<String> nomes) throws FileNotFoundException, ParseException {
 
 		ArrayList<CalendarEvent> eventos = new ArrayList<>();
@@ -214,6 +240,17 @@ public class txtToObject {
 
 	}
 
+	/**
+	 * Available or not.
+	 *
+	 * @param dataI the data I
+	 * @param dataF the data F
+	 * @param eventos the eventos
+	 * @param nomes the nomes
+	 * @return the boolean
+	 * @throws FileNotFoundException the file not found exception
+	 * @throws ParseException the parse exception
+	 */
 	public static Boolean availableOrNot(String dataI, String dataF, ArrayList<CalendarEvent> eventos, ArrayList<String> nomes) throws FileNotFoundException, ParseException {
 
 		// converter as strings em datas
@@ -253,6 +290,18 @@ public class txtToObject {
 		return true;
 	}
 
+	/**
+	 * Adds the event.
+	 *
+	 * @param eventos the eventos
+	 * @param nomes the nomes
+	 * @param data the data
+	 * @param inicio the inicio
+	 * @param duracao the duracao
+	 * @return the array list
+	 * @throws ParseException the parse exception
+	 * @throws FileNotFoundException the file not found exception
+	 */
 	public static ArrayList<CalendarEvent> addEvent(ArrayList<CalendarEvent> eventos, ArrayList<String> nomes, String data, String inicio, String duracao) throws ParseException, FileNotFoundException {
 
 		PrintStream out = new PrintStream("Horário.txt");
@@ -285,6 +334,18 @@ public class txtToObject {
 		return eventos;
 	}
 
+	/**
+	 * Find best time.
+	 *
+	 * @param eventos the eventos
+	 * @param duracao the duracao
+	 * @param alturaDoDia the altura do dia
+	 * @param nomes the nomes
+	 * @param data the data
+	 * @return the array list
+	 * @throws FileNotFoundException the file not found exception
+	 * @throws ParseException the parse exception
+	 */
 	public static ArrayList<CalendarEvent> findBestTime(ArrayList<CalendarEvent> eventos, String duracao, String alturaDoDia, ArrayList<String> nomes, LocalDate data) throws FileNotFoundException, ParseException {
 		
 		LocalDate hoje = data;
@@ -363,6 +424,14 @@ public class txtToObject {
 		return eventos;
 	}
 
+	/**
+	 * Gets the number events of day.
+	 *
+	 * @param eventos the eventos
+	 * @param nomes the nomes
+	 * @param date the date
+	 * @return the number events of day
+	 */
 	public static int getNumberEventsOfDay(ArrayList<CalendarEvent> eventos, ArrayList<String> nomes, LocalDate date) {
 
 		int x = 0;
@@ -384,6 +453,19 @@ public class txtToObject {
 		return x;
 	}
 
+	/**
+	 * Periodicity.
+	 *
+	 * @param eventos the eventos
+	 * @param nomes the nomes
+	 * @param data the data
+	 * @param semanas the semanas
+	 * @param duracao the duracao
+	 * @param alturaDoDia the altura do dia
+	 * @return the array list
+	 * @throws FileNotFoundException the file not found exception
+	 * @throws ParseException the parse exception
+	 */
 	public static ArrayList<CalendarEvent> periodicity(ArrayList<CalendarEvent> eventos, ArrayList<String> nomes, LocalDate data, int semanas, String duracao, String alturaDoDia) throws FileNotFoundException, ParseException {
 
 //		CalendarEvent reuniao = null;

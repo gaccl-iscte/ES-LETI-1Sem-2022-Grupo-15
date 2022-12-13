@@ -1,3 +1,6 @@
+/*
+ * 
+ */
 package MonthCalendar;
 
 import java.awt.Dimension;
@@ -7,13 +10,23 @@ import Calendar.CalendarEvent;
 
 
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class Main.
+ */
 public class Main extends javax.swing.JFrame {
 
+	/** The eventos. */
 	static ArrayList<CalendarEvent> eventos;
+	
+	/** The nomes. */
 	static ArrayList<String> nomes;
 	
     /**
-     * Creates new form Main
+     * Creates new form Main.
+     *
+     * @param eventos the eventos
+     * @param nomes the nomes
      */
     public Main(ArrayList<CalendarEvent> eventos, ArrayList<String> nomes) {
     	Main.eventos = eventos;
@@ -78,6 +91,8 @@ public class Main extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     /**
+     * The main method.
+     *
      * @param args the command line arguments
      */
     public static void main(String args[]) {
@@ -112,8 +127,11 @@ public class Main extends javax.swing.JFrame {
         });
     }
 
+    /** The calendar custom 2. */
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private CalendarCustom calendarCustom2;
+    
+    /** The j panel 1. */
     private javax.swing.JPanel jPanel1;
     // End of variables declaration//GEN-END:variables
 }

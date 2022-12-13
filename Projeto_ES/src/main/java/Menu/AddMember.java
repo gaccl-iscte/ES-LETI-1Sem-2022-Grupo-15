@@ -1,3 +1,6 @@
+/*
+ * 
+ */
 package Menu;
 
 import java.awt.Color;
@@ -24,21 +27,53 @@ import ES_2022_LETI_Grupo_15.Projeto_ES.toTxt;
 import ES_2022_LETI_Grupo_15.Projeto_ES.txtToObject;
 
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class AddMember.
+ */
 public class AddMember extends JFrame implements ActionListener{
 
+	/** The apelido. */
 	JTextField url, nome, apelido;
+	
+	/** The lblmetting. */
 	JLabel lblurl, lblnome, lblapelido, lblmembers, lblmetting;
+	
+	/** The adicionar. */
 	JButton file, adicionar;
+	
+	/** The metting. */
 	JCheckBox metting;
+	
+	/** The i. */
 	int i;
+	
+	/** The file 1. */
 	File file1;
+	
+	/** The files. */
 	public static ArrayList<String> files = new ArrayList<String>();
+	
+	/** The nomes. */
 	public static ArrayList<String> nomes = new ArrayList<String>();
+	
+	/** The files 2. */
 	public static ArrayList<String> files2 = new ArrayList<String>();
+	
+	/** The files metting. */
 	public static ArrayList<String> filesMetting = new ArrayList<String>();
+	
+	/** The nomes metting. */
 	public static ArrayList<String> nomesMetting = new ArrayList<String>();
+	
+	/** The files 2 metting. */
 	public static ArrayList<String> files2Metting = new ArrayList<String>();
 
+	/**
+	 * Instantiates a new adds the member.
+	 *
+	 * @param i the i
+	 */
 	AddMember(int i){
 		this.i = i;
 		ImageIcon image = new ImageIcon("iscte_logo.png");
@@ -127,6 +162,11 @@ public class AddMember extends JFrame implements ActionListener{
 		this.setVisible(true);		
 	}
 
+	/**
+	 * Action performed.
+	 *
+	 * @param e the e
+	 */
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		// TODO Auto-generated method stub

@@ -1,3 +1,6 @@
+/*
+ * 
+ */
 package Menu;
 
 import java.awt.Color;
@@ -30,19 +33,38 @@ import ES_2022_LETI_Grupo_15.Projeto_ES.txtToObject;
 import MonthCalendar.Main;
 import WeekCalendar.WeekCalendarTest;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class Metting.
+ */
 public class Metting extends JFrame implements ActionListener{
 
+	/** The lblcalendar. */
 	JLabel lblmetting, lblproposta, lbldata, lblcalendar;
+	
+	/** The txt. */
 	JButton back, mensal, semanal, diario, members, txt;
+	
+	/** The display frame. */
 	JFrame displayFrame;
+	
+	/** The instance. */
 	public static Metting instance;
 
+	/**
+	 * Gets the single instance of Metting.
+	 *
+	 * @return single instance of Metting
+	 */
 	public static Metting getInstance() {
 		if(instance == null) 
 			instance = new Metting();
 		return instance;
 	}
 
+	/**
+	 * Instantiates a new metting.
+	 */
 	Metting(){
 		ImageIcon image = new ImageIcon("iscte_logo.png");
 		this.setIconImage(image.getImage());
@@ -127,6 +149,11 @@ public class Metting extends JFrame implements ActionListener{
 		this.setVisible(true);
 	}
 
+	/**
+	 * Action performed.
+	 *
+	 * @param e the e
+	 */
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		// TODO Auto-generated method stub
@@ -176,6 +203,11 @@ public class Metting extends JFrame implements ActionListener{
 		}
 	}
 	
+	/**
+	 * Gets the frame instance.
+	 *
+	 * @return the frame instance
+	 */
 	public JFrame getFrameInstance() {
 		return this;
 	}

@@ -1,3 +1,6 @@
+/*
+ * 
+ */
 package Menu;
 
 import java.awt.Color;
@@ -31,24 +34,56 @@ import ES_2022_LETI_Grupo_15.Projeto_ES.txtToObject;
 
 
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class GenerateMetting.
+ */
 public class GenerateMetting extends JFrame implements ActionListener{
 
+	/** The lblsemanas. */
 	JLabel lblmetting, lblperiodicidade, lbltempo, lblduracao, lbldata, lblhora, lblsemanas;
+	
+	/** The periodicidade. */
 	static JComboBox<String> periodicidade = new JComboBox<String>();
+	
+	/** The tempo. */
 	JComboBox<String> tempo = new JComboBox<String>();
+	
+	/** The semanas. */
 	JComboBox<Integer> semanas = new JComboBox<Integer>();
+	
+	/** The manual. */
 	JButton gerar, auto, manual;
+	
+	/** The hora. */
 	JSpinner duracao, hora;
+	
+	/** The data. */
 	JXDatePicker data;
+	
+	/** The instance. */
 	public static GenerateMetting instance;
+	
+	/** The events. */
 	static ArrayList<CalendarEvent> events;
 
+	/**
+	 * Gets the single instance of GenerateMetting.
+	 *
+	 * @return single instance of GenerateMetting
+	 * @throws BadLocationException the bad location exception
+	 */
 	public static GenerateMetting getInstance() throws BadLocationException {
 		if(instance == null) 
 			instance = new GenerateMetting();
 		return instance;
 	}
 
+	/**
+	 * Instantiates a new generate metting.
+	 *
+	 * @throws BadLocationException the bad location exception
+	 */
 	GenerateMetting() throws BadLocationException{
 		ImageIcon image = new ImageIcon("iscte_logo.png");
 		this.setIconImage(image.getImage());
@@ -189,10 +224,18 @@ public class GenerateMetting extends JFrame implements ActionListener{
 		this.setVisible(true);				
 	}
 
+	/** The format. */
 	SimpleDateFormat format = new SimpleDateFormat("HH:mm");
+	
+	/** The format 1. */
 	SimpleDateFormat format1 = new SimpleDateFormat("yyyy-MM-dd");
 
 
+	/**
+	 * Action performed.
+	 *
+	 * @param e the e
+	 */
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		// TODO Auto-generated method stub
@@ -275,6 +318,11 @@ public class GenerateMetting extends JFrame implements ActionListener{
 		}
 	}
 
+	/**
+	 * Gets the frame instance.
+	 *
+	 * @return the frame instance
+	 */
 	public JFrame getFrameInstance() {
 		return this;
 	}

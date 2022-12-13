@@ -1,3 +1,6 @@
+/*
+ * 
+ */
 package DayCalendar;
 
 import javax.swing.*;
@@ -12,7 +15,20 @@ import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.ArrayList;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class DayCalendarTest.
+ */
 public class DayCalendarTest {
+    
+    /**
+     * Instantiates a new day calendar test.
+     *
+     * @param events the events
+     * @param data the data
+     * @throws FileNotFoundException the file not found exception
+     * @throws ParseException the parse exception
+     */
     public DayCalendarTest(ArrayList<CalendarEvent> events, LocalDate data) throws FileNotFoundException, ParseException {
         JFrame frm = new JFrame();
         ImageIcon image = new ImageIcon("iscte_logo.png");

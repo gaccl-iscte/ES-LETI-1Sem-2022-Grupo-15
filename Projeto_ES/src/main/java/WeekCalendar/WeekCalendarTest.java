@@ -1,3 +1,6 @@
+/*
+ * 
+ */
 package WeekCalendar;
 
 import java.awt.BorderLayout;
@@ -17,7 +20,19 @@ import Calendar.Calendar;
 import Calendar.CalendarEvent;
 
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class WeekCalendarTest.
+ */
 public class WeekCalendarTest {
+	
+	/**
+	 * Instantiates a new week calendar test.
+	 *
+	 * @param events the events
+	 * @throws FileNotFoundException the file not found exception
+	 * @throws ParseException the parse exception
+	 */
 	public WeekCalendarTest(ArrayList<CalendarEvent> events) throws FileNotFoundException, ParseException {
         JFrame frm = new JFrame();
         ImageIcon image = new ImageIcon("iscte_logo.png");

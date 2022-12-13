@@ -1,3 +1,6 @@
+/*
+ * 
+ */
 package MonthCalendar;
 
 import java.awt.Component;
@@ -7,16 +10,33 @@ import java.awt.event.ComponentAdapter;
 import java.awt.event.ComponentEvent;
 import javax.swing.Timer;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class PanelSlide.
+ */
 public class PanelSlide extends javax.swing.JPanel {
 
+    /**
+     * Gets the animate.
+     *
+     * @return the animate
+     */
     public int getAnimate() {
         return animate;
     }
 
+    /**
+     * Sets the animate.
+     *
+     * @param animate the new animate
+     */
     public void setAnimate(int animate) {
         this.animate = animate;
     }
 
+    /**
+     * Instantiates a new panel slide.
+     */
     public PanelSlide() {
 		initComponents();
         setLayout(null);
@@ -36,12 +56,27 @@ public class PanelSlide extends javax.swing.JPanel {
 
     }
 
+    /** The timer. */
     private final Timer timer;
+    
+    /** The com exit. */
     private Component comExit;
+    
+    /** The com show. */
     private Component comShow;
+    
+    /** The animate type. */
     private AnimateType animateType;
+    
+    /** The animate. */
     private int animate = 1;
 
+    /**
+     * Show.
+     *
+     * @param com the com
+     * @param animateType the animate type
+     */
     public void show(Component com, AnimateType animateType) {
         if (!timer.isRunning()) {
             this.animateType = animateType;
@@ -68,6 +103,9 @@ public class PanelSlide extends javax.swing.JPanel {
         }
     }
 
+    /**
+     * Animate.
+     */
     private void animate() {
         if (animateType == AnimateType.TO_RIGHT) {
             if (comShow.getLocation().x < 0) {
@@ -93,6 +131,9 @@ public class PanelSlide extends javax.swing.JPanel {
         }
     }
 
+    /**
+     * Inits the components.
+     */
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -109,8 +150,15 @@ public class PanelSlide extends javax.swing.JPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
 
+    /**
+     * The Enum AnimateType.
+     */
     public static enum AnimateType {
-        TO_RIGHT, TO_LEFT
+        
+        /** The to right. */
+        TO_RIGHT, 
+ /** The to left. */
+ TO_LEFT
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     // End of variables declaration//GEN-END:variables
