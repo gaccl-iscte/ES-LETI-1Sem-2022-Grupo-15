@@ -205,7 +205,7 @@ public class txtToObject {
 
 		eventos.sort(Comparator.comparing(CalendarEvent::getDate).thenComparing(CalendarEvent::getStart));
 
-		PrintStream out = new PrintStream("Horário.txt");
+		PrintStream out = new PrintStream("HorárioIndividual.txt");
 		System.setOut(out);
 
 		eventos.forEach(x -> System.out.println(x.toString()));
@@ -280,12 +280,13 @@ public class txtToObject {
 		}
 
 		eventos.forEach(x -> System.out.println(x.toString()));
+		
 
 		return eventos;
 	}
 
 	public static ArrayList<CalendarEvent> findBestTime(ArrayList<CalendarEvent> eventos, String duracao, String alturaDoDia, ArrayList<String> nomes, LocalDate data) throws FileNotFoundException, ParseException {
-
+		
 		LocalDate hoje = data;
 
 		if(DayOfWeek.from(hoje).getValue() == 6 || DayOfWeek.from(hoje).getValue() == 7) {
@@ -352,9 +353,13 @@ public class txtToObject {
 					}
 				}
 
+		PrintStream out = new PrintStream("Horário.txt");
+		System.setOut(out);
+		
 		eventos.add(reuniao);
 		reuniaoFinal = reuniao;
 		eventos.sort(Comparator.comparing(CalendarEvent::getDate).thenComparing(CalendarEvent::getStart));
+		eventos.forEach(y -> System.out.println(y.toString()));
 		return eventos;
 	}
 
@@ -390,7 +395,7 @@ public class txtToObject {
 		}
 //		eventos.add(reuniao);
 
-		for(int i = 0; i < semanas - 1; i++) {
+		for(int i = 1; i < semanas; i++) {
 
 			int addDays = 8 - DayOfWeek.from(data).getValue();
 

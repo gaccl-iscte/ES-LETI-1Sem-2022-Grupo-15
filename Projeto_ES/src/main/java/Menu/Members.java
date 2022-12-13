@@ -1,12 +1,15 @@
 package Menu;
 
 import java.awt.Color;
+import java.awt.Desktop;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.text.ParseException;
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -26,7 +29,7 @@ import WeekCalendar.WeekCalendarTest;
 public class Members extends JFrame implements ActionListener{
 
 	JLabel lblmembers, lblselect, lblcalendar;
-	JButton mensal, semanal, diario, back;
+	JButton mensal, semanal, diario, back, txt;
 	JComboBox<String> members = new JComboBox<String>();
 
 	Members(){
@@ -69,6 +72,12 @@ public class Members extends JFrame implements ActionListener{
 
 			members.insertItemAt(AddMember.nomes.get(i), i);
 		}
+		
+		txt = new JButton("Ver txt");
+		txt.addActionListener(this);
+		Dimension sizetxt = txt.getPreferredSize();
+		txt.setBounds(360, 10, 100, sizetxt.height);
+		this.add(txt);
 
 		lblcalendar = new JLabel("Calendário:");
 		lblcalendar.setFont(new Font("Arial", Font.PLAIN, 20));
@@ -132,6 +141,21 @@ public class Members extends JFrame implements ActionListener{
 				file.remove(0);
 				member.remove(0);
 			} catch (FileNotFoundException | ParseException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
+		}else if(e.getSource() == txt) {
+			try {
+				member.add((String) members.getSelectedItem());
+				file.add(AddMember.files2.get(members.getSelectedIndex()));
+				txtToObject.getList(file, member);
+				Desktop.getDesktop().open(new File("HorárioIndividual.txt"));
+				file.remove(0);
+				member.remove(0);
+			} catch (IOException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			} catch (ParseException e1) {
 				// TODO Auto-generated catch block
 				e1.printStackTrace();
 			}

@@ -1,12 +1,18 @@
 package Menu;
 
 import java.awt.Color;
+import java.awt.Desktop;
 import java.awt.Dimension;
+import java.awt.FlowLayout;
 import java.awt.Font;
+import java.awt.Insets;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
 import java.text.ParseException;
 import java.time.LocalDate;
 
@@ -14,6 +20,9 @@ import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.JTextArea;
 import javax.swing.text.BadLocationException;
 
 import DayCalendar.DayCalendarTest;
@@ -24,7 +33,8 @@ import WeekCalendar.WeekCalendarTest;
 public class Metting extends JFrame implements ActionListener{
 
 	JLabel lblmetting, lblproposta, lbldata, lblcalendar;
-	JButton back, mensal, semanal, diario, members;
+	JButton back, mensal, semanal, diario, members, txt;
+	JFrame displayFrame;
 	public static Metting instance;
 
 	public static Metting getInstance() {
@@ -76,11 +86,18 @@ public class Metting extends JFrame implements ActionListener{
 			lbldata.setBounds(100, 130, sizelbldata.width, sizelbldata.height);
 			this.add(lbldata);		
 		}
+		
 		members = new JButton("Ver Membros");
 		members.addActionListener(this);
 		Dimension sizemembers = members.getPreferredSize();
 		members.setBounds(165, 190, 150, sizemembers.height);
 		this.add(members);
+		
+		txt = new JButton("Ver txt");
+		txt.addActionListener(this);
+		Dimension sizetxt = txt.getPreferredSize();
+		txt.setBounds(360, 10, 100, sizetxt.height);
+		this.add(txt);
 
 		lblcalendar = new JLabel("Calendário:");
 		lblcalendar.setFont(new Font("Arial", Font.PLAIN, 20));
@@ -149,9 +166,16 @@ public class Metting extends JFrame implements ActionListener{
 				// TODO Auto-generated catch block
 				e1.printStackTrace();
 			}
+		}else if(e.getSource() == txt) {
+			try {
+				Desktop.getDesktop().open(new File("Horário.txt"));
+			} catch (IOException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
 		}
 	}
-
+	
 	public JFrame getFrameInstance() {
 		return this;
 	}
