@@ -1,6 +1,3 @@
-/*
- * 
- */
 package ES_2022_LETI_Grupo_15.Projeto_ES;
 
 import java.io.File;
@@ -21,7 +18,6 @@ import java.util.Scanner;
 import org.apache.commons.lang3.StringUtils;
 import Calendar.CalendarEvent;
 
-// TODO: Auto-generated Javadoc
 /**
  * The Class txtToObject.
  */

@@ -1,6 +1,4 @@
-/*
- * 
- */
+
 package Menu;
 
 import java.awt.Color;
@@ -33,8 +31,6 @@ import Calendar.CalendarEvent;
 import ES_2022_LETI_Grupo_15.Projeto_ES.txtToObject;
 
 
-
-// TODO: Auto-generated Javadoc
 /**
  * The Class GenerateMetting.
  */

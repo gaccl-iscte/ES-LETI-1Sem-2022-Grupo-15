@@ -1,6 +1,4 @@
-/*
- * 
- */
+
 package MonthCalendar;
 
 import java.awt.Color;
@@ -19,8 +17,6 @@ import javax.swing.JButton;
 import javax.swing.JLabel;
 
 
-
-// TODO: Auto-generated Javadoc
 /**
  * The Class Cell.
  */

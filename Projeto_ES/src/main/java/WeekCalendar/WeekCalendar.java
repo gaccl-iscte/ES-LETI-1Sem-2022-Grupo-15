@@ -1,6 +1,4 @@
-/*
- * 
- */
+
 package WeekCalendar;
 
 import java.time.DayOfWeek;
@@ -10,7 +8,6 @@ import java.util.ArrayList;
 import Calendar.Calendar;
 import Calendar.CalendarEvent;
 
-// TODO: Auto-generated Javadoc
 /**
  * The Class WeekCalendar.
  */

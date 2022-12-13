@@ -1,6 +1,4 @@
-/*
- * 
- */
+
 package MonthCalendar;
 
 import javax.swing.JPanel;
@@ -9,7 +7,6 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 
-// TODO: Auto-generated Javadoc
 /**
  * The Class CalendarCustom.
  */

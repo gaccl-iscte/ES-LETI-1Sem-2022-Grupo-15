@@ -1,9 +1,6 @@
-/*
- * 
- */
+
 package MonthCalendar;
 
-// TODO: Auto-generated Javadoc
 /**
  * The Class ToDay.
  */

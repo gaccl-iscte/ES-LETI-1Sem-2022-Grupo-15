@@ -1,6 +1,4 @@
-/*
- * 
- */
+
 package MonthCalendar;
 
 import java.awt.Component;
@@ -10,7 +8,6 @@ import java.awt.event.ComponentAdapter;
 import java.awt.event.ComponentEvent;
 import javax.swing.Timer;
 
-// TODO: Auto-generated Javadoc
 /**
  * The Class PanelSlide.
  */

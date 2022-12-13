@@ -1,6 +1,4 @@
-/*
- * 
- */
+
 package Menu;
 
 import java.awt.Color;
@@ -29,7 +27,6 @@ import DayCalendar.DayCalendarTest;
 import ES_2022_LETI_Grupo_15.Projeto_ES.txtToObject;
 import WeekCalendar.WeekCalendarTest;
 
-// TODO: Auto-generated Javadoc
 /**
  * The Class Members.
  */

@@ -1,6 +1,4 @@
-/*
- * 
- */
+
 package MonthCalendar;
 
 import java.awt.Color;
@@ -21,7 +19,6 @@ import DayCalendar.DayCalendarTest;
 import ES_2022_LETI_Grupo_15.Projeto_ES.txtToObject;
 import Menu.GenerateMetting;
 
-// TODO: Auto-generated Javadoc
 /**
  * The Class PanelDate.
  */

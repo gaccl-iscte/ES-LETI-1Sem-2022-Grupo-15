@@ -1,6 +1,4 @@
-/*
- * 
- */
+
 package WeekCalendar;
 
 import java.awt.BorderLayout;
@@ -20,7 +18,6 @@ import Calendar.Calendar;
 import Calendar.CalendarEvent;
 
 
-// TODO: Auto-generated Javadoc
 /**
  * The Class WeekCalendarTest.
  */

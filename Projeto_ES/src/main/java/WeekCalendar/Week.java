@@ -1,13 +1,10 @@
-/*
- * 
- */
+
 package WeekCalendar;
 
 import java.time.DayOfWeek;
 import java.time.LocalDate;
 import java.util.ArrayList;
 
-// TODO: Auto-generated Javadoc
 /**
  * The Class Week.
  */

@@ -1,6 +1,4 @@
-/*
- * 
- */
+
 package Menu;
 
 import java.awt.Color;
@@ -14,7 +12,6 @@ import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 
-// TODO: Auto-generated Javadoc
 /**
  * The Class WelcomeWindow.
  */

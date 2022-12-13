@@ -1,6 +1,4 @@
-/*
- * 
- */
+
 package MonthCalendar;
 
 import java.awt.Dimension;
@@ -11,8 +9,6 @@ import javax.swing.ImageIcon;
 import Calendar.CalendarEvent;
 
 
-
-// TODO: Auto-generated Javadoc
 /**
  * The Class Main.
  */

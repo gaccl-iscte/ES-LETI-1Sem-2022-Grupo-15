@@ -1,6 +1,3 @@
-/*
- * 
- */
 package ES_2022_LETI_Grupo_15.Projeto_ES;
 
 import junit.framework.Test;

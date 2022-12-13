@@ -1,6 +1,3 @@
-/*
- * 
- */
 package ES_2022_LETI_Grupo_15.Projeto_ES;
 
 import java.io.File;
@@ -11,7 +8,6 @@ import java.net.URL;
 import java.nio.channels.Channels;
 import java.nio.channels.ReadableByteChannel;
 
-// TODO: Auto-generated Javadoc
 /**
  * The Class toTxt.
  */
