@@ -13,7 +13,7 @@ import org.junit.jupiter.api.Test;
 
 import Calendar.CalendarEvent;
 
-class WeekCalendarTest {
+class WeekCalendarTestJunit {
 
     ArrayList<String> nomes = new ArrayList<>();
     ArrayList<CalendarEvent> eventos = new ArrayList<>();

@@ -12,7 +12,7 @@ import org.junit.jupiter.api.Test;
 
 import Calendar.CalendarEvent;
 
-class DayCalendarTest {
+class DayCalendarTestJunit {
 
     LocalDate data;
     DayCalendar day;
