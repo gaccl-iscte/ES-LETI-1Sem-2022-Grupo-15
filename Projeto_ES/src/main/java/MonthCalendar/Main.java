@@ -6,6 +6,8 @@ package MonthCalendar;
 import java.awt.Dimension;
 import java.util.ArrayList;
 
+import javax.swing.ImageIcon;
+
 import Calendar.CalendarEvent;
 
 
@@ -52,6 +54,8 @@ public class Main extends javax.swing.JFrame {
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
         
+        ImageIcon image = new ImageIcon("iscte_logo.png");
+		this.setIconImage(image.getImage());
         this.setResizable(false);
         this.setTitle("Month Calendar");
         
