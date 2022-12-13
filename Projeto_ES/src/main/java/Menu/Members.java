@@ -117,6 +117,10 @@ public class Members extends JFrame implements ActionListener{
 			Metting.getInstance().getFrameInstance().setVisible(true);
 		}else if(e.getSource() == mensal) {
 			try {
+				member.clear();
+				file.clear();
+				member.add((String) members.getSelectedItem());
+				file.add(AddMember.files2.get(members.getSelectedIndex()));
 				new Main(txtToObject.getList(file, member), member);
 			} catch (FileNotFoundException | ParseException e1) {
 				// TODO Auto-generated catch block
@@ -124,34 +128,34 @@ public class Members extends JFrame implements ActionListener{
 			}
 		}else if(e.getSource() == semanal) {
 			try {
+				member.clear();
+				file.clear();
 				member.add((String) members.getSelectedItem());
 				file.add(AddMember.files2.get(members.getSelectedIndex()));
 				new WeekCalendarTest(txtToObject.getList(file, member));
-				file.remove(0);
-				member.remove(0);
 			} catch (FileNotFoundException | ParseException e1) {
 				// TODO Auto-generated catch block
 				e1.printStackTrace();
 			}
 		}else if(e.getSource() == diario) {
 			try {
+				member.clear();
+				file.clear();
 				member.add((String) members.getSelectedItem());
 				file.add(AddMember.files2.get(members.getSelectedIndex()));
 				new DayCalendarTest(txtToObject.getList(file, member), LocalDate.now());
-				file.remove(0);
-				member.remove(0);
 			} catch (FileNotFoundException | ParseException e1) {
 				// TODO Auto-generated catch block
 				e1.printStackTrace();
 			}
 		}else if(e.getSource() == txt) {
 			try {
+				member.clear();
+				file.clear();
 				member.add((String) members.getSelectedItem());
 				file.add(AddMember.files2.get(members.getSelectedIndex()));
 				txtToObject.getList(file, member);
 				Desktop.getDesktop().open(new File("HorárioIndividual.txt"));
-				file.remove(0);
-				member.remove(0);
 			} catch (IOException e1) {
 				// TODO Auto-generated catch block
 				e1.printStackTrace();

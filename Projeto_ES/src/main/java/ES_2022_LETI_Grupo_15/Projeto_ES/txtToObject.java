@@ -395,7 +395,7 @@ public class txtToObject {
 		}
 //		eventos.add(reuniao);
 
-		for(int i = 1; i < semanas; i++) {
+		for(int i = 0; i < semanas - 1; i++) {
 
 			int addDays = 8 - DayOfWeek.from(data).getValue();
 
