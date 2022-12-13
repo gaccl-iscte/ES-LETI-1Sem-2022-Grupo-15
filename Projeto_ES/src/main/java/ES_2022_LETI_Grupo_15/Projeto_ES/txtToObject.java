@@ -20,6 +20,7 @@ import Calendar.CalendarEvent;
 
 public class txtToObject {
 
+	public static CalendarEvent reuniaoFinal = null;
 
 	public static ArrayList<String> convert(ArrayList<String> files, ArrayList<String> nomes) throws FileNotFoundException {
 
@@ -272,7 +273,8 @@ public class txtToObject {
 			CalendarEvent reuniao = new CalendarEvent(date, start, end, "Reunião", nomes);
 
 			eventos.add(reuniao);
-
+			reuniaoFinal = reuniao;
+			
 			eventos.sort(Comparator.comparing(CalendarEvent::getDate).thenComparing(CalendarEvent::getStart));
 
 		}
@@ -351,6 +353,7 @@ public class txtToObject {
 				}
 
 		eventos.add(reuniao);
+		reuniaoFinal = reuniao;
 		eventos.sort(Comparator.comparing(CalendarEvent::getDate).thenComparing(CalendarEvent::getStart));
 		return eventos;
 	}
@@ -378,16 +381,16 @@ public class txtToObject {
 
 	public static ArrayList<CalendarEvent> periodicity(ArrayList<CalendarEvent> eventos, ArrayList<String> nomes, LocalDate data, int semanas, String duracao, String alturaDoDia) throws FileNotFoundException, ParseException {
 
-		CalendarEvent reuniao = null;
+//		CalendarEvent reuniao = null;
 		try {
 			eventos = findBestTime(eventos, duracao, alturaDoDia, nomes, data);
 		} catch (FileNotFoundException | ParseException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		eventos.add(reuniao);
+//		eventos.add(reuniao);
 
-		for(int i = 0; i < semanas ; i++) {
+		for(int i = 0; i < semanas - 1; i++) {
 
 			int addDays = 8 - DayOfWeek.from(data).getValue();
 

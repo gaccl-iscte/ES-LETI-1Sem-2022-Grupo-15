@@ -33,9 +33,10 @@ import ES_2022_LETI_Grupo_15.Projeto_ES.txtToObject;
 
 public class GenerateMetting extends JFrame implements ActionListener{
 
-	JLabel lblmetting, lblperiodicidade, lbltempo, lblduracao, lbldata, lblhora;
-	JComboBox<String> periodicidade = new JComboBox<String>();
+	JLabel lblmetting, lblperiodicidade, lbltempo, lblduracao, lbldata, lblhora, lblsemanas;
+	static JComboBox<String> periodicidade = new JComboBox<String>();
 	JComboBox<String> tempo = new JComboBox<String>();
+	JComboBox<Integer> semanas = new JComboBox<Integer>();
 	JButton gerar, auto, manual;
 	JSpinner duracao, hora;
 	JXDatePicker data;
@@ -90,9 +91,25 @@ public class GenerateMetting extends JFrame implements ActionListener{
 		periodicidade.addActionListener(this);		
 		periodicidade.setBounds(170, 110, 80, 25);
 		this.add(periodicidade);
-		periodicidade.insertItemAt("Diária", 0);
+		periodicidade.insertItemAt("Uma vez", 0);
 		periodicidade.insertItemAt("Semanal", 1);
 		periodicidade.setVisible(false);
+		
+		lblsemanas = new JLabel("Nº Semanas:");
+		lblsemanas.setFont(new Font("Arial", Font.PLAIN, 20));
+		lblsemanas.setForeground(Color.WHITE);
+		Dimension sizelblsemanas = lblsemanas.getPreferredSize();
+		lblsemanas.setBounds(270, 110, sizelblsemanas.width, sizelblsemanas.height);
+		this.add(lblsemanas);
+		lblsemanas.setVisible(false);
+		
+		semanas.addActionListener(this);
+		semanas.setBounds(400, 110, 50, 25);		
+		this.add(semanas);
+		for(int i=0; i<15; i++) {
+			semanas.insertItemAt(i+1, i);
+		}
+		semanas.setVisible(false);
 
 		lbltempo = new JLabel("Tempo do Dia:");
 		lbltempo.setFont(new Font("Arial", Font.PLAIN, 20));
@@ -120,7 +137,7 @@ public class GenerateMetting extends JFrame implements ActionListener{
 		data = new JXDatePicker();
 		data.setFont(new Font("Arial", Font.PLAIN, 18));
 		Dimension sizedata = lbldata.getPreferredSize();
-		data.setBounds(170, 180, 100, sizedata.height);
+		data.setBounds(170, 180, 120, sizedata.height);
 		this.add(data);
 		data.setVisible(false);	
 
@@ -128,7 +145,7 @@ public class GenerateMetting extends JFrame implements ActionListener{
 		lblhora.setFont(new Font("Arial", Font.PLAIN, 20));
 		lblhora.setForeground(Color.WHITE);	
 		Dimension sizelblhora = lblhora.getPreferredSize();
-		lblhora.setBounds(300, 180, sizelblhora.width, sizelblhora.height);
+		lblhora.setBounds(30, 110, sizelblhora.width, sizelblhora.height);
 		this.add(lblhora);
 		lblhora.setVisible(false);		
 
@@ -139,7 +156,7 @@ public class GenerateMetting extends JFrame implements ActionListener{
 		de.getTextField().setEditable( false );
 		hora.setEditor(de);
 		Dimension sizehora = hora.getPreferredSize();
-		hora.setBounds(380, 180, sizehora.width, 25);
+		hora.setBounds(170, 110, sizehora.width, 25);
 		this.add(hora);
 		hora.setVisible(false);
 
@@ -175,16 +192,15 @@ public class GenerateMetting extends JFrame implements ActionListener{
 	SimpleDateFormat format = new SimpleDateFormat("HH:mm");
 	SimpleDateFormat format1 = new SimpleDateFormat("yyyy-MM-dd");
 
-	
+
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		// TODO Auto-generated method stub
 		if(e.getSource() == gerar) {
-			if(!periodicidade.isVisible()) {					
-					System.out.println("erro");
+			if(!duracao.isVisible()) {					
+				System.out.println("erro");
 			}else {
 				String horas = null;
-				periodicidade.getSelectedItem();
 				horas = format.format(duracao.getValue());
 				if(data.isVisible()) {
 					String horasI = null;
@@ -201,13 +217,24 @@ public class GenerateMetting extends JFrame implements ActionListener{
 					}
 
 				}else {
-					try {
-						events = txtToObject.findBestTime(txtToObject.getList(AddMember.files2Metting, AddMember.nomesMetting), horas, tempo.getSelectedItem().toString(), AddMember.nomesMetting, LocalDate.now());
-						new Metting();
-						this.setVisible(false);
-					} catch (FileNotFoundException | ParseException e1) {
-						// TODO Auto-generated catch block
-						e1.printStackTrace();
+					if(periodicidade.getSelectedItem().equals((Object) "Uma vez")){
+						try {
+							events = txtToObject.findBestTime(txtToObject.getList(AddMember.files2Metting, AddMember.nomesMetting), horas, tempo.getSelectedItem().toString(), AddMember.nomesMetting, LocalDate.now());
+							new Metting();
+							this.setVisible(false);
+						} catch (FileNotFoundException | ParseException e1) {
+							// TODO Auto-generated catch block
+							e1.printStackTrace();
+						}
+					}else if (periodicidade.getSelectedItem().equals((Object) "Semanal")){
+						try {
+							events = txtToObject.periodicity(txtToObject.getList(AddMember.files2Metting, AddMember.nomesMetting), AddMember.nomesMetting, LocalDate.now(), semanas.getSelectedIndex() + 1, horas, tempo.getSelectedItem().toString());
+							new Metting();
+							this.setVisible(false);
+						} catch (FileNotFoundException | ParseException e1) {
+							// TODO Auto-generated catch block
+							e1.printStackTrace();
+						}
 					}
 				}
 			}
@@ -226,8 +253,10 @@ public class GenerateMetting extends JFrame implements ActionListener{
 		}else if(e.getSource() == manual) {
 			lbltempo.setVisible(false);
 			tempo.setVisible(false);
-			lblperiodicidade.setVisible(true);
-			periodicidade.setVisible(true);
+			lblperiodicidade.setVisible(false);
+			periodicidade.setVisible(false);	
+			lblsemanas.setVisible(false);
+			semanas.setVisible(false);
 			lblduracao.setVisible(true);
 			duracao.setVisible(true);
 			gerar.setVisible(true);
@@ -235,6 +264,14 @@ public class GenerateMetting extends JFrame implements ActionListener{
 			data.setVisible(true);
 			lblhora.setVisible(true);
 			hora.setVisible(true);
+		}else if(e.getSource() == periodicidade) {
+			if(periodicidade.getSelectedItem().equals((Object) "Semanal")){
+				lblsemanas.setVisible(true);
+				semanas.setVisible(true);
+			}else if(periodicidade.getSelectedItem().equals((Object) "Uma vez")) {
+				lblsemanas.setVisible(false);
+				semanas.setVisible(false);
+			}
 		}
 	}
 

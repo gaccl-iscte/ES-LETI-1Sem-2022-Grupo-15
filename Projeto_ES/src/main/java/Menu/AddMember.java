@@ -6,6 +6,7 @@ import java.awt.Font;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -13,6 +14,7 @@ import java.util.ArrayList;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
+import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
@@ -29,6 +31,7 @@ public class AddMember extends JFrame implements ActionListener{
 	JButton file, adicionar;
 	JCheckBox metting;
 	int i;
+	File file1;
 	public static ArrayList<String> files = new ArrayList<String>();
 	public static ArrayList<String> nomes = new ArrayList<String>();
 	public static ArrayList<String> files2 = new ArrayList<String>();
@@ -73,6 +76,7 @@ public class AddMember extends JFrame implements ActionListener{
 		file.setIcon(new ImageIcon("note.png"));
 		Dimension sizefile = file.getPreferredSize();
 		file.setBounds(350+sizelblurl.width, 70, sizefile.width, sizefile.height);
+		file.addActionListener(this);
 		this.add(file);
 
 		lblnome = new JLabel("Primeiro Nome:");
@@ -138,8 +142,11 @@ public class AddMember extends JFrame implements ActionListener{
 			String file = lastname+".txt";
 
 			try {
-
-				toTxt.convert(link, file);
+				try {
+					toTxt.convert(link, file);
+				} catch (IOException e1){
+					toTxt.convert(file1, file);
+				}
 				files.add(file);
 				nomes.add(name+" "+lastname);
 				if(metting.isSelected()) {
@@ -165,6 +172,13 @@ public class AddMember extends JFrame implements ActionListener{
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
 				}
+			}
+		}else if(e.getSource() == file) {
+			JFileChooser fileChooser = new JFileChooser();
+			int response = fileChooser.showOpenDialog(null);
+			
+			if(response == JFileChooser.APPROVE_OPTION) {
+				file1 = new File(fileChooser.getSelectedFile().getAbsolutePath());				
 			}
 		}
 	}

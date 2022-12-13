@@ -17,6 +17,7 @@ import javax.swing.JLabel;
 import javax.swing.text.BadLocationException;
 
 import DayCalendar.DayCalendarTest;
+import ES_2022_LETI_Grupo_15.Projeto_ES.txtToObject;
 import MonthCalendar.Main;
 import WeekCalendar.WeekCalendarTest;
 
@@ -57,20 +58,24 @@ public class Metting extends JFrame implements ActionListener{
 		lblmetting.setBounds(200, 10, sizelblmetting.width, sizelblmetting.height);
 		this.add(lblmetting);		
 
-		lblproposta = new JLabel("Reunião proposta para:");
-		lblproposta.setFont(new Font("Arial", Font.PLAIN, 20));
-		lblproposta.setForeground(Color.WHITE);	
-		Dimension sizelblproposta = lblproposta.getPreferredSize();
-		lblproposta.setBounds(140, 100, sizelblproposta.width, sizelblproposta.height);
-		this.add(lblproposta);
+		if(!GenerateMetting.periodicidade.isVisible() || GenerateMetting.periodicidade.getSelectedItem().equals((Object) "Uma vez")) {
 
-		lbldata = new JLabel("dd/MM/yyyy hh:mm");
-		lbldata.setFont(new Font("Arial", Font.PLAIN, 20));
-		lbldata.setForeground(Color.WHITE);	
-		Dimension sizelbldata = lbldata.getPreferredSize();
-		lbldata.setBounds(155, 130, sizelbldata.width, sizelbldata.height);
-		this.add(lbldata);
+			lblproposta = new JLabel("Reunião proposta para:");
+			lblproposta.setFont(new Font("Arial", Font.PLAIN, 20));
+			lblproposta.setForeground(Color.WHITE);	
+			Dimension sizelblproposta = lblproposta.getPreferredSize();
+			lblproposta.setBounds(140, 100, sizelblproposta.width, sizelblproposta.height);
+			this.add(lblproposta);
 
+			String proposta = txtToObject.reuniaoFinal.toString();
+			String[] split = proposta.split(" ");
+			lbldata = new JLabel(split[0] + " " + split[1] + " " + split[2]);
+			lbldata.setFont(new Font("Arial", Font.PLAIN, 20));
+			lbldata.setForeground(Color.WHITE);	
+			Dimension sizelbldata = lbldata.getPreferredSize();
+			lbldata.setBounds(100, 130, sizelbldata.width, sizelbldata.height);
+			this.add(lbldata);		
+		}
 		members = new JButton("Ver Membros");
 		members.addActionListener(this);
 		Dimension sizemembers = members.getPreferredSize();
