@@ -1,4 +1,10 @@
 eclipse.preferences.version=1
 encoding//src/main/java=UTF-8
+encoding//src/main/java/Calendar/CalendarProduct.java=UTF-8
+encoding//src/main/java/Calendar/CalendarProduct2.java=UTF-8
+encoding//src/main/java/MonthCalendar/CalendarCustomProduct.java=UTF-8
+encoding//src/main/java/MonthCalendar/CalendarCustomProduct2.java=UTF-8
+encoding//src/main/java/MonthCalendar/MainProduct.java=UTF-8
+encoding//src/main/java/MonthCalendar/PanelDateProduct.java=UTF-8
 encoding//src/test/java=UTF-8
 encoding/<project>=UTF-8

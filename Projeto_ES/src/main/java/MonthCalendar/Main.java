@@ -4,6 +4,7 @@ package MonthCalendar;
 import java.awt.Dimension;
 import java.util.ArrayList;
 
+import javax.swing.GroupLayout;
 import javax.swing.ImageIcon;
 
 import Calendar.CalendarEvent;
@@ -13,6 +14,8 @@ import Calendar.CalendarEvent;
  * The Class Main.
  */
 public class Main extends javax.swing.JFrame {
+
+	private MainProduct mainProduct = new MainProduct();
 
 	/** The eventos. */
 	static ArrayList<CalendarEvent> eventos;
@@ -42,39 +45,17 @@ public class Main extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jPanel1 = new javax.swing.JPanel();
-        
-        calendarCustom2 = new CalendarCustom();
+        GroupLayout jPanel1Layout = mainProduct.jPanel1Layout(this);
+		
 
 //        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jPanel1.setBackground(new java.awt.Color(255, 255, 255));
-        
         ImageIcon image = new ImageIcon("iscte_logo.png");
 		this.setIconImage(image.getImage());
         this.setResizable(false);
         this.setTitle("Month Calendar");
         
         
-        calendarCustom2.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(48, 48, 48)
-                .addComponent(calendarCustom2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(381, Short.MAX_VALUE))
-        );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(27, 27, 27)
-                .addComponent(calendarCustom2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(122, Short.MAX_VALUE))
-        );
-
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -90,7 +71,7 @@ public class Main extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    /**
+	/**
      * The main method.
      *
      * @param args the command line arguments
@@ -127,11 +108,15 @@ public class Main extends javax.swing.JFrame {
         });
     }
 
-    /** The calendar custom 2. */
-    // Variables declaration - do not modify//GEN-BEGIN:variables
-    private CalendarCustom calendarCustom2;
-    
     /** The j panel 1. */
     private javax.swing.JPanel jPanel1;
     // End of variables declaration//GEN-END:variables
+
+	public void setJPanel1(javax.swing.JPanel jPanel1) {
+		this.jPanel1 = jPanel1;
+	}
+
+	public javax.swing.JPanel getJPanel1() {
+		return jPanel1;
+	}
 }

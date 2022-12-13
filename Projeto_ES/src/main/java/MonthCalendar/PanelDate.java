@@ -24,9 +24,8 @@ import Menu.GenerateMetting;
  */
 public class PanelDate extends JPanel{
 
-	/** The year. */
-	private int month, year;
-	
+	private PanelDateProduct panelDateProduct = new PanelDateProduct();
+
 	/** The cells. */
 	private static ArrayList<Cell> cells = new ArrayList<>();
 
@@ -38,8 +37,8 @@ public class PanelDate extends JPanel{
 	 */
 	public PanelDate(int month, int year) {
 		initComponents();
-		this.month = month;
-		this.year = year;
+		panelDateProduct.setMonth(month);
+		panelDateProduct.setYear(year);
 		init();
 	}
 
@@ -54,55 +53,7 @@ public class PanelDate extends JPanel{
 		sex.asTitle();
 		sab.asTitle();
 		dom.asTitle();
-		setDate();
-	}
-
-	/**
-	 * Sets the date.
-	 */
-	private void setDate() {
-		Calendar calendar = Calendar.getInstance();
-		calendar.set(Calendar.YEAR, year);
-		calendar.set(Calendar.MONTH, month - 1);  //  month jan as 0 so start from 0
-		calendar.set(Calendar.DATE, 1);
-		int startDay = calendar.get(Calendar.DAY_OF_WEEK) - 1;  //  get day of week -1 to index
-		calendar.add(Calendar.DATE, -startDay);
-		ToDay toDay = getToDay();
-		for (Component com : getComponents()) {
-			Cell cell = (Cell) com;
-			if (!cell.isTitle()) {
-				cell.setText(calendar.get(Calendar.DATE) + "");
-				cell.setDate(calendar.getTime());
-				cell.currentMonth(calendar.get(Calendar.MONTH) == month - 1);
-				cell.setOpaque(true);
-				if (toDay.isToDay(new ToDay(calendar.get(Calendar.DATE), calendar.get(Calendar.MONTH) + 1, calendar.get(Calendar.YEAR)))) {
-					cell.setAsToDay();
-				}
-				LocalDate data = cell.getDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
-				int numEvents = txtToObject.getNumberEventsOfDay(Main.eventos, Main.nomes, data);
-				if( numEvents >= 6) {
-					cell.setBackground(new Color(0, 102, 204));
-				}else if( numEvents < 6 && numEvents >= 3) {
-					cell.setBackground(new Color(51, 153, 255));
-				}else if( numEvents < 3 && numEvents >= 1) {
-					cell.setBackground(new Color(153, 204, 255));
-				}else {
-					cell.setBackground(new Color(169, 169, 169));
-				}
-				calendar.add(Calendar.DATE, 1); //  up 1 day
-			}
-		}
-	}
-
-	/**
-	 * Gets the to day.
-	 *
-	 * @return the to day
-	 */
-	private ToDay getToDay() {
-		Calendar calendar = Calendar.getInstance();
-		calendar.setTime(new Date());
-		return new ToDay(calendar.get(Calendar.DATE), calendar.get(Calendar.MONTH) + 1, calendar.get(Calendar.YEAR));
+		panelDateProduct.setDate(this);
 	}
 
 	/**
@@ -118,6 +69,84 @@ public class PanelDate extends JPanel{
 		qui = new Cell();
 		sex = new Cell();
 		sab = new Cell();
+		cells();
+		setLayout(new java.awt.GridLayout(7, 7));
+
+		dom.setForeground(new java.awt.Color(222, 12, 12));
+		dom.setText("Dom");
+		dom.setFont(new java.awt.Font("sansserif", 0, 25)); // NOI18N
+		add(dom);
+
+		seg.setText("Seg");
+		seg.setFont(new java.awt.Font("sansserif", 0, 25)); // NOI18N
+		add(seg);
+
+		ter.setText("Ter");
+		ter.setFont(new java.awt.Font("sansserif", 0, 25)); // NOI18N
+		add(ter);
+
+		qua.setText("Qua");
+		qua.setFont(new java.awt.Font("sansserif", 0, 25)); // NOI18N
+		add(qua);
+
+		qui.setText("Qui");
+		qui.setFont(new java.awt.Font("sansserif", 0, 25)); // NOI18N
+		add(qui);
+
+		sex.setText("Sex");
+		sex.setFont(new java.awt.Font("sansserif", 0, 25)); // NOI18N
+		add(sex);
+
+		sab.setForeground(new java.awt.Color(222, 12, 12));
+		sab.setText("Sab");       
+		sab.setFont(new java.awt.Font("sansserif", 0, 25)); // NOI18N
+		add(sab);
+
+		add(cell8);
+		add(cell9);
+		add(cell10);
+		add(cell11);
+		add(cell12);
+		add(cell13);
+		add(cell14);
+		add(cell15);
+		add(cell16);
+		add(cell17);
+		add(cell18);
+		add(cell19);
+		add(cell20);
+		add(cell21);
+		add(cell22);
+		add(cell23);
+		add(cell24);
+		add(cell25);
+		add(cell26);
+		add(cell27);
+		add(cell28);
+		add(cell29);
+		add(cell30);
+		add(cell31);
+		add(cell32);
+		add(cell33);
+		add(cell34);
+		add(cell35);
+		add(cell36);
+		add(cell37);
+		add(cell38);
+		add(cell39);
+		add(cell40);
+		add(cell41);
+		add(cell42);
+		add(cell43);
+		add(cell44);
+		add(cell45);
+		add(cell46);
+		add(cell47);
+		add(cell48);
+		add(cell49);
+	}// </editor-fold>//GEN-END:initComponents
+
+	private void cells() {
 		cell8 = new Cell();
 		cell9 = new Cell();
 		cell10 = new Cell();
@@ -160,249 +189,133 @@ public class PanelDate extends JPanel{
 		cell47 = new Cell();
 		cell48 = new Cell();
 		cell49 = new Cell();
-		
-		setLayout(new java.awt.GridLayout(7, 7));
-
-		dom.setForeground(new java.awt.Color(222, 12, 12));
-		dom.setText("Dom");
-		dom.setFont(new java.awt.Font("sansserif", 0, 25)); // NOI18N
-		add(dom);
-
-		seg.setText("Seg");
-		seg.setFont(new java.awt.Font("sansserif", 0, 25)); // NOI18N
-		add(seg);
-
-		ter.setText("Ter");
-		ter.setFont(new java.awt.Font("sansserif", 0, 25)); // NOI18N
-		add(ter);
-
-		qua.setText("Qua");
-		qua.setFont(new java.awt.Font("sansserif", 0, 25)); // NOI18N
-		add(qua);
-
-		qui.setText("Qui");
-		qui.setFont(new java.awt.Font("sansserif", 0, 25)); // NOI18N
-		add(qui);
-
-		sex.setText("Sex");
-		sex.setFont(new java.awt.Font("sansserif", 0, 25)); // NOI18N
-		add(sex);
-
-		sab.setForeground(new java.awt.Color(222, 12, 12));
-		sab.setText("Sab");       
-		sab.setFont(new java.awt.Font("sansserif", 0, 25)); // NOI18N
-		add(sab);
-
-		cell8.setFont(new java.awt.Font("sansserif", 0, 25)); // NOI18N
+		cell8.setFont(new java.awt.Font("sansserif", 0, 25));
 		cell8.addActionListener(new open());
-		add(cell8);
 		cells.add(cell8);
-
-		cell9.setFont(new java.awt.Font("sansserif", 0, 25)); // NOI18N
+		cell9.setFont(new java.awt.Font("sansserif", 0, 25));
 		cell9.addActionListener(new open());
-		add(cell9);
 		cells.add(cell9);
-
-		cell10.setFont(new java.awt.Font("sansserif", 0, 25)); // NOI18N
+		cell10.setFont(new java.awt.Font("sansserif", 0, 25));
 		cell10.addActionListener(new open());
-		add(cell10);
 		cells.add(cell10);
-
-		cell11.setFont(new java.awt.Font("sansserif", 0, 25)); // NOI18N
+		cell11.setFont(new java.awt.Font("sansserif", 0, 25));
 		cell11.addActionListener(new open());
-		add(cell11);
 		cells.add(cell11);
-
-		cell12.setFont(new java.awt.Font("sansserif", 0, 25)); // NOI18N
+		cell12.setFont(new java.awt.Font("sansserif", 0, 25));
 		cell12.addActionListener(new open());
-		add(cell12);
 		cells.add(cell12);
-
-		cell13.setFont(new java.awt.Font("sansserif", 0, 25)); // NOI18N
+		cell13.setFont(new java.awt.Font("sansserif", 0, 25));
 		cell13.addActionListener(new open());
-		add(cell13);
 		cells.add(cell13);
-
-		cell14.setFont(new java.awt.Font("sansserif", 0, 25)); // NOI18N
+		cell14.setFont(new java.awt.Font("sansserif", 0, 25));
 		cell14.addActionListener(new open());
-		add(cell14);
 		cells.add(cell14);
-
-		cell15.setFont(new java.awt.Font("sansserif", 0, 25)); // NOI18N
+		cell15.setFont(new java.awt.Font("sansserif", 0, 25));
 		cell15.addActionListener(new open());
-		add(cell15);
 		cells.add(cell15);
-
-		cell16.setFont(new java.awt.Font("sansserif", 0, 25)); // NOI18N
+		cell16.setFont(new java.awt.Font("sansserif", 0, 25));
 		cell16.addActionListener(new open());
-		add(cell16);
 		cells.add(cell16);
-
-		cell17.setFont(new java.awt.Font("sansserif", 0, 25)); // NOI18N
+		cell17.setFont(new java.awt.Font("sansserif", 0, 25));
 		cell17.addActionListener(new open());
-		add(cell17);
 		cells.add(cell17);
-
-		cell18.setFont(new java.awt.Font("sansserif", 0, 25)); // NOI18N
+		cell18.setFont(new java.awt.Font("sansserif", 0, 25));
 		cell18.addActionListener(new open());
-		add(cell18);
 		cells.add(cell18);
-
-		cell19.setFont(new java.awt.Font("sansserif", 0, 25)); // NOI18N
+		cell19.setFont(new java.awt.Font("sansserif", 0, 25));
 		cell19.addActionListener(new open());
-		add(cell19);
 		cells.add(cell19);
-
-		cell20.setFont(new java.awt.Font("sansserif", 0, 25)); // NOI18N
+		cell20.setFont(new java.awt.Font("sansserif", 0, 25));
 		cell20.addActionListener(new open());
-		add(cell20);
 		cells.add(cell20);
-
-		cell21.setFont(new java.awt.Font("sansserif", 0, 25)); // NOI18N
+		cell21.setFont(new java.awt.Font("sansserif", 0, 25));
 		cell21.addActionListener(new open());
-		add(cell21);
 		cells.add(cell21);
-
-		cell22.setFont(new java.awt.Font("sansserif", 0, 25)); // NOI18N
+		cell22.setFont(new java.awt.Font("sansserif", 0, 25));
 		cell22.addActionListener(new open());
-		add(cell22);
 		cells.add(cell22);
-
-		cell23.setFont(new java.awt.Font("sansserif", 0, 25)); // NOI18N
+		cell23.setFont(new java.awt.Font("sansserif", 0, 25));
 		cell23.addActionListener(new open());
-		add(cell23);
 		cells.add(cell23);
-
-		cell24.setFont(new java.awt.Font("sansserif", 0, 25)); // NOI18N
+		cell24.setFont(new java.awt.Font("sansserif", 0, 25));
 		cell24.addActionListener(new open());
-		add(cell24);
 		cells.add(cell24);
-
-		cell25.setFont(new java.awt.Font("sansserif", 0, 25)); // NOI18N
+		cell25.setFont(new java.awt.Font("sansserif", 0, 25));
 		cell25.addActionListener(new open());
-		add(cell25);
 		cells.add(cell25);
-
-		cell26.setFont(new java.awt.Font("sansserif", 0, 25)); // NOI18N
+		cell26.setFont(new java.awt.Font("sansserif", 0, 25));
 		cell26.addActionListener(new open());
-		add(cell26);
 		cells.add(cell26);
-
-		cell27.setFont(new java.awt.Font("sansserif", 0, 25)); // NOI18N
+		cell27.setFont(new java.awt.Font("sansserif", 0, 25));
 		cell27.addActionListener(new open());
-		add(cell27);
 		cells.add(cell27);
-
-		cell28.setFont(new java.awt.Font("sansserif", 0, 25)); // NOI18N
+		cell28.setFont(new java.awt.Font("sansserif", 0, 25));
 		cell28.addActionListener(new open());
-		add(cell28);
 		cells.add(cell28);
-
-		cell29.setFont(new java.awt.Font("sansserif", 0, 25)); // NOI18N
+		cell29.setFont(new java.awt.Font("sansserif", 0, 25));
 		cell29.addActionListener(new open());
-		add(cell29);
 		cells.add(cell29);
-
-		cell30.setFont(new java.awt.Font("sansserif", 0, 25)); // NOI18N
+		cell30.setFont(new java.awt.Font("sansserif", 0, 25));
 		cell30.addActionListener(new open());
-		add(cell30);
 		cells.add(cell30);
-
-		cell31.setFont(new java.awt.Font("sansserif", 0, 25)); // NOI18N
+		cell31.setFont(new java.awt.Font("sansserif", 0, 25));
 		cell31.addActionListener(new open());
-		add(cell31);
 		cells.add(cell31);
-
-		cell32.setFont(new java.awt.Font("sansserif", 0, 25)); // NOI18N
+		cell32.setFont(new java.awt.Font("sansserif", 0, 25));
 		cell32.addActionListener(new open());
-		add(cell32);
 		cells.add(cell32);
-
-		cell33.setFont(new java.awt.Font("sansserif", 0, 25)); // NOI18N
+		cell33.setFont(new java.awt.Font("sansserif", 0, 25));
 		cell33.addActionListener(new open());
-		add(cell33);
 		cells.add(cell33);
-
-		cell34.setFont(new java.awt.Font("sansserif", 0, 25)); // NOI18N
+		cell34.setFont(new java.awt.Font("sansserif", 0, 25));
 		cell34.addActionListener(new open());
-		add(cell34);
 		cells.add(cell34);
-
-		cell35.setFont(new java.awt.Font("sansserif", 0, 25)); // NOI18N
+		cell35.setFont(new java.awt.Font("sansserif", 0, 25));
 		cell35.addActionListener(new open());
-		add(cell35);
 		cells.add(cell35);
-
-		cell36.setFont(new java.awt.Font("sansserif", 0, 25)); // NOI18N
+		cell36.setFont(new java.awt.Font("sansserif", 0, 25));
 		cell36.addActionListener(new open());
-		add(cell36);
 		cells.add(cell36);
-
-		cell37.setFont(new java.awt.Font("sansserif", 0, 25)); // NOI18N
+		cell37.setFont(new java.awt.Font("sansserif", 0, 25));
 		cell37.addActionListener(new open());
-		add(cell37);
 		cells.add(cell37);
-
-		cell38.setFont(new java.awt.Font("sansserif", 0, 25)); // NOI18N
+		cell38.setFont(new java.awt.Font("sansserif", 0, 25));
 		cell38.addActionListener(new open());
-		add(cell38);
 		cells.add(cell38);
-
-		cell39.setFont(new java.awt.Font("sansserif", 0, 25)); // NOI18N
+		cell39.setFont(new java.awt.Font("sansserif", 0, 25));
 		cell39.addActionListener(new open());
-		add(cell39);
 		cells.add(cell39);
-
-		cell40.setFont(new java.awt.Font("sansserif", 0, 25)); // NOI18N
+		cell40.setFont(new java.awt.Font("sansserif", 0, 25));
 		cell40.addActionListener(new open());
-		add(cell40);
 		cells.add(cell40);
-
-		cell41.setFont(new java.awt.Font("sansserif", 0, 25)); // NOI18N
+		cell41.setFont(new java.awt.Font("sansserif", 0, 25));
 		cell41.addActionListener(new open());
-		add(cell41);
 		cells.add(cell41);
-
-		cell42.setFont(new java.awt.Font("sansserif", 0, 25)); // NOI18N
+		cell42.setFont(new java.awt.Font("sansserif", 0, 25));
 		cell42.addActionListener(new open());
-		add(cell42);
 		cells.add(cell42);
-
-		cell43.setFont(new java.awt.Font("sansserif", 0, 25)); // NOI18N
+		cell43.setFont(new java.awt.Font("sansserif", 0, 25));
 		cell43.addActionListener(new open());
-		add(cell43);
 		cells.add(cell43);
-
-		cell44.setFont(new java.awt.Font("sansserif", 0, 25)); // NOI18N
+		cell44.setFont(new java.awt.Font("sansserif", 0, 25));
 		cell44.addActionListener(new open());
-		add(cell44);
 		cells.add(cell44);
-
-		cell45.setFont(new java.awt.Font("sansserif", 0, 25)); // NOI18N
+		cell45.setFont(new java.awt.Font("sansserif", 0, 25));
 		cell45.addActionListener(new open());
-		add(cell45);
 		cells.add(cell45);
-
-		cell46.setFont(new java.awt.Font("sansserif", 0, 25)); // NOI18N
+		cell46.setFont(new java.awt.Font("sansserif", 0, 25));
 		cell46.addActionListener(new open());
-		add(cell46);
 		cells.add(cell46);
-
-		cell47.setFont(new java.awt.Font("sansserif", 0, 25)); // NOI18N
+		cell47.setFont(new java.awt.Font("sansserif", 0, 25));
 		cell47.addActionListener(new open());
-		add(cell47);
 		cells.add(cell47);
-
-		cell48.setFont(new java.awt.Font("sansserif", 0, 25)); // NOI18N
+		cell48.setFont(new java.awt.Font("sansserif", 0, 25));
 		cell48.addActionListener(new open());
-		add(cell48);
 		cells.add(cell48);
-
-		cell49.setFont(new java.awt.Font("sansserif", 0, 25)); // NOI18N
+		cell49.setFont(new java.awt.Font("sansserif", 0, 25));
 		cell49.addActionListener(new open());
-		add(cell49);
 		cells.add(cell49);
-	}// </editor-fold>//GEN-END:initComponents
+	}
 
 
 	/** The cell 10. */

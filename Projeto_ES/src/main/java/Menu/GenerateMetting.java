@@ -234,6 +234,7 @@ public class GenerateMetting extends JFrame implements ActionListener{
 	 */
 	@Override
 	public void actionPerformed(ActionEvent e) {
+		data(e);
 		// TODO Auto-generated method stub
 		if(e.getSource() == gerar) {
 			if(!duracao.isVisible()) {					
@@ -284,9 +285,7 @@ public class GenerateMetting extends JFrame implements ActionListener{
 			duracao.setVisible(true);
 			lbltempo.setVisible(true);
 			tempo.setVisible(true);
-			gerar.setVisible(true);
 			lbldata.setVisible(false);
-			data.setVisible(false);
 			lblhora.setVisible(false);
 			hora.setVisible(false);
 		}else if(e.getSource() == manual) {
@@ -298,9 +297,7 @@ public class GenerateMetting extends JFrame implements ActionListener{
 			semanas.setVisible(false);
 			lblduracao.setVisible(true);
 			duracao.setVisible(true);
-			gerar.setVisible(true);
 			lbldata.setVisible(true);
-			data.setVisible(true);
 			lblhora.setVisible(true);
 			hora.setVisible(true);
 		}else if(e.getSource() == periodicidade) {
@@ -311,6 +308,17 @@ public class GenerateMetting extends JFrame implements ActionListener{
 				lblsemanas.setVisible(false);
 				semanas.setVisible(false);
 			}
+		}
+	}
+
+	private void data(ActionEvent e) {
+		if (e.getSource() == gerar) {
+		} else if (e.getSource() == auto) {
+			gerar.setVisible(true);
+			data.setVisible(false);
+		} else if (e.getSource() == manual) {
+			gerar.setVisible(true);
+			data.setVisible(true);
 		}
 	}
 

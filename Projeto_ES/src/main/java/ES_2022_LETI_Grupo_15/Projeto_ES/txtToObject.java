@@ -357,16 +357,8 @@ public class txtToObject {
 		// manhã - 08:00 às 14:00
 		// tarde - 14:00 às 20:00
 
-		int horaI = 0;
-		int horaF = 0;
-		if(alturaDoDia.equals("Manhã")) {
-			horaI = 8;
-			horaF = 14;
-		} else {
-			horaI = 14;
-			horaF = 20;
-		}
-
+		int horaI = horaI(alturaDoDia);
+		int horaF = horaF(alturaDoDia);
 		LocalDate dateFinal = hoje;
 
 		int x = 0;
@@ -374,11 +366,8 @@ public class txtToObject {
 
 		for(int i = 1 ; i < 6-day ; i++) {
 
+			x = x(eventos, nomes, hoje, x);
 			hoje = hoje.plusDays(1);
-			x = 0;
-
-			x = getNumberEventsOfDay(eventos, nomes, hoje);
-
 			if(x < z) {
 
 				z = x;				
@@ -390,18 +379,9 @@ public class txtToObject {
 			for(int h = horaI ; h < horaF ; h++) 
 				for(int m = 0; m < 60 ; m=m+15) {
 
-					String dataI = dateFinal.toString();
+					String dataI = dataI(dateFinal, h, m);
+					LocalTime fim = fim(duracao, h, m);
 					LocalTime inicio = LocalTime.of(h, m);
-					LocalTime fim = null;
-					String timeI = inicio.toString();
-
-					dataI = dataI + " " + timeI;
-
-					LocalTime duration = LocalTime.parse(duracao);
-					int result = duration.get(ChronoField.MINUTE_OF_DAY);
-
-					fim = inicio.plusMinutes(result);
-
 					String dataF = dateFinal.toString() + " " + fim.toString();
 
 					if(availableOrNot(dataI, dataF, eventos, nomes)) {
@@ -418,6 +398,50 @@ public class txtToObject {
 		eventos.sort(Comparator.comparing(CalendarEvent::getDate).thenComparing(CalendarEvent::getStart));
 		eventos.forEach(y -> System.out.println(y.toString()));
 		return eventos;
+	}
+
+	private static int x(ArrayList<CalendarEvent> eventos, ArrayList<String> nomes, LocalDate hoje, int x) {
+		hoje = hoje.plusDays(1);
+		x = 0;
+		x = getNumberEventsOfDay(eventos, nomes, hoje);
+		return x;
+	}
+
+	private static int horaI(String alturaDoDia) {
+		int horaI = 0;
+		if (alturaDoDia.equals("Manhã")) {
+			horaI = 8;
+		} else {
+			horaI = 14;
+		}
+		return horaI;
+	}
+
+	private static int horaF(String alturaDoDia) {
+		int horaF = 0;
+		if (alturaDoDia.equals("Manhã")) {
+			horaF = 14;
+		} else {
+			horaF = 20;
+		}
+		return horaF;
+	}
+
+	private static String dataI(LocalDate dateFinal, int h, int m) {
+		String dataI = dateFinal.toString();
+		LocalTime inicio = LocalTime.of(h, m);
+		String timeI = inicio.toString();
+		dataI = dataI + " " + timeI;
+		return dataI;
+	}
+
+	private static LocalTime fim(String duracao, int h, int m) {
+		LocalTime inicio = LocalTime.of(h, m);
+		LocalTime fim = null;
+		LocalTime duration = LocalTime.parse(duracao);
+		int result = duration.get(ChronoField.MINUTE_OF_DAY);
+		fim = inicio.plusMinutes(result);
+		return fim;
 	}
 
 	/**

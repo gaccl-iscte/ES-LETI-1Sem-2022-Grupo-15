@@ -3,6 +3,7 @@ package Menu;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
+import java.awt.HeadlessException;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -167,6 +168,7 @@ public class AddMember extends JFrame implements ActionListener{
 	public void actionPerformed(ActionEvent e) {
 		// TODO Auto-generated method stub
 
+		file1(e);
 		if( e.getSource() == adicionar) {
 
 			this.setVisible(false);
@@ -209,12 +211,16 @@ public class AddMember extends JFrame implements ActionListener{
 					e1.printStackTrace();
 				}
 			}
-		}else if(e.getSource() == file) {
+		}
+	}
+
+	private void file1(ActionEvent e) throws HeadlessException {
+		if (e.getSource() == adicionar) {
+		} else if (e.getSource() == file) {
 			JFileChooser fileChooser = new JFileChooser();
 			int response = fileChooser.showOpenDialog(null);
-			
-			if(response == JFileChooser.APPROVE_OPTION) {
-				file1 = new File(fileChooser.getSelectedFile().getAbsolutePath());				
+			if (response == JFileChooser.APPROVE_OPTION) {
+				file1 = new File(fileChooser.getSelectedFile().getAbsolutePath());
 			}
 		}
 	}

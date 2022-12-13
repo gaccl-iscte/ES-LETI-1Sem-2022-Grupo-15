@@ -25,6 +25,10 @@ import java.util.Locale;
  */
 public abstract class Calendar extends JComponent {
 	
+	private CalendarProduct2 calendarProduct2 = new CalendarProduct2();
+
+	private CalendarProduct calendarProduct = new CalendarProduct();
+
 	/** The Constant START_TIME. */
 	protected static final LocalTime START_TIME = LocalTime.of(7, 0);
 	
@@ -51,17 +55,11 @@ public abstract class Calendar extends JComponent {
 	/** The events. */
 	private ArrayList<CalendarEvent> events;
 	
-	/** The time scale. */
-	private double timeScale;
-	
 	/** The day width. */
 	private double dayWidth;
 	
 	/** The g 2. */
 	private Graphics2D g2;
-
-	/** The listener list. */
-	private EventListenerList listenerList = new EventListenerList();
 
 	/**
 	 * Instantiates a new calendar.
@@ -135,12 +133,12 @@ public abstract class Calendar extends JComponent {
 			if (!dateInRange(event.getDate())) continue;
 
 			x0 = dayToPixel(event.getDate().getDayOfWeek());
-			y0 = timeToPixel(event.getStart());
+			y0 = calendarProduct2.timeToPixel(event.getStart());
 			x1 = dayToPixel(event.getDate().getDayOfWeek()) + dayWidth;
-			y1 = timeToPixel(event.getEnd());
+			y1 = calendarProduct2.timeToPixel(event.getEnd());
 
 			if (p.getX() >= x0 && p.getX() <= x1 && p.getY() >= y0 && p.getY() <= y1) {
-				fireCalendarEventClick(event);
+				calendarProduct.fireCalendarEventClick(event, this);
 				return true;
 			}
 		}
@@ -156,12 +154,12 @@ public abstract class Calendar extends JComponent {
 	private boolean checkCalendarEmptyClick(Point p) {
 		final double x0 = dayToPixel(getStartDay());
 		final double x1 = dayToPixel(getEndDay()) + dayWidth;
-		final double y0 = timeToPixel(START_TIME);
-		final double y1 = timeToPixel(END_TIME);
+		final double y0 = calendarProduct2.timeToPixel(START_TIME);
+		final double y1 = calendarProduct2.timeToPixel(END_TIME);
 
 		if (p.getX() >= x0 && p.getX() <= x1 && p.getY() >= y0 && p.getY() <= y1) {
 			LocalDate date = getDateFromDay(pixelToDay(p.getX()));
-			fireCalendarEmptyClick(LocalDateTime.of(date, pixelToTime(p.getY())));
+			calendarProduct.fireCalendarEmptyClick(LocalDateTime.of(date, calendarProduct2.pixelToTime(p.getY())), this);
 			return true;
 		}
 		return false;
@@ -183,7 +181,7 @@ public abstract class Calendar extends JComponent {
 	 * @param l the l
 	 */
 	public void addCalendarEventClickListener(CalendarEventClickListener l) {
-		listenerList.add(CalendarEventClickListener.class, l);
+		calendarProduct.addCalendarEventClickListener(l);
 	}
 
 	/**
@@ -192,29 +190,10 @@ public abstract class Calendar extends JComponent {
 	 * @param l the l
 	 */
 	public void removeCalendarEventClickListener(CalendarEventClickListener l) {
-		listenerList.remove(CalendarEventClickListener.class, l);
+		calendarProduct.removeCalendarEventClickListener(l);
 	}
 
-	// Notify all listeners that have registered interest for
-	/**
-	 * Fire calendar event click.
-	 *
-	 * @param calendarEvent the calendar event
-	 */
-	// notification on this event type.
-	private void fireCalendarEventClick(CalendarEvent calendarEvent) {
-		// Guaranteed to return a non-null array
-		Object[] listeners = listenerList.getListenerList();
-		// Process the listeners last to first, notifying
-		// those that are interested in this event
-		CalendarEventClickEvent calendarEventClickEvent;
-		for (int i = listeners.length - 2; i >= 0; i -= 2) {
-			if (listeners[i] == CalendarEventClickListener.class) {
-				calendarEventClickEvent = new CalendarEventClickEvent(this, calendarEvent);
-				((CalendarEventClickListener) listeners[i + 1]).calendarEventClick(calendarEventClickEvent);
-			}
-		}
-	}
+	
 
 	// CalendarEmptyClick methods
 
@@ -224,7 +203,7 @@ public abstract class Calendar extends JComponent {
 	 * @param l the l
 	 */
 	public void addCalendarEmptyClickListener(CalendarEmptyClickListener l) {
-		listenerList.add(CalendarEmptyClickListener.class, l);
+		calendarProduct.addCalendarEmptyClickListener(l);
 	}
 
 	/**
@@ -233,43 +212,35 @@ public abstract class Calendar extends JComponent {
 	 * @param l the l
 	 */
 	public void removeCalendarEmptyClickListener(CalendarEmptyClickListener l) {
-		listenerList.remove(CalendarEmptyClickListener.class, l);
-	}
-
-	/**
-	 * Fire calendar empty click.
-	 *
-	 * @param dateTime the date time
-	 */
-	private void fireCalendarEmptyClick(LocalDateTime dateTime) {
-		Object[] listeners = listenerList.getListenerList();
-		CalendarEmptyClickEvent calendarEmptyClickEvent;
-		for (int i = listeners.length - 2; i >= 0; i -= 2) {
-			if (listeners[i] == CalendarEmptyClickListener.class) {
-				calendarEmptyClickEvent = new CalendarEmptyClickEvent(this, dateTime);
-				((CalendarEmptyClickListener) listeners[i + 1]).calendarEmptyClick(calendarEmptyClickEvent);
-			}
-		}
+		calendarProduct.removeCalendarEmptyClickListener(l);
 	}
 
 	/**
 	 * Calculate scale vars.
 	 */
 	private void calculateScaleVars() {
-		int width = getWidth();
+		int width = width();
+		int height = height();
+		// Units are pixels per second
+		calendarProduct2.setTimeScale(
+				(double) (height - HEADER_HEIGHT) / (END_TIME.toSecondOfDay() - START_TIME.toSecondOfDay()));
+		dayWidth = (width - TIME_COL_WIDTH) / numDaysToShow();
+	}
+
+	private int height() {
 		int height = getHeight();
-
-		if (width < MIN_WIDTH) {
-			width = MIN_WIDTH;
-		}
-
 		if (height < MIN_HEIGHT) {
 			height = MIN_HEIGHT;
 		}
+		return height;
+	}
 
-		// Units are pixels per second
-		timeScale = (double) (height - HEADER_HEIGHT) / (END_TIME.toSecondOfDay() - START_TIME.toSecondOfDay());
-		dayWidth = (width - TIME_COL_WIDTH) / numDaysToShow();
+	private int width() {
+		int width = getWidth();
+		if (width < MIN_WIDTH) {
+			width = MIN_WIDTH;
+		}
+		return width;
 	}
 
 	/**
@@ -287,26 +258,6 @@ public abstract class Calendar extends JComponent {
 	 */
 	// Gives x val of left most pixel for day col
 	protected abstract double dayToPixel(DayOfWeek dayOfWeek);
-
-	/**
-	 * Time to pixel.
-	 *
-	 * @param time the time
-	 * @return the double
-	 */
-	private double timeToPixel(LocalTime time) {
-		return ((time.toSecondOfDay() - START_TIME.toSecondOfDay()) * timeScale) + HEADER_HEIGHT;
-	}
-
-	/**
-	 * Pixel to time.
-	 *
-	 * @param y the y
-	 * @return the local time
-	 */
-	private LocalTime pixelToTime(double y) {
-		return LocalTime.ofSecondOfDay((int) ((y - HEADER_HEIGHT) / timeScale) + START_TIME.toSecondOfDay()).truncatedTo(ChronoUnit.MINUTES);
-	}
 
 	/**
 	 * Pixel to day.
@@ -405,26 +356,34 @@ public abstract class Calendar extends JComponent {
 		double x;
 		for (int i = getStartDay().getValue(); i <= getEndDay().getValue(); i++) {
 			x = dayToPixel(DayOfWeek.of(i));
-			g2.draw(new Line2D.Double(x, HEADER_HEIGHT, x, timeToPixel(END_TIME)));
+			g2.draw(new Line2D.Double(x, HEADER_HEIGHT, x, calendarProduct2.timeToPixel(END_TIME)));
 		}
 
 		// Draw horizontal grid lines
 		double y;
-		int x1;
+		int x1=0;
 		for (LocalTime time = START_TIME; time.compareTo(END_TIME) <= 0; time = time.plusMinutes(30)) {
-			y = timeToPixel(time);
+			y = calendarProduct2.timeToPixel(time);
+			x1 = x1(x1, time);
 			if (time.getMinute() == 0) {
 				g2.setColor(alphaGray);
-				x1 = 0;
 			} else {
 				g2.setColor(alphaGrayLighter);
-				x1 = TIME_COL_WIDTH;
 			}
 			g2.draw(new Line2D.Double(x1, y, dayToPixel(getEndDay()) + dayWidth, y));
 		}
 
 		// Reset the graphics context's colour
 		g2.setColor(ORIG_COLOUR);
+	}
+
+	private int x1(int x1, LocalTime time) {
+		if (time.getMinute() == 0) {
+			x1 = 0;
+		} else {
+			x1 = TIME_COL_WIDTH;
+		}
+		return x1;
 	}
 
 	/**
@@ -437,9 +396,9 @@ public abstract class Calendar extends JComponent {
 		if (!dateInRange(today)) return;
 
 		final double x = dayToPixel(today.getDayOfWeek());
-		final double y = timeToPixel(START_TIME);
+		final double y = calendarProduct2.timeToPixel(START_TIME);
 		final double width = dayWidth;
-		final double height = timeToPixel(END_TIME) - timeToPixel(START_TIME);
+		final double height = calendarProduct2.timeToPixel(END_TIME) - calendarProduct2.timeToPixel(START_TIME);
 
 		final Color origColor = g2.getColor();
 		Color alphaGray = new Color(200, 200, 200, 64);
@@ -459,7 +418,7 @@ public abstract class Calendar extends JComponent {
 
 		final double x0 = dayToPixel(today.getDayOfWeek());
 		final double x1 = dayToPixel(today.getDayOfWeek()) + dayWidth;
-		final double y = timeToPixel(LocalTime.now());
+		final double y = calendarProduct2.timeToPixel(LocalTime.now());
 
 		final Color origColor = g2.getColor();
 		final Stroke origStroke = g2.getStroke();
@@ -478,7 +437,7 @@ public abstract class Calendar extends JComponent {
 	private void drawTimes() {
 		int y;
 		for (LocalTime time = START_TIME; time.compareTo(END_TIME) <= 0; time = time.plusHours(1)) {
-			y = (int) timeToPixel(time) + 15;
+			y = (int) calendarProduct2.timeToPixel(time) + 15;
 			g2.drawString(time.toString(), TIME_COL_WIDTH - (FONT_LETTER_PIXEL_WIDTH * time.toString().length()) - 5, y);
 		}
 	}
@@ -489,21 +448,22 @@ public abstract class Calendar extends JComponent {
 	private void drawEvents() {
 		double x;
 		double y0;
+		
 
 		for (CalendarEvent event : events) {
 			if (!dateInRange(event.getDate())) continue;
 
 			x = event.getX();
-			y0 = timeToPixel(event.getStart());
+			y0 = calendarProduct2.timeToPixel(event.getStart());
+			Rectangle2D rect = rect(x, y0, event);
 
 			//AQUI
 
-			Rectangle2D rect = new Rectangle2D.Double(x, y0, dayWidth/getNumEvents(event), (timeToPixel(event.getEnd()) - timeToPixel(event.getStart())));
 			Color origColor = g2.getColor();
 			g2.setColor(event.getColor());
 			g2.fill(rect);
 			g2.setColor(origColor);
-			g2.drawRect((int)x, (int)y0, (int)dayWidth / getNumEvents(event), (int)(timeToPixel(event.getEnd()) - timeToPixel(event.getStart())));
+			g2.drawRect((int)x, (int)y0, (int)dayWidth / getNumEvents(event), (int)(calendarProduct2.timeToPixel(event.getEnd()) - calendarProduct2.timeToPixel(event.getStart())));
 
 			// Draw time header
 
@@ -537,6 +497,14 @@ public abstract class Calendar extends JComponent {
 			// Reset font
 			g2.setFont(origFont);            
 		}
+	}
+
+	private Rectangle2D rect(double x, double y0, CalendarEvent event) {
+		x = event.getX();
+		y0 = calendarProduct2.timeToPixel(event.getStart());
+		Rectangle2D rect = new Rectangle2D.Double(x, y0, dayWidth / getNumEvents(event),
+				(calendarProduct2.timeToPixel(event.getEnd()) - calendarProduct2.timeToPixel(event.getStart())));
+		return rect;
 	}
 
 
