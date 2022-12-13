@@ -26,6 +26,7 @@ O nosso projeto permite aos utilizadores:
 14. Visualizar o calendário de todos os membros, que foram adicionados à reunião, juntos em forma de texto
 15. Visualizar o calendário mensal, semanal e diário, individual em forma de texto
 16. Visualizar a taxa de ocupação nos calendários através do auxilio de cores, sendo que quanto mais clara a cor mais disponivel estará o horário e ao contrário se esta for mais escura
+
 Concluindo, todas as funcionalidades pedidas foram implementadas.
 
 Foram ainda implementadas algumas funcionalidades, além das principais que nos foram propostas:
