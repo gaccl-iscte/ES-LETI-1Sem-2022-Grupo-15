@@ -1,0 +1,2 @@
+MonthCalendar.PanelSlide::private void animate() 
+MonthCalendar.PanelSlide::public void show(java.awt.Component, MonthCalendar.PanelSlide.AnimateType) 
