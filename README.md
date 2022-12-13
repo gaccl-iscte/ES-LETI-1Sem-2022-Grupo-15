@@ -3,10 +3,11 @@
 Projeto Engenharia de Software 1ºSemestre Grupo 15
 
 Membros do grupo:
-Bernardo Assunção | Nº 98616 | Turma ET-C2
-Gonçalo Lobato | Nº 98624 | Turma ET-C2
-João Rabuge | Nº 98509 | Turma ET-C1
-Tiago Felício | Nº 99213 | Turma ET-C1
+
+-Bernardo Assunção | Nº 98616 | Turma ET-C2
+-Gonçalo Lobato | Nº 98624 | Turma ET-C2
+-João Rabuge | Nº 98509 | Turma ET-C1
+-Tiago Felício | Nº 99213 | Turma ET-C1
 
 Explicação das funcionalidades:
 O nosso projeto permite aos utilizadores:
