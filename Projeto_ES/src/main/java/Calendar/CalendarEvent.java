@@ -18,7 +18,7 @@ public class CalendarEvent {
 	/** The Color azul claro. */
 	private static Color azulClaro = new Color(153,204,255);
 	
-	/** The Color azul intermédio. */
+	/** The Color azul intermedio. */
 	private static Color azulIntermedio = new Color(51,153,255);
 	
 	/** The Color azul escuro. */

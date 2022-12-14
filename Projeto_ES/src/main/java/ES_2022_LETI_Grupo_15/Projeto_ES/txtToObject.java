@@ -29,9 +29,9 @@ public class txtToObject {
 	/**
 	 * Filtra os ficheiros .txt obtidos pelo o url ou o ficheiro ics.
 	 *
-	 * @param files é a lista os nomes dos ficheiros que são obtitos pelas as funções da classe toTxt
-	 * @param nomes é a lista com o nomes do membros
-	 * @return ArrayList com o nome dos ficheiros com a informação filtrada
+	 * @param files e a lista os nomes dos ficheiros que sao obtitos pelas as funções da classe toTxt
+	 * @param nomes e a lista com o nomes do membros
+	 * @return ArrayList com o nome dos ficheiros com a informacao filtrada
 	 * @throws FileNotFoundException the file not found exception
 	 */
 	public static ArrayList<String> convert(ArrayList<String> files, ArrayList<String> nomes) throws FileNotFoundException {
@@ -93,10 +93,10 @@ public class txtToObject {
 	}
 	
 	/**
-	 * Obtém a lista de eventos(aulas) a partir da informação dos ficheiros filtrados da função convert()
+	 * Obtem a lista de eventos(aulas) a partir da informacao dos ficheiros filtrados da funcao convert()
 	 *
-	 * @param files2 é a lista os nomes do ficheiros
-	 * @param nomes é a lista com o nomes do membros
+	 * @param files2 e a lista os nomes do ficheiros
+	 * @param nomes e a lista com o nomes do membros
 	 * @return lista de eventos.
 	 * @throws FileNotFoundException the file not found exception
 	 * @throws ParseException the parse exception
@@ -229,12 +229,12 @@ public class txtToObject {
 	}
 
 	/**
-	 * Verifica se o intervalo de tempo está disponível ou não
+	 * Verifica se o intervalo de tempo esta disponivel ou nao
 	 *
-	 * @param dataI é a data do início da hora da reunião
-	 * @param dataF é a data do fim da hora da reunião
-	 * @param eventos é a lista de eventos
-	 * @param nomes é a lista com o nomes do membros
+	 * @param dataI e a data do inicio da hora da reuniao
+	 * @param dataF e a data do fim da hora da reuniao
+	 * @param eventos e a lista de eventos
+	 * @param nomes e a lista com o nomes do membros
 	 * @return the boolean
 	 * @throws FileNotFoundException the file not found exception
 	 * @throws ParseException the parse exception
@@ -277,14 +277,14 @@ public class txtToObject {
 	}
 
 	/**
-	 * Adiciona uma reunião à lista de eventos
+	 * Adiciona uma reuniao à lista de eventos
 	 *
-	 * @param eventos é a lista de eventos
-	 * @param nomes é a lista com o nomes do membros
-	 * @param data é a data do evento
-	 * @param inicio é a hora do inicio da reunião
-	 * @param duracao é a duração da reunião
-	 * @return lista a de eventos com a reunião
+	 * @param eventos e a lista de eventos
+	 * @param nomes e a lista com o nomes do membros
+	 * @param data e a data do evento
+	 * @param inicio e a hora do inicio da reuniao
+	 * @param duracao e a duracao da reuniao
+	 * @return lista a de eventos com a reuniao
 	 * @throws ParseException the parse exception
 	 * @throws FileNotFoundException the file not found exception
 	 */
@@ -305,7 +305,7 @@ public class txtToObject {
 
 		if(availableOrNot(dateToString, endToString, eventos, nomes)) {
 
-			CalendarEvent reuniao = new CalendarEvent(date, start, end, "Reunião", nomes);
+			CalendarEvent reuniao = new CalendarEvent(date, start, end, "reuniao", nomes);
 
 			eventos.add(reuniao);
 			reuniaoFinal = reuniao;
@@ -321,14 +321,14 @@ public class txtToObject {
 	}
 
 	/**
-	 * Encontra a melhor hora para marcar a reunião
+	 * Encontra a melhor hora para marcar a reuniao
 	 *
-	 * @param eventos é a lista de eventos
-	 * @param duracao é a duração da reunião
-	 * @param alturaDoDia é a altura do dia(manhã ou tarde)
-	 * @param nomes é a lista com o nomes do membros
-	 * @param data é a data da reunião
-	 * @return lista de eventos com a reunião 
+	 * @param eventos e a lista de eventos
+	 * @param duracao e a duracao da reuniao
+	 * @param alturaDoDia e a altura do dia(manha ou tarde)
+	 * @param nomes e a lista com o nomes do membros
+	 * @param data e a data da reuniao
+	 * @return lista de eventos com a reuniao 
 	 * @throws FileNotFoundException the file not found exception
 	 * @throws ParseException the parse exception
 	 */
@@ -372,7 +372,7 @@ public class txtToObject {
 					String dataF = dateFinal.toString() + " " + fim.toString();
 
 					if(availableOrNot(dataI, dataF, eventos, nomes)) {
-						reuniao = new CalendarEvent(dateFinal, inicio, fim, "Reunião", nomes);
+						reuniao = new CalendarEvent(dateFinal, inicio, fim, "reuniao", nomes);
 						break outerloop;
 					}
 				}
@@ -388,12 +388,12 @@ public class txtToObject {
 	}
 
 	/**
-	 * Obtém o número de eventos do dia
+	 * Obtem o numero de eventos do dia
 	 *
-	 * @param eventos é a lista de eventos
-	 * @param nomes é a lista de nomes
-	 * @param data é a data do dia
-	 * @return o número de eventos do dia
+	 * @param eventos e a lista de eventos
+	 * @param nomes e a lista de nomes
+	 * @param data e a data do dia
+	 * @return o numero de eventos do dia
 	 */
 	private static int x(ArrayList<CalendarEvent> eventos, ArrayList<String> nomes, LocalDate data, int x) {
 		
@@ -404,14 +404,14 @@ public class txtToObject {
 	}
 
 	/**
-	 * Obtém a hora de início da altura do dia
+	 * Obtem a hora de inicio da altura do dia
 	 *
-	 * @param alturaDoDia é a altura do dia
+	 * @param alturaDoDia e a altura do dia
 	 * @return da hora de inicio da altura do dia
 	 */
 	private static int horaI(String alturaDoDia) {
 		int horaI = 0;
-		if (alturaDoDia.equals("Manhã")) {
+		if (alturaDoDia.equals("manha")) {
 			horaI = 8;
 		} else {
 			horaI = 14;
@@ -420,14 +420,14 @@ public class txtToObject {
 	}
 
 	/**
-	 * Obtém a hora de fim da altura do dia
+	 * Obtem a hora de fim da altura do dia
 	 *
-	 * @param alturaDoDia é a altura do dia
+	 * @param alturaDoDia e a altura do dia
 	 * @return da hora de fim da altura do dia
 	 */
 	private static int horaF(String alturaDoDia) {
 		int horaF = 0;
-		if (alturaDoDia.equals("Manhã")) {
+		if (alturaDoDia.equals("manha")) {
 			horaF = 14;
 		} else {
 			horaF = 20;
@@ -436,11 +436,11 @@ public class txtToObject {
 	}
 
 	/**
-	 * Obtém a data do início em formato String
+	 * Obtem a data do inicio em formato String
 	 *
-	 * @param dateFinal é a data
-	 * @param h é as horas
-	 * @param m é os minutos
+	 * @param dateFinal e a data
+	 * @param h e as horas
+	 * @param m e os minutos
 	 * @return data em formato String
 	 */
 	private static String dataI(LocalDate dateFinal, int h, int m) {
@@ -452,12 +452,12 @@ public class txtToObject {
 	}
 
 	/**
-	 * Obtém a hora do fim da reunião
+	 * Obtem a hora do fim da reuniao
 	 *
-	 * @param duracao é a duração da reunião
-	 * @param h é as horas
-	 * @param m é os minutos
-	 * @return hora do fim da reunião
+	 * @param duracao e a duracao da reuniao
+	 * @param h e as horas
+	 * @param m e os minutos
+	 * @return hora do fim da reuniao
 	 */
 	private static LocalTime fim(String duracao, int h, int m) {
 		LocalTime inicio = LocalTime.of(h, m);
@@ -469,12 +469,12 @@ public class txtToObject {
 	}
 
 	/**
-	 * Obtém o número de eventos do dia
+	 * Obtem o numero de eventos do dia
 	 *
-	 * @param eventos é a lista de eventos
-	 * @param nomes é a lista de nomes
-	 * @param data é a data do dia
-	 * @return o número de eventos do dia
+	 * @param eventos e a lista de eventos
+	 * @param nomes e a lista de nomes
+	 * @param data e a data do dia
+	 * @return o numero de eventos do dia
 	 */
 	public static int getNumberEventsOfDay(ArrayList<CalendarEvent> eventos, ArrayList<String> nomes, LocalDate data) {
 
@@ -498,15 +498,15 @@ public class txtToObject {
 	}
 
 	/**
-	 * Adicione reuniões periodicamente
+	 * Adicione reunioes periodicamente
 	 *
-	 * @param eventos é a lista de eventos
-	 * @param nomes é a lista de nomes dos membros
+	 * @param eventos e a lista de eventos
+	 * @param nomes e a lista de nomes dos membros
 	 * @param data the data
-	 * @param semanas é o número de semanas
-	 * @param duracao é a duração da reunião
-	 * @param alturaDoDia é a altura do dia(manhã/tarde)
-	 * @return lista de eventos com as reuniões
+	 * @param semanas e o numero de semanas
+	 * @param duracao e a duracao da reuniao
+	 * @param alturaDoDia e a altura do dia(manha/tarde)
+	 * @return lista de eventos com as reunioes
 	 * @throws FileNotFoundException the file not found exception
 	 * @throws ParseException the parse exception
 	 */
