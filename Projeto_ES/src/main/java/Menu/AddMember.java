@@ -10,6 +10,7 @@ import java.awt.event.ActionListener;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.net.URL;
 import java.util.ArrayList;
 
 import javax.swing.ImageIcon;
@@ -18,6 +19,7 @@ import javax.swing.JCheckBox;
 import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import javax.swing.text.BadLocationException;
 
@@ -25,6 +27,7 @@ import ES_2022_LETI_Grupo_15.Projeto_ES.toTxt;
 import ES_2022_LETI_Grupo_15.Projeto_ES.txtToObject;
 
 
+// TODO: Auto-generated Javadoc
 /**
  * The Class AddMember.
  */
@@ -32,37 +35,37 @@ public class AddMember extends JFrame implements ActionListener{
 
 	/** The JTextFiled's in use. */
 	JTextField url, nome, apelido;
-	
+
 	/** The JLabel's in use. */
 	JLabel lblurl, lblnome, lblapelido, lblmembers, lblmetting;
-	
+
 	/** The JButton's in use. */
 	JButton file, adicionar;
-	
+
 	/** The JCheckBox to add to meeting. */
 	JCheckBox metting;
-	
+
 	/** The number of members. */
 	int i;
-	
+
 	/** The file to convert. */
-	File file1;
-	
+	File file1 = null;
+
 	/** The list of files to convert. */
 	public static ArrayList<String> files = new ArrayList<String>();
-	
+
 	/** The list of names. */
 	public static ArrayList<String> nomes = new ArrayList<String>();
-	
+
 	/** The list of files converted. */
 	public static ArrayList<String> files2 = new ArrayList<String>();
-	
+
 	/** The list of files of the members in meeting. */
 	public static ArrayList<String> filesMetting = new ArrayList<String>();
-	
+
 	/** The list of names of the members in meeting. */
 	public static ArrayList<String> nomesMetting = new ArrayList<String>();
-	
+
 	/** The list of files converted of the members in meeting. */
 	public static ArrayList<String> files2Metting = new ArrayList<String>();
 
@@ -170,7 +173,15 @@ public class AddMember extends JFrame implements ActionListener{
 		file1(e);
 		if( e.getSource() == adicionar) {
 
-			this.setVisible(false);
+			if(nome.getText().equals("") || apelido.getText().equals("")) {
+				JOptionPane.showMessageDialog(null,"Introduza o nome!");
+				return;
+			}
+
+			if(file1 == null && !isValid(url.getText())) {
+				JOptionPane.showMessageDialog(null,"Introduza um URL ou selecione um ficheiro!");
+				return;
+			}
 
 			String name = nome.getText();
 			String lastname = apelido.getText();
@@ -194,6 +205,12 @@ public class AddMember extends JFrame implements ActionListener{
 				e1.printStackTrace();
 			}			
 			if(i==1) {
+
+				if(nomesMetting.size() == 0) {
+					JOptionPane.showMessageDialog(null,"Nenhum membro adicionado à reunião!");
+					return;
+				}
+
 				try {
 					files2Metting = txtToObject.convert(filesMetting, nomesMetting);					
 					files2 = txtToObject.convert(files, nomes);
@@ -207,6 +224,8 @@ public class AddMember extends JFrame implements ActionListener{
 					e1.printStackTrace();
 				}
 			}
+			
+			this.setVisible(false);
 		}
 	}
 
@@ -224,6 +243,30 @@ public class AddMember extends JFrame implements ActionListener{
 			if (response == JFileChooser.APPROVE_OPTION) {
 				file1 = new File(fileChooser.getSelectedFile().getAbsolutePath());
 			}
+
+			if(!file1.getName().substring(file1.getName().lastIndexOf(".")).equals(".ics")) {
+				JOptionPane.showMessageDialog(null,"Tipo de ficheiro inválido!");
+				file1 = null;
+				return;
+			}
+		}
+	}
+
+	/**
+	 * Checks if URL is valid.
+	 *
+	 * @param url the url
+	 * @return true, if is valid
+	 */
+	public static boolean isValid(String url){
+
+		try {
+			new URL(url).toURI();
+			return true;
+		}
+
+		catch (Exception e) {
+			return false;
 		}
 	}
 }

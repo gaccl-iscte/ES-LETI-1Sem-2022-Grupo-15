@@ -20,6 +20,7 @@ import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.SwingConstants;
 
 import MonthCalendar.Main;
@@ -133,6 +134,12 @@ public class Members extends JFrame implements ActionListener{
 			Metting.getInstance().getFrameInstance().setVisible(true);
 		}else if(e.getSource() == mensal) {
 			try {
+				
+				if(members.getSelectedItem() == null) {
+					JOptionPane.showMessageDialog(null,"Nenhum membro selecionado!");
+					return;
+				}
+				
 				member.clear();
 				file.clear();
 				member.add((String) members.getSelectedItem());
@@ -143,6 +150,12 @@ public class Members extends JFrame implements ActionListener{
 			}
 		}else if(e.getSource() == semanal) {
 			try {
+				
+				if(members.getSelectedItem() == null) {
+					JOptionPane.showMessageDialog(null,"Nenhum membro selecionado!");
+					return;
+				}
+				
 				member.clear();
 				file.clear();
 				member.add((String) members.getSelectedItem());
@@ -153,6 +166,12 @@ public class Members extends JFrame implements ActionListener{
 			}
 		}else if(e.getSource() == diario) {
 			try {
+				
+				if(members.getSelectedItem() == null) {
+					JOptionPane.showMessageDialog(null,"Nenhum membro selecionado!");
+					return;
+				}
+				
 				member.clear();
 				file.clear();
 				member.add((String) members.getSelectedItem());
@@ -163,6 +182,12 @@ public class Members extends JFrame implements ActionListener{
 			}
 		}else if(e.getSource() == txt) {
 			try {
+				
+				if(members.getSelectedItem() == null) {
+					JOptionPane.showMessageDialog(null,"Nenhum membro selecionado!");
+					return;
+				}
+				
 				member.clear();
 				file.clear();
 				member.add((String) members.getSelectedItem());

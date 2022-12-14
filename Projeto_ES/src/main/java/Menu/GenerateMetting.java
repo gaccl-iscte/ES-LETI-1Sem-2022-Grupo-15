@@ -10,7 +10,11 @@ import java.awt.event.ActionListener;
 import java.io.FileNotFoundException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.time.DayOfWeek;
 import java.time.LocalDate;
+import java.time.LocalTime;
+import java.time.ZoneId;
+import java.time.temporal.ChronoField;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
@@ -19,6 +23,7 @@ import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JSpinner;
 import javax.swing.SpinnerDateModel;
 import javax.swing.text.BadLocationException;
@@ -34,28 +39,28 @@ public class GenerateMetting extends JFrame implements ActionListener{
 
 	/** The JLabel's in use. */
 	JLabel lblmetting, lblperiodicidade, lbltempo, lblduracao, lbldata, lblhora, lblsemanas;
-	
+
 	/** The JComboBox to select periodicity. */
 	static JComboBox<String> periodicidade = new JComboBox<String>();
-	
+
 	/** The JComboBox to select time of day. */
 	JComboBox<String> tempo = new JComboBox<String>();
-	
+
 	/** The JComboBox to select number of weeks. */
 	JComboBox<Integer> semanas = new JComboBox<Integer>();
-	
+
 	/** The JButton's in use. */
 	JButton gerar, auto, manual;
-	
+
 	/** The JSpinner's in use. */
 	JSpinner duracao, hora;
-	
+
 	/** The JXDatePicker to select a date. */
 	JXDatePicker data;
-	
+
 	/** The instance. */
 	public static GenerateMetting instance;
-	
+
 	/** The list of events. */
 	static ArrayList<CalendarEvent> events;
 
@@ -121,7 +126,7 @@ public class GenerateMetting extends JFrame implements ActionListener{
 		periodicidade.insertItemAt("Uma vez", 0);
 		periodicidade.insertItemAt("Semanal", 1);
 		periodicidade.setVisible(false);
-		
+
 		lblsemanas = new JLabel("Nº Semanas:");
 		lblsemanas.setFont(new Font("Arial", Font.PLAIN, 20));
 		lblsemanas.setForeground(Color.WHITE);
@@ -129,7 +134,7 @@ public class GenerateMetting extends JFrame implements ActionListener{
 		lblsemanas.setBounds(270, 110, sizelblsemanas.width, sizelblsemanas.height);
 		this.add(lblsemanas);
 		lblsemanas.setVisible(false);
-		
+
 		semanas.addActionListener(this);
 		semanas.setBounds(400, 110, 50, 25);		
 		this.add(semanas);
@@ -218,7 +223,7 @@ public class GenerateMetting extends JFrame implements ActionListener{
 
 	/** The time format. */
 	SimpleDateFormat format = new SimpleDateFormat("HH:mm");
-	
+
 	/** The date format. */
 	SimpleDateFormat format1 = new SimpleDateFormat("yyyy-MM-dd");
 
@@ -232,41 +237,68 @@ public class GenerateMetting extends JFrame implements ActionListener{
 	public void actionPerformed(ActionEvent e) {
 		data(e);
 		if(e.getSource() == gerar) {
-			if(!duracao.isVisible()) {					
-				System.out.println("erro");
+
+			String horas = null;
+			horas = format.format(duracao.getValue());
+			if(data.isVisible()) {
+
+				if(hora.getValue() == null || data.getDate() == null) {
+					JOptionPane.showMessageDialog(null,"Informação insuficiente!");
+					return;
+				}
+
+				if(data.getDate().toInstant()
+						.atZone(ZoneId.systemDefault())
+						.toLocalDate().getDayOfWeek() == DayOfWeek.SUNDAY 
+						|| data.getDate().toInstant()
+						.atZone(ZoneId.systemDefault())
+						.toLocalDate().getDayOfWeek() == DayOfWeek.SATURDAY) {
+					JOptionPane.showMessageDialog(null,"Selecione um dia útil!");
+					return;
+				}
+
+				String horasI = null;
+				String dia = null;
+				horasI = format.format(hora.getValue());
+				dia = format1.format(data.getDate());
+
+				LocalTime horaFinal = LocalTime.parse(horasI).plusMinutes(LocalTime.parse(horas).get(ChronoField.MINUTE_OF_DAY));
+
+				if(horaFinal.isAfter(LocalTime.of(20, 00))) {
+					JOptionPane.showMessageDialog(null,"Reunião ultrapassa as 20:00!");
+					return;
+				}
+
+				try {
+					events = txtToObject.addEvent(txtToObject.getList(AddMember.files2Metting, AddMember.nomesMetting), AddMember.nomesMetting, dia, horasI, horas);
+					new Metting();
+					this.setVisible(false);
+				} catch (FileNotFoundException | ParseException e1) {
+					e1.printStackTrace();
+				}
+
 			}else {
-				String horas = null;
-				horas = format.format(duracao.getValue());
-				if(data.isVisible()) {
-					String horasI = null;
-					String dia = null;
-					horasI = format.format(hora.getValue());
-					dia = format1.format(data.getDate());
+
+				if(periodicidade.getSelectedItem() == null || tempo.getSelectedItem() == null) {
+					JOptionPane.showMessageDialog(null,"Informação incompleta!");
+					return;
+				}
+
+				if(periodicidade.getSelectedItem().equals((Object) "Uma vez")){
 					try {
-						events = txtToObject.addEvent(txtToObject.getList(AddMember.files2Metting, AddMember.nomesMetting), AddMember.nomesMetting, dia, horasI, horas);
+						events = txtToObject.findBestTime(txtToObject.getList(AddMember.files2Metting, AddMember.nomesMetting), horas, tempo.getSelectedItem().toString(), AddMember.nomesMetting, LocalDate.now());
 						new Metting();
 						this.setVisible(false);
 					} catch (FileNotFoundException | ParseException e1) {
 						e1.printStackTrace();
 					}
-
-				}else {
-					if(periodicidade.getSelectedItem().equals((Object) "Uma vez")){
-						try {
-							events = txtToObject.findBestTime(txtToObject.getList(AddMember.files2Metting, AddMember.nomesMetting), horas, tempo.getSelectedItem().toString(), AddMember.nomesMetting, LocalDate.now());
-							new Metting();
-							this.setVisible(false);
-						} catch (FileNotFoundException | ParseException e1) {
-							e1.printStackTrace();
-						}
-					}else if (periodicidade.getSelectedItem().equals((Object) "Semanal")){
-						try {
-							events = txtToObject.periodicity(txtToObject.getList(AddMember.files2Metting, AddMember.nomesMetting), AddMember.nomesMetting, LocalDate.now(), semanas.getSelectedIndex() + 1, horas, tempo.getSelectedItem().toString());
-							new Metting();
-							this.setVisible(false);
-						} catch (FileNotFoundException | ParseException e1) {
-							e1.printStackTrace();
-						}
+				}else if (periodicidade.getSelectedItem().equals((Object) "Semanal")){
+					try {
+						events = txtToObject.periodicity(txtToObject.getList(AddMember.files2Metting, AddMember.nomesMetting), AddMember.nomesMetting, LocalDate.now(), semanas.getSelectedIndex() + 1, horas, tempo.getSelectedItem().toString());
+						new Metting();
+						this.setVisible(false);
+					} catch (FileNotFoundException | ParseException e1) {
+						e1.printStackTrace();
 					}
 				}
 			}
