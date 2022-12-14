@@ -38,3 +38,5 @@ Concluindo, todas as funcionalidades pedidas foram implementadas.
 Foram ainda implementadas algumas funcionalidades, além das principais que nos foram propostas:
 1. Botões de "Back" para permitir ao utilizador navegar no menu conforme a sua vontade
 2. Mensagens de erro ao carregar em botões quando a informação é insuficiente
+
+Para testar o nosso projeto basta correr a função main na class test do package Menu!
