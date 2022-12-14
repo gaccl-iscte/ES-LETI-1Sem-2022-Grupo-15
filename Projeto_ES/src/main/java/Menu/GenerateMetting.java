@@ -138,8 +138,8 @@ public class GenerateMetting extends JFrame implements ActionListener{
 		semanas.addActionListener(this);
 		semanas.setBounds(400, 110, 50, 25);		
 		this.add(semanas);
-		for(int i=0; i<15; i++) {
-			semanas.insertItemAt(i+1, i);
+		for(int i=1; i<15; i++) {
+			semanas.addItem(i);
 		}
 		semanas.setVisible(false);
 
@@ -264,7 +264,7 @@ public class GenerateMetting extends JFrame implements ActionListener{
 
 				LocalTime horaFinal = LocalTime.parse(horasI).plusMinutes(LocalTime.parse(horas).get(ChronoField.MINUTE_OF_DAY));
 
-				if(horaFinal.isAfter(LocalTime.of(20, 00))) {
+				if(horaFinal.isAfter(LocalTime.of(20, 00)) || horaFinal.isAfter(LocalTime.of(00, 00))) {
 					JOptionPane.showMessageDialog(null,"Reunião ultrapassa as 20:00!");
 					return;
 				}
