@@ -305,7 +305,7 @@ public class txtToObject {
 
 		if(availableOrNot(dateToString, endToString, eventos, nomes)) {
 
-			CalendarEvent reuniao = new CalendarEvent(date, start, end, "reuniao", nomes);
+			CalendarEvent reuniao = new CalendarEvent(date, start, end, "Reunião", nomes);
 
 			eventos.add(reuniao);
 			reuniaoFinal = reuniao;
@@ -372,7 +372,7 @@ public class txtToObject {
 					String dataF = dateFinal.toString() + " " + fim.toString();
 
 					if(availableOrNot(dataI, dataF, eventos, nomes)) {
-						reuniao = new CalendarEvent(dateFinal, inicio, fim, "reuniao", nomes);
+						reuniao = new CalendarEvent(dateFinal, inicio, fim, "Reunião", nomes);
 						break outerloop;
 					}
 				}
