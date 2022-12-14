@@ -16,15 +16,15 @@ import Menu.AddMember;
  * The Class CalendarEvent.
  */
 public class CalendarEvent {
-
-	/** The Constant DEFAULT_COLOR. */
-	private static final Color DEFAULT_COLOR = Color.LIGHT_GRAY;
 	
 	/** The azul claro. */
-	private Color azulClaro = new Color(102,178,255);
+	private static Color azulClaro = new Color(153,204,255);
+	
+	/** The azul intermédio. */
+	private static Color azulIntermedio = new Color(51,153,255);
 	
 	/** The azul escuro. */
-	private Color azulEscuro = new Color(0,102,204);
+	private static Color azulEscuro = new Color(0,102,204);
 
 	/** The date. */
 	private LocalDate date;
@@ -57,7 +57,7 @@ public class CalendarEvent {
 	 * @param nomes the nomes
 	 */
 	public CalendarEvent(LocalDate date, LocalTime start, LocalTime end, String text, ArrayList<String> nomes) {
-		this(date, start, end, text, nomes, DEFAULT_COLOR);
+		this(date, start, end, text, nomes, azulClaro);
 	}
 
 	/**
@@ -171,9 +171,11 @@ public class CalendarEvent {
 
 		if(nomes.size() >= 3) {
 			
-			this.color = azulEscuro;
-			
+			this.color = azulEscuro;			
 		} else if (nomes.size() < 3 && nomes.size() >= 2 ) {
+			
+			this.color = azulIntermedio;
+		} else if (nomes.size() == 1) {
 			
 			this.color = azulClaro;
 		}

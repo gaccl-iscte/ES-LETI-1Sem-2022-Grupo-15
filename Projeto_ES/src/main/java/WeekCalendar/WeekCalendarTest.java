@@ -4,15 +4,12 @@ package WeekCalendar;
 import java.awt.BorderLayout;
 import java.io.FileNotFoundException;
 import java.text.ParseException;
-import java.time.LocalDate;
-import java.time.LocalTime;
 import java.util.ArrayList;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
-import javax.swing.WindowConstants;
 
 import Calendar.Calendar;
 import Calendar.CalendarEvent;
@@ -26,7 +23,7 @@ public class WeekCalendarTest {
 	/**
 	 * Instantiates a new week calendar test.
 	 *
-	 * @param events the events
+	 * @param events the list of events
 	 * @throws FileNotFoundException the file not found exception
 	 * @throws ParseException the parse exception
 	 */
@@ -70,6 +67,5 @@ public class WeekCalendarTest {
         frm.add(cal, BorderLayout.CENTER);
         frm.setSize(1000, 900);
         frm.setVisible(true);
-//        frm.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
     }
 }

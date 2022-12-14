@@ -55,7 +55,7 @@ public class DayCalendar extends Calendar {
     /**
      * Num days to show.
      *
-     * @return the int
+     * @return number of days
      */
     @Override
     protected int numDaysToShow() {
@@ -94,7 +94,7 @@ public class DayCalendar extends Calendar {
      * Day to pixel.
      *
      * @param dayOfWeek the day of week
-     * @return the double
+     * @return the pixel
      */
     @Override
     protected double dayToPixel(DayOfWeek dayOfWeek) {

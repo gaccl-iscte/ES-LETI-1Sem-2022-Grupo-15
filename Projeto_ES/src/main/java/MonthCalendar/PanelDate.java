@@ -2,7 +2,6 @@
 package MonthCalendar;
 
 import java.awt.Color;
-import java.awt.Component;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.FileNotFoundException;
@@ -10,14 +9,10 @@ import java.text.ParseException;
 import java.time.LocalDate;
 import java.time.ZoneId;
 import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.Date;
 
 import javax.swing.JPanel;
 
 import DayCalendar.DayCalendarTest;
-import ES_2022_LETI_Grupo_15.Projeto_ES.txtToObject;
-import Menu.GenerateMetting;
 
 /**
  * The Class PanelDate.
@@ -475,7 +470,7 @@ public class PanelDate extends JPanel{
 		/**
 		 * Action performed.
 		 *
-		 * @param e the e
+		 * @param e the action performed
 		 */
 		public void actionPerformed (ActionEvent e){
 			for(Cell cell : cells) {

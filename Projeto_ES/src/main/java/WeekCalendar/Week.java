@@ -56,7 +56,7 @@ public class Week {
 	/**
 	 * Next week.
 	 *
-	 * @return the week
+	 * @return next week
 	 */
 	public Week nextWeek() {
 		final LocalDate saturday = getDay(DayOfWeek.SATURDAY);

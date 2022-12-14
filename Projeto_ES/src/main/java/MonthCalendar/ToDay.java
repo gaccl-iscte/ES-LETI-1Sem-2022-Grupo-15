@@ -89,10 +89,10 @@ public class ToDay {
     private int year;
 
     /**
-     * Checks if is to day.
+     * Checks if is day.
      *
      * @param date the date
-     * @return true, if is to day
+     * @return true, if is day
      */
     public boolean isToDay(ToDay date) {
         return day == date.getDay() && month == date.getMonth() && year == date.getYear();

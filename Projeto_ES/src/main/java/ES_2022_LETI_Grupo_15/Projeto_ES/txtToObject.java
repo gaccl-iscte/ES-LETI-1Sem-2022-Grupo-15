@@ -27,18 +27,14 @@ public class txtToObject {
 	public static CalendarEvent reuniaoFinal = null;
 
 	/**
-	 * Convert.
+	 * Filtra os ficheiros .txt obtidos pelo o url ou o ficheiro ics.
 	 *
-	 * @param files the files
-	 * @param nomes the nomes
-	 * @return the array list
+	 * @param files é a lista os nomes dos ficheiros que são obtitos pelas as funções da classe toTxt
+	 * @param nomes é a lista com o nomes do membros
+	 * @return ArrayList com o nome dos ficheiros com a informação filtrada
 	 * @throws FileNotFoundException the file not found exception
 	 */
 	public static ArrayList<String> convert(ArrayList<String> files, ArrayList<String> nomes) throws FileNotFoundException {
-
-		//		for(int i = 0 ; i < nomes.size() ; i++) {
-		//			nomes.set(i, nomes.get(i).replace(" ", ""));
-		//		}
 
 		ArrayList<String> files2 = new ArrayList<>();
 
@@ -98,11 +94,11 @@ public class txtToObject {
 	}
 	
 	/**
-	 * Gets the list.
+	 * Obtém a lista de eventos(aulas) a partir da informação dos ficheiros filtrados da função convert()
 	 *
-	 * @param files2 the files 2
-	 * @param nomes the nomes
-	 * @return the list
+	 * @param files2 é a lista os nomes do ficheiros
+	 * @param nomes é a lista com o nomes do membros
+	 * @return lista de eventos.
 	 * @throws FileNotFoundException the file not found exception
 	 * @throws ParseException the parse exception
 	 */
@@ -113,8 +109,6 @@ public class txtToObject {
 		SimpleDateFormat format = new SimpleDateFormat("yyyyMMdd HHmmss");
 		DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");  
 
-
-		//loop para obter o nome do ficheiro
 		for(int i = 0 ; i < files2.size(); i++) {
 
 			File file = new File(files2.get(i));
@@ -132,7 +126,6 @@ public class txtToObject {
 				next = next.trim().replaceAll(" +", " ");			
 				String summary = next;
 
-				// para abreviar os nomes das cadeiras que possuam demasiadas letras
 				String[] palavras = summary.split(" ");
 				summary = "";
 
@@ -237,12 +230,12 @@ public class txtToObject {
 	}
 
 	/**
-	 * Available or not.
+	 * Verifica se o intervalo de tempo está disponível ou não
 	 *
-	 * @param dataI the data I
-	 * @param dataF the data F
-	 * @param eventos the eventos
-	 * @param nomes the nomes
+	 * @param dataI é a data do início da hora da reunião
+	 * @param dataF é a data do fim da hora da reunião
+	 * @param eventos é a lista de eventos
+	 * @param nomes é a lista com o nomes do membros
 	 * @return the boolean
 	 * @throws FileNotFoundException the file not found exception
 	 * @throws ParseException the parse exception
@@ -287,14 +280,14 @@ public class txtToObject {
 	}
 
 	/**
-	 * Adds the event.
+	 * Adiciona uma reunião à lista de eventos
 	 *
-	 * @param eventos the eventos
-	 * @param nomes the nomes
-	 * @param data the data
-	 * @param inicio the inicio
-	 * @param duracao the duracao
-	 * @return the array list
+	 * @param eventos é a lista de eventos
+	 * @param nomes é a lista com o nomes do membros
+	 * @param data é a data do evento
+	 * @param inicio é a hora do inicio da reunião
+	 * @param duracao é a duração da reunião
+	 * @return lista a de eventos com a reunião
 	 * @throws ParseException the parse exception
 	 * @throws FileNotFoundException the file not found exception
 	 */
@@ -331,14 +324,14 @@ public class txtToObject {
 	}
 
 	/**
-	 * Find best time.
+	 * Encontra a melhor hora para marcar a reunião
 	 *
-	 * @param eventos the eventos
-	 * @param duracao the duracao
-	 * @param alturaDoDia the altura do dia
-	 * @param nomes the nomes
-	 * @param data the data
-	 * @return the array list
+	 * @param eventos é a lista de eventos
+	 * @param duracao é a duração da reunião
+	 * @param alturaDoDia é a altura do dia(manhã ou tarde)
+	 * @param nomes é a lista com o nomes do membros
+	 * @param data é a data da reunião
+	 * @return lista de eventos com a reunião 
 	 * @throws FileNotFoundException the file not found exception
 	 * @throws ParseException the parse exception
 	 */
@@ -400,13 +393,28 @@ public class txtToObject {
 		return eventos;
 	}
 
-	private static int x(ArrayList<CalendarEvent> eventos, ArrayList<String> nomes, LocalDate hoje, int x) {
-		hoje = hoje.plusDays(1);
+	/**
+	 * Obtém o número de eventos do dia
+	 *
+	 * @param eventos é a lista de eventos
+	 * @param nomes é a lista de nomes
+	 * @param data é a data do dia
+	 * @return o número de eventos do dia
+	 */
+	private static int x(ArrayList<CalendarEvent> eventos, ArrayList<String> nomes, LocalDate data, int x) {
+		
+		data = data.plusDays(1);
 		x = 0;
-		x = getNumberEventsOfDay(eventos, nomes, hoje);
+		x = getNumberEventsOfDay(eventos, nomes, data);
 		return x;
 	}
 
+	/**
+	 * Obtém a hora de início da altura do dia
+	 *
+	 * @param alturaDoDia é a altura do dia
+	 * @return da hora de inicio da altura do dia
+	 */
 	private static int horaI(String alturaDoDia) {
 		int horaI = 0;
 		if (alturaDoDia.equals("Manhã")) {
@@ -417,6 +425,12 @@ public class txtToObject {
 		return horaI;
 	}
 
+	/**
+	 * Obtém a hora de fim da altura do dia
+	 *
+	 * @param alturaDoDia é a altura do dia
+	 * @return da hora de fim da altura do dia
+	 */
 	private static int horaF(String alturaDoDia) {
 		int horaF = 0;
 		if (alturaDoDia.equals("Manhã")) {
@@ -427,6 +441,14 @@ public class txtToObject {
 		return horaF;
 	}
 
+	/**
+	 * Obtém a data do início em formato String
+	 *
+	 * @param dateFinal é a data
+	 * @param h é as horas
+	 * @param m é os minutos
+	 * @return data em formato String
+	 */
 	private static String dataI(LocalDate dateFinal, int h, int m) {
 		String dataI = dateFinal.toString();
 		LocalTime inicio = LocalTime.of(h, m);
@@ -435,6 +457,14 @@ public class txtToObject {
 		return dataI;
 	}
 
+	/**
+	 * Obtém a hora do fim da reunião
+	 *
+	 * @param duracao é a duração da reunião
+	 * @param h é as horas
+	 * @param m é os minutos
+	 * @return hora do fim da reunião
+	 */
 	private static LocalTime fim(String duracao, int h, int m) {
 		LocalTime inicio = LocalTime.of(h, m);
 		LocalTime fim = null;
@@ -445,14 +475,14 @@ public class txtToObject {
 	}
 
 	/**
-	 * Gets the number events of day.
+	 * Obtém o número de eventos do dia
 	 *
-	 * @param eventos the eventos
-	 * @param nomes the nomes
-	 * @param date the date
-	 * @return the number events of day
+	 * @param eventos é a lista de eventos
+	 * @param nomes é a lista de nomes
+	 * @param data é a data do dia
+	 * @return o número de eventos do dia
 	 */
-	public static int getNumberEventsOfDay(ArrayList<CalendarEvent> eventos, ArrayList<String> nomes, LocalDate date) {
+	public static int getNumberEventsOfDay(ArrayList<CalendarEvent> eventos, ArrayList<String> nomes, LocalDate data) {
 
 		int x = 0;
 
@@ -460,11 +490,11 @@ public class txtToObject {
 
 			if(nomes == null) {
 
-				if(e.getDate().equals(date)) {
+				if(e.getDate().equals(data)) {
 					x++;
 				}
 			} else {
-				if(e.getDate().equals(date) && !Collections.disjoint(e.getNomes(), nomes)) {
+				if(e.getDate().equals(data) && !Collections.disjoint(e.getNomes(), nomes)) {
 					x++;
 				}
 			}
@@ -474,28 +504,26 @@ public class txtToObject {
 	}
 
 	/**
-	 * Periodicity.
+	 * Adicione reuniões periodicamente
 	 *
-	 * @param eventos the eventos
-	 * @param nomes the nomes
+	 * @param eventos é a lista de eventos
+	 * @param nomes é a lista de nomes dos membros
 	 * @param data the data
-	 * @param semanas the semanas
-	 * @param duracao the duracao
-	 * @param alturaDoDia the altura do dia
-	 * @return the array list
+	 * @param semanas é o número de semanas
+	 * @param duracao é a duração da reunião
+	 * @param alturaDoDia é a altura do dia(manhã/tarde)
+	 * @return lista de eventos com as reuniões
 	 * @throws FileNotFoundException the file not found exception
 	 * @throws ParseException the parse exception
 	 */
 	public static ArrayList<CalendarEvent> periodicity(ArrayList<CalendarEvent> eventos, ArrayList<String> nomes, LocalDate data, int semanas, String duracao, String alturaDoDia) throws FileNotFoundException, ParseException {
 
-//		CalendarEvent reuniao = null;
 		try {
 			eventos = findBestTime(eventos, duracao, alturaDoDia, nomes, data);
 		} catch (FileNotFoundException | ParseException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-//		eventos.add(reuniao);
 
 		for(int i = 0; i < semanas - 1; i++) {
 

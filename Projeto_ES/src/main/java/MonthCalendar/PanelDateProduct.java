@@ -10,6 +10,9 @@ import java.awt.Color;
 import java.util.Date;
 import java.io.Serializable;
 
+/**
+ * The Class PanelDateProduct.
+ */
 public class PanelDateProduct implements Serializable {
 	private int month;
 	private int year;
@@ -68,8 +71,8 @@ public class PanelDateProduct implements Serializable {
 	}
 
 	/**
-	* Gets the to day.
-	* @return  the to day
+	* Gets the toDay.
+	* @return the toDay
 	*/
 	public ToDay getToDay() {
 		Calendar calendar = Calendar.getInstance();

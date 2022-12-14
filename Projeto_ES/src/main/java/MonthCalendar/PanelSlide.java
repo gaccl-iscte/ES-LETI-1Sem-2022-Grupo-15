@@ -56,10 +56,10 @@ public class PanelSlide extends javax.swing.JPanel {
     /** The timer. */
     private final Timer timer;
     
-    /** The com exit. */
+    /** The component exit. */
     private Component comExit;
     
-    /** The com show. */
+    /** The component show. */
     private Component comShow;
     
     /** The animate type. */
@@ -71,7 +71,7 @@ public class PanelSlide extends javax.swing.JPanel {
     /**
      * Show.
      *
-     * @param com the com
+     * @param com the component
      * @param animateType the animate type
      */
     public void show(Component com, AnimateType animateType) {
@@ -132,7 +132,6 @@ public class PanelSlide extends javax.swing.JPanel {
      * Inits the components.
      */
     @SuppressWarnings("unchecked")
-    // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
@@ -145,7 +144,7 @@ public class PanelSlide extends javax.swing.JPanel {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 192, Short.MAX_VALUE)
         );
-    }// </editor-fold>//GEN-END:initComponents
+    }
 
     /**
      * The Enum AnimateType.
@@ -157,6 +156,4 @@ public class PanelSlide extends javax.swing.JPanel {
  /** The to left. */
  TO_LEFT
     }
-    // Variables declaration - do not modify//GEN-BEGIN:variables
-    // End of variables declaration//GEN-END:variables
 }

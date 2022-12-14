@@ -40,7 +40,7 @@ public class WeekCalendar extends Calendar {
     /**
      * Gets the date from day.
      *
-     * @param day the day
+     * @param day the day of week
      * @return the date from day
      */
     @Override
@@ -51,7 +51,7 @@ public class WeekCalendar extends Calendar {
     /**
      * Num days to show.
      *
-     * @return the int
+     * @return number of days
      */
     protected int numDaysToShow() {
         return 6;
@@ -89,7 +89,7 @@ public class WeekCalendar extends Calendar {
      * Day to pixel.
      *
      * @param dayOfWeek the day of week
-     * @return the double
+     * @return the pixel
      */
     @Override
     protected double dayToPixel(DayOfWeek dayOfWeek) {

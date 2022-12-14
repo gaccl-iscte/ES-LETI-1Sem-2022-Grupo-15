@@ -2,12 +2,13 @@ package MonthCalendar;
 
 
 import javax.swing.GroupLayout;
-import javax.swing.JPanel;
-import java.awt.Color;
-import javax.swing.BorderFactory;
 import java.io.Serializable;
 
+/**
+ * The Class MainProduct.
+ */
 public class MainProduct implements Serializable {
+	
 	private CalendarCustom calendarCustom2;
 
 	public GroupLayout jPanel1Layout(Main main) {
