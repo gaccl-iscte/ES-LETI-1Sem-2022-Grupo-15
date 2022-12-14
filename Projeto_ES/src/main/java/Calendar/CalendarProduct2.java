@@ -5,9 +5,19 @@ import java.time.LocalTime;
 import java.time.temporal.ChronoUnit;
 import java.io.Serializable;
 
+/**
+ * The Class CalendarProduct2.
+ */
 public class CalendarProduct2 implements Serializable {
+	
+	/** The time scale. */
 	private double timeScale;
 
+	/**
+	 * Sets the time scale.
+	 *
+	 * @param timeScale the new time scale
+	 */
 	public void setTimeScale(double timeScale) {
 		this.timeScale = timeScale;
 	}
@@ -23,7 +33,7 @@ public class CalendarProduct2 implements Serializable {
 
 	/**
 	* Pixel to time.
-	* @param y  the y
+	* @param y  the y coordinate
 	* @return  the local time
 	*/
 	public LocalTime pixelToTime(double y) {

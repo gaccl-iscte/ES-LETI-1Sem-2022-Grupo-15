@@ -9,8 +9,15 @@ import java.io.Serializable;
  */
 public class MainProduct implements Serializable {
 	
+	/** The calendar custom 2. */
 	private CalendarCustom calendarCustom2;
 
+	/**
+	 * Sets the GroupPanel jPanel1Layout.
+	 *
+	 * @param main the main
+	 * @return the group layout
+	 */
 	public GroupLayout jPanel1Layout(Main main) {
 		main.setJPanel1(new javax.swing.JPanel());
 		calendarCustom2();
@@ -30,6 +37,9 @@ public class MainProduct implements Serializable {
 		return jPanel1Layout;
 	}
 
+	/**
+	 * Creates a CalendarCustom.
+	 */
 	public void calendarCustom2() {
 		calendarCustom2 = new CalendarCustom();
 		calendarCustom2.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));

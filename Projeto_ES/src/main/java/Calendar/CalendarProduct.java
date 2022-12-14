@@ -5,12 +5,17 @@ import javax.swing.event.EventListenerList;
 import java.time.LocalDateTime;
 import java.io.Serializable;
 
+/**
+ * The Class CalendarProduct.
+ */
 public class CalendarProduct implements Serializable {
+	
+	/** The listener list. */
 	private EventListenerList listenerList = new EventListenerList();
 
 	/**
 	* Adds the calendar event click listener.
-	* @param l  the l
+	* @param l  the CalendarEventClickListener
 	*/
 	public void addCalendarEventClickListener(CalendarEventClickListener l) {
 		listenerList.add(CalendarEventClickListener.class, l);
@@ -18,7 +23,7 @@ public class CalendarProduct implements Serializable {
 
 	/**
 	* Removes the calendar event click listener.
-	* @param l  the l
+	* @param l  the CalendarEventClickListener
 	*/
 	public void removeCalendarEventClickListener(CalendarEventClickListener l) {
 		listenerList.remove(CalendarEventClickListener.class, l);
@@ -26,7 +31,7 @@ public class CalendarProduct implements Serializable {
 
 	/**
 	* Adds the calendar empty click listener.
-	* @param l  the l
+	* @param l  the CalendarEmptyClickListener
 	*/
 	public void addCalendarEmptyClickListener(CalendarEmptyClickListener l) {
 		listenerList.add(CalendarEmptyClickListener.class, l);
@@ -34,16 +39,18 @@ public class CalendarProduct implements Serializable {
 
 	/**
 	* Removes the calendar empty click listener.
-	* @param l  the l
+	* @param l  the CalendarEmptyClickListener
 	*/
 	public void removeCalendarEmptyClickListener(CalendarEmptyClickListener l) {
 		listenerList.remove(CalendarEmptyClickListener.class, l);
 	}
 
 	/**
-	* Fire calendar event click.
-	* @param calendarEvent  the calendar event
-	*/
+	 * Fire calendar event click.
+	 *
+	 * @param calendarEvent  the calendar event
+	 * @param calendar the calendar
+	 */
 	public void fireCalendarEventClick(CalendarEvent calendarEvent, Calendar calendar) {
 		Object[] listeners = listenerList.getListenerList();
 		CalendarEventClickEvent calendarEventClickEvent;
@@ -56,9 +63,11 @@ public class CalendarProduct implements Serializable {
 	}
 
 	/**
-	* Fire calendar empty click.
-	* @param dateTime  the date time
-	*/
+	 * Fire calendar empty click.
+	 *
+	 * @param dateTime  the date time
+	 * @param calendar the calendar
+	 */
 	public void fireCalendarEmptyClick(LocalDateTime dateTime, Calendar calendar) {
 		Object[] listeners = listenerList.getListenerList();
 		CalendarEmptyClickEvent calendarEmptyClickEvent;

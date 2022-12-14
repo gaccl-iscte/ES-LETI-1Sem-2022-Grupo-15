@@ -17,10 +17,10 @@ import javax.swing.JLabel;
  */
 public class WelcomeWindow extends JFrame implements ActionListener{
 	
-	/** The members. */
+	/** The JLabel's in use. */
 	JLabel welcome, members;
 	
-	/** The numero membros. */
+	/** The JComboBox to select the number of members. */
 	JComboBox<Integer> numeroMembros = new JComboBox<Integer>();
 
 	/**
@@ -68,11 +68,10 @@ public class WelcomeWindow extends JFrame implements ActionListener{
 	/**
 	 * Action performed.
 	 *
-	 * @param e the e
+	 * @param e the action performed
 	 */
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		// TODO Auto-generated method stub
 		if(e.getSource() == numeroMembros) {
 			if(numeroMembros.getSelectedItem() != null) {
 				this.setVisible(false);

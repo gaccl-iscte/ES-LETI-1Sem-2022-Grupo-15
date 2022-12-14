@@ -6,7 +6,6 @@ package Calendar;
 
 import java.util.EventListener;
 
-// TODO: Auto-generated Javadoc
 /**
  * The listener interface for receiving calendarEventClick events.
  * The class that is interested in processing a calendarEventClick
@@ -23,8 +22,7 @@ public interface CalendarEventClickListener extends EventListener {
     /**
      * Calendar event click.
      *
-     * @param e the e
+     * @param e the CalendarEventClickEvent
      */
-    // Event dispatch methods
     void calendarEventClick(CalendarEventClickEvent e);
 }

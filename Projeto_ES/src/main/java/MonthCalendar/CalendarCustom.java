@@ -1,10 +1,7 @@
 
 package MonthCalendar;
 
-import javax.swing.JPanel;
-
 import java.text.SimpleDateFormat;
-import java.util.Calendar;
 import java.util.Date;
 
 /**
@@ -12,6 +9,7 @@ import java.util.Date;
  */
 public class CalendarCustom extends javax.swing.JPanel {
 
+    /** The calendar custom product 2. */
     private CalendarCustomProduct2 calendarCustomProduct2 = new CalendarCustomProduct2();
 
 	/**
@@ -47,7 +45,6 @@ public class CalendarCustom extends javax.swing.JPanel {
      * Inits the components.
      */
     @SuppressWarnings("unchecked")
-    // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
         slide();
@@ -66,7 +63,6 @@ public class CalendarCustom extends javax.swing.JPanel {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                //.addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(slide, 1000, 1000, Short.MAX_VALUE)
@@ -75,7 +71,6 @@ public class CalendarCustom extends javax.swing.JPanel {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-//            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(layout.createSequentialGroup()
                 .addGap(13, 13, 13)
                 .addComponent(calendarCustomProduct2.getJLayeredPane1(), javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -83,8 +78,11 @@ public class CalendarCustom extends javax.swing.JPanel {
                 .addComponent(slide, 850, 850, Short.MAX_VALUE)
                 .addContainerGap())
         );
-    }// </editor-fold>//GEN-END:initComponents
+    }
 
+	/**
+	 * Sets lbType.
+	 */
 	private void lbType() {
 		lbType = new javax.swing.JLabel();
 		lbType.setFont(new java.awt.Font("sansserif", 1, 25));
@@ -92,6 +90,9 @@ public class CalendarCustom extends javax.swing.JPanel {
 		lbType.setText("PM");
 	}
 
+	/**
+	 * Sets lbTime.
+	 */
 	private void lbTime() {
 		lbTime = new javax.swing.JLabel();
 		lbTime.setFont(new java.awt.Font("sansserif", 1, 48));
@@ -100,6 +101,9 @@ public class CalendarCustom extends javax.swing.JPanel {
 		lbTime.setText("9:32:00");
 	}
 
+	/**
+	 * Sets lbDate.
+	 */
 	private void lbDate() {
 		lbDate = new javax.swing.JLabel();
 		lbDate.setFont(new java.awt.Font("sansserif", 0, 18));
@@ -108,6 +112,9 @@ public class CalendarCustom extends javax.swing.JPanel {
 		lbDate.setText("Sunday, 30/05/2021");
 	}
 
+	/**
+	 * Sets panelSlide.
+	 */
 	private void slide() {
 		calendarCustomProduct2.jLayeredPane1(this);
 		slide.setBackground(new java.awt.Color(255, 255, 255));
@@ -119,23 +126,33 @@ public class CalendarCustom extends javax.swing.JPanel {
 				.addGap(0, 321, Short.MAX_VALUE));
 	}
 
-	/** The lb date. */
+	/** The JLabel lbdate. */
     private javax.swing.JLabel lbDate;
     
-    /** The lb time. */
+    /** The JLabel lbtime. */
     private javax.swing.JLabel lbTime;
     
-    /** The lb type. */
+    /** The JLabel lbtype. */
     private javax.swing.JLabel lbType;
     
-    /** The slide. */
+    /** The PanelSlide slide. */
     private MonthCalendar.PanelSlide slide;
     // End of variables declaration//GEN-END:variables
 
-	public void setSlide(MonthCalendar.PanelSlide slide) {
+	/**
+     * Sets the slide.
+     *
+     * @param slide the new slide
+     */
+    public void setSlide(MonthCalendar.PanelSlide slide) {
 		this.slide = slide;
 	}
 
+	/**
+	 * Gets the slide.
+	 *
+	 * @return the slide
+	 */
 	public MonthCalendar.PanelSlide getSlide() {
 		return slide;
 	}

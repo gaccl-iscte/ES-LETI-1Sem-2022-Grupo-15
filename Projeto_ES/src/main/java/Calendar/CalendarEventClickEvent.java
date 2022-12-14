@@ -5,7 +5,6 @@ package Calendar;
 
 import java.awt.*;
 
-// TODO: Auto-generated Javadoc
 /**
  * The Class CalendarEventClickEvent.
  */
@@ -17,7 +16,7 @@ public class CalendarEventClickEvent extends AWTEvent {
     /**
      * Instantiates a new calendar event click event.
      *
-     * @param source the source
+     * @param source the source object
      * @param calendarEvent the calendar event
      */
     public CalendarEventClickEvent(Object source, CalendarEvent calendarEvent) {

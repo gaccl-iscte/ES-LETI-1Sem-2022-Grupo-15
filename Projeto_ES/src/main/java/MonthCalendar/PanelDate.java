@@ -38,7 +38,7 @@ public class PanelDate extends JPanel{
 	}
 
 	/**
-	 * Inits the.
+	 * Sets cells as titles.
 	 */
 	private void init() {
 		seg.asTitle();
@@ -139,7 +139,7 @@ public class PanelDate extends JPanel{
 		add(cell47);
 		add(cell48);
 		add(cell49);
-	}// </editor-fold>//GEN-END:initComponents
+	}
 
 	private void cells() {
 		cell8 = new Cell();
@@ -314,7 +314,6 @@ public class PanelDate extends JPanel{
 
 
 	/** The cell 10. */
-	// Variables declaration - do not modify//GEN-BEGIN:variables
 	private Cell cell10;
 	
 	/** The cell 11. */
@@ -440,27 +439,26 @@ public class PanelDate extends JPanel{
 	/** The cell 9. */
 	private Cell cell9;
 	
-	/** The sex. */
+	/** The cell sex. */
 	private Cell sex;
 	
-	/** The seg. */
+	/** The cell seg. */
 	private Cell seg;
 	
-	/** The sab. */
+	/** The cell sab. */
 	private Cell sab;
 	
-	/** The dom. */
+	/** The cell dom. */
 	private Cell dom;
 	
-	/** The qui. */
+	/** The cell qui. */
 	private Cell qui;
 	
-	/** The ter. */
+	/** The cell ter. */
 	private Cell ter;
 	
-	/** The qua. */
+	/** The cell qua. */
 	private Cell qua;
-	// End of variables declaration//GEN-END:variables
 
 	/**
 	 * The Class open.

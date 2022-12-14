@@ -7,10 +7,6 @@ import java.awt.Graphics2D;
 import java.awt.RenderingHints;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.io.FileNotFoundException;
-import java.text.ParseException;
-import java.time.LocalDate;
-import java.time.ZoneId;
 import java.util.Date;
 
 import javax.swing.JButton;
@@ -25,10 +21,10 @@ public class Cell extends JButton {
     /** The date. */
     private Date date;
     
-    /** The title. */
+    /** The is title boolean. */
     private boolean title;
     
-    /** The is to day. */
+    /** The isToDay boolean. */
     private boolean isToDay;
 
     /**
@@ -76,9 +72,9 @@ public class Cell extends JButton {
     }
 
     /**
-     * Current month.
+     * Sets Foreground if its the current month.
      *
-     * @param act the act
+     * @param act the current month boolean
      */
     public void currentMonth(boolean act) {
         if (act) {
@@ -89,7 +85,7 @@ public class Cell extends JButton {
     }
 
     /**
-     * Sets the as to day.
+     * Sets Foreground if its today.
      */
     public void setAsToDay() {
         isToDay = true;
@@ -99,7 +95,7 @@ public class Cell extends JButton {
     /**
      * Paint component.
      *
-     * @param grphcs the grphcs
+     * @param grphcs the graphics
      */
     @Override
     protected void paintComponent(Graphics grphcs) {
@@ -126,7 +122,7 @@ public class Cell extends JButton {
 		/**
 		 * Action performed.
 		 *
-		 * @param e the e
+		 * @param e the action performed
 		 */
 		public void actionPerformed (ActionEvent e){
 

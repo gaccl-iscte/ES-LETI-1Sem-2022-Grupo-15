@@ -4,26 +4,19 @@ package Menu;
 import java.awt.Color;
 import java.awt.Desktop;
 import java.awt.Dimension;
-import java.awt.FlowLayout;
 import java.awt.Font;
-import java.awt.Insets;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.io.FileReader;
 import java.io.IOException;
 import java.text.ParseException;
 import java.time.LocalDate;
-
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
-import javax.swing.JPanel;
-import javax.swing.JScrollPane;
-import javax.swing.JTextArea;
 import javax.swing.text.BadLocationException;
 
 import DayCalendar.DayCalendarTest;
@@ -36,15 +29,12 @@ import WeekCalendar.WeekCalendarTest;
  */
 public class Metting extends JFrame implements ActionListener{
 
-	/** The lblcalendar. */
+	/** The JLabel's in use. */
 	JLabel lblmetting, lblproposta, lbldata, lblcalendar;
 	
-	/** The txt. */
+	/** The JButton's in use. */
 	JButton back, mensal, semanal, diario, members, txt;
-	
-	/** The display frame. */
-	JFrame displayFrame;
-	
+
 	/** The instance. */
 	public static Metting instance;
 
@@ -149,11 +139,10 @@ public class Metting extends JFrame implements ActionListener{
 	/**
 	 * Action performed.
 	 *
-	 * @param e the e
+	 * @param e the action performed
 	 */
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		// TODO Auto-generated method stub
 		if(e.getSource() == mensal) {
 
 			new Main(GenerateMetting.events, AddMember.nomesMetting);
@@ -163,7 +152,6 @@ public class Metting extends JFrame implements ActionListener{
 			try {
 				new WeekCalendarTest(GenerateMetting.events);
 			} catch (FileNotFoundException | ParseException e1) {
-				// TODO Auto-generated catch block
 				e1.printStackTrace();
 			}
 
@@ -172,7 +160,6 @@ public class Metting extends JFrame implements ActionListener{
 			try {
 				new DayCalendarTest(GenerateMetting.events, LocalDate.now());
 			} catch (FileNotFoundException | ParseException e1) {
-				// TODO Auto-generated catch block
 				e1.printStackTrace();
 			}
 
@@ -187,14 +174,12 @@ public class Metting extends JFrame implements ActionListener{
 			try {
 				GenerateMetting.getInstance().getFrameInstance().setVisible(true);
 			} catch (BadLocationException e1) {
-				// TODO Auto-generated catch block
 				e1.printStackTrace();
 			}
 		}else if(e.getSource() == txt) {
 			try {
 				Desktop.getDesktop().open(new File("Horário.txt"));
 			} catch (IOException e1) {
-				// TODO Auto-generated catch block
 				e1.printStackTrace();
 			}
 		}

@@ -6,7 +6,6 @@ package Calendar;
 import java.awt.*;
 import java.time.LocalDateTime;
 
-// TODO: Auto-generated Javadoc
 /**
  * The Class CalendarEmptyClickEvent.
  */
@@ -18,7 +17,7 @@ public class CalendarEmptyClickEvent extends AWTEvent {
     /**
      * Instantiates a new calendar empty click event.
      *
-     * @param source the source
+     * @param source the source object
      * @param dateTime the date time
      */
     public CalendarEmptyClickEvent(Object source, LocalDateTime dateTime) {

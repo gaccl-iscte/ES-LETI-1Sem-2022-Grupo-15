@@ -9,52 +9,50 @@ import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.ArrayList;
 
-import Menu.AddMember;
 
-// TODO: Auto-generated Javadoc
 /**
  * The Class CalendarEvent.
  */
 public class CalendarEvent {
 	
-	/** The azul claro. */
+	/** The Color azul claro. */
 	private static Color azulClaro = new Color(153,204,255);
 	
-	/** The azul intermédio. */
+	/** The Color azul intermédio. */
 	private static Color azulIntermedio = new Color(51,153,255);
 	
-	/** The azul escuro. */
+	/** The Color azul escuro. */
 	private static Color azulEscuro = new Color(0,102,204);
 
 	/** The date. */
 	private LocalDate date;
 	
-	/** The start. */
+	/** The start time. */
 	private LocalTime start;
 	
-	/** The end. */
+	/** The end time. */
 	private LocalTime end;
 	
-	/** The text. */
+	/** The summary text. */
 	private String text;
 	
 	/** The color. */
 	private Color color;
 	
-	/** The nomes. */
+	/** The list of names. */
 	private ArrayList<String> nomes;
 	
-	/** The x. */
+	/** The x coordinate. */
 	private double x;
 
 	/**
 	 * Instantiates a new calendar event.
 	 *
 	 * @param date the date
-	 * @param start the start
-	 * @param end the end
-	 * @param text the text
-	 * @param nomes the nomes
+	 * @param start the start time
+	 * @param end the end time
+	 * @param text the suumary text
+	 * @param nomes the list of names
 	 */
 	public CalendarEvent(LocalDate date, LocalTime start, LocalTime end, String text, ArrayList<String> nomes) {
 		this(date, start, end, text, nomes, azulClaro);
@@ -64,10 +62,10 @@ public class CalendarEvent {
 	 * Instantiates a new calendar event.
 	 *
 	 * @param date the date
-	 * @param start the start
-	 * @param end the end
-	 * @param text the text
-	 * @param nomes the nomes
+	 * @param start the start time
+	 * @param end the end time
+	 * @param text the summary text
+	 * @param nomes the list of names
 	 * @param color the color
 	 */
 	public CalendarEvent(LocalDate date, LocalTime start, LocalTime end, String text, ArrayList<String> nomes, Color color) {
@@ -98,72 +96,72 @@ public class CalendarEvent {
 	}
 
 	/**
-	 * Gets the start.
+	 * Gets the start time.
 	 *
-	 * @return the start
+	 * @return the start time
 	 */
 	public LocalTime getStart() {
 		return start;
 	}
 
 	/**
-	 * Sets the start.
+	 * Sets the start time.
 	 *
-	 * @param start the new start
+	 * @param start the new start time
 	 */
 	public void setStart(LocalTime start) {
 		this.start = start;
 	}
 
 	/**
-	 * Gets the end.
+	 * Gets the end time.
 	 *
-	 * @return the end
+	 * @return the end time
 	 */
 	public LocalTime getEnd() {
 		return end;
 	}
 
 	/**
-	 * Sets the end.
+	 * Sets the end time.
 	 *
-	 * @param end the new end
+	 * @param end the new end time
 	 */
 	public void setEnd(LocalTime end) {
 		this.end = end;
 	}
 
 	/**
-	 * Gets the text.
+	 * Gets the summary text.
 	 *
-	 * @return the text
+	 * @return the summary text
 	 */
 	public String getText() {
 		return text;
 	}
 
 	/**
-	 * Sets the text.
+	 * Sets the summary text.
 	 *
-	 * @param text the new text
+	 * @param text the new summary text
 	 */
 	public void setText(String text) {
 		this.text = text;
 	}
 
 	/**
-	 * Gets the nomes.
+	 * Gets the list of names.
 	 *
-	 * @return the nomes
+	 * @return the list of names
 	 */
 	public ArrayList<String> getNomes() {
 		return nomes;
 	}
 
 	/**
-	 * Sets the nomes.
+	 * Sets the list of names.
 	 *
-	 * @param nomes the new nomes
+	 * @param nomes the new list of names
 	 */
 	public void setNomes(ArrayList<String> nomes) {
 		
@@ -200,31 +198,27 @@ public class CalendarEvent {
 	}
 	
 	/**
-	 * Gets the x.
+	 * Gets the x coordinate.
 	 *
-	 * @return the x
+	 * @return the x coordinate
 	 */
 	public double getX() {
         return this.x;
     }
 
     /**
-     * Sets the x.
+     * Sets the x coordinate.
      *
-     * @param d the new x
+     * @param d the new x coordinate
      */
     public void setX(double d) {
         this.x = d;
     }
-	
-//	public int compareTo(CalendarEvent o) {
-//	    return getDate().compareTo(o.getDate());
-//	  }
 
-	/**
+ /**
  * Equals.
  *
- * @param o the o
+ * @param o the object
  * @return true, if successful
  */
 @Override

@@ -13,147 +13,147 @@ import javax.swing.Timer;
  */
 public class PanelSlide extends javax.swing.JPanel {
 
-    /**
-     * Gets the animate.
-     *
-     * @return the animate
-     */
-    public int getAnimate() {
-        return animate;
-    }
+	/**
+	 * Gets the animate.
+	 *
+	 * @return the animate
+	 */
+	public int getAnimate() {
+		return animate;
+	}
 
-    /**
-     * Sets the animate.
-     *
-     * @param animate the new animate
-     */
-    public void setAnimate(int animate) {
-        this.animate = animate;
-    }
+	/**
+	 * Sets the animate.
+	 *
+	 * @param animate the new animate
+	 */
+	public void setAnimate(int animate) {
+		this.animate = animate;
+	}
 
-    /**
-     * Instantiates a new panel slide.
-     */
-    public PanelSlide() {
+	/**
+	 * Instantiates a new panel slide.
+	 */
+	public PanelSlide() {
 		initComponents();
-        setLayout(null);
-        addComponentListener(new ComponentAdapter() {
-            @Override
-            public void componentResized(ComponentEvent ce) {
-                comShow.setSize(getSize());
-            }
+		setLayout(null);
+		addComponentListener(new ComponentAdapter() {
+			@Override
+			public void componentResized(ComponentEvent ce) {
+				comShow.setSize(getSize());
+			}
 
-        });
-        timer = new Timer(0, new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent ae) {
-                animate();
-            }
-        });
+		});
+		timer = new Timer(0, new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent ae) {
+				animate();
+			}
+		});
 
-    }
+	}
 
-    /** The timer. */
-    private final Timer timer;
-    
-    /** The component exit. */
-    private Component comExit;
-    
-    /** The component show. */
-    private Component comShow;
-    
-    /** The animate type. */
-    private AnimateType animateType;
-    
-    /** The animate. */
-    private int animate = 1;
+	/** The timer. */
+	private final Timer timer;
 
-    /**
-     * Show.
-     *
-     * @param com the component
-     * @param animateType the animate type
-     */
-    public void show(Component com, AnimateType animateType) {
-        if (!timer.isRunning()) {
-            this.animateType = animateType;
-            this.comShow = com;
-            com.setSize(getSize());
-            if (getComponentCount() == 0) {
-                add(com);
-                comExit = com;
-                repaint();
-                revalidate();
-            } else {
+	/** The component exit. */
+	private Component comExit;
 
-                if (animateType == AnimateType.TO_RIGHT) {
-                    comShow.setLocation(-comShow.getWidth(), 0);
-                } else {
-                    comShow.setLocation(getWidth(), 0);
-                }
-                add(com);
-                repaint();
-                revalidate();
-                timer.start();
+	/** The component show. */
+	private Component comShow;
 
-            }
-        }
-    }
+	/** The animate type. */
+	private AnimateType animateType;
 
-    /**
-     * Animate.
-     */
-    private void animate() {
-        if (animateType == AnimateType.TO_RIGHT) {
-            if (comShow.getLocation().x < 0) {
-                comShow.setLocation(comShow.getLocation().x + 1000, 0);
-                comExit.setLocation(comExit.getLocation().x + 1000, 0);
-            } else {
-                //  Stop animate
-                comShow.setLocation(0, 0);
-                timer.stop();
-                remove(comExit);
-                comExit = comShow;
-            }
-        } else {
-            if (comShow.getLocation().x > 0) {
-                comShow.setLocation(comShow.getLocation().x - 1000, 0);
-                comExit.setLocation(comExit.getLocation().x - 1000, 0);
-            } else {
-                comShow.setLocation(0, 0);
-                timer.stop();
-                remove(comExit);
-                comExit = comShow;
-            }
-        }
-    }
+	/** The animate. */
+	private int animate = 1;
 
-    /**
-     * Inits the components.
-     */
-    @SuppressWarnings("unchecked")
-    private void initComponents() {
+	/**
+	 * Show.
+	 *
+	 * @param com the component
+	 * @param animateType the animate type
+	 */
+	public void show(Component com, AnimateType animateType) {
+		if (!timer.isRunning()) {
+			this.animateType = animateType;
+			this.comShow = com;
+			com.setSize(getSize());
+			if (getComponentCount() == 0) {
+				add(com);
+				comExit = com;
+				repaint();
+				revalidate();
+			} else {
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
-        this.setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 319, Short.MAX_VALUE)
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 192, Short.MAX_VALUE)
-        );
-    }
+				if (animateType == AnimateType.TO_RIGHT) {
+					comShow.setLocation(-comShow.getWidth(), 0);
+				} else {
+					comShow.setLocation(getWidth(), 0);
+				}
+				add(com);
+				repaint();
+				revalidate();
+				timer.start();
 
-    /**
-     * The Enum AnimateType.
-     */
-    public static enum AnimateType {
-        
-        /** The to right. */
-        TO_RIGHT, 
- /** The to left. */
- TO_LEFT
-    }
+			}
+		}
+	}
+
+	/**
+	 * Animate.
+	 */
+	private void animate() {
+		if (animateType == AnimateType.TO_RIGHT) {
+			if (comShow.getLocation().x < 0) {
+				comShow.setLocation(comShow.getLocation().x + 1000, 0);
+				comExit.setLocation(comExit.getLocation().x + 1000, 0);
+			} else {
+				//  Stop animate
+				comShow.setLocation(0, 0);
+				timer.stop();
+				remove(comExit);
+				comExit = comShow;
+			}
+		} else {
+			if (comShow.getLocation().x > 0) {
+				comShow.setLocation(comShow.getLocation().x - 1000, 0);
+				comExit.setLocation(comExit.getLocation().x - 1000, 0);
+			} else {
+				comShow.setLocation(0, 0);
+				timer.stop();
+				remove(comExit);
+				comExit = comShow;
+			}
+		}
+	}
+
+	/**
+	 * Inits the components.
+	 */
+	@SuppressWarnings("unchecked")
+	private void initComponents() {
+
+		javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
+		this.setLayout(layout);
+		layout.setHorizontalGroup(
+				layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+				.addGap(0, 319, Short.MAX_VALUE)
+				);
+		layout.setVerticalGroup(
+				layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+				.addGap(0, 192, Short.MAX_VALUE)
+				);
+	}
+
+	/**
+	 * The Enum AnimateType.
+	 */
+	public static enum AnimateType {
+
+		/** The to right. */
+		TO_RIGHT, 
+		/** The to left. */
+		TO_LEFT
+	}
 }

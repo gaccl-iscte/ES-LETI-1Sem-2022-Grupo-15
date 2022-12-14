@@ -14,20 +14,36 @@ import java.io.Serializable;
  * The Class PanelDateProduct.
  */
 public class PanelDateProduct implements Serializable {
+	
+	/** The month. */
 	private int month;
+	
+	/** The year. */
 	private int year;
 
+	/**
+	 * Sets the month.
+	 *
+	 * @param month the new month
+	 */
 	public void setMonth(int month) {
 		this.month = month;
 	}
 
+	/**
+	 * Sets the year.
+	 *
+	 * @param year the new year
+	 */
 	public void setYear(int year) {
 		this.year = year;
 	}
 
 	/**
-	* Sets the date.
-	*/
+	 * Sets the date.
+	 *
+	 * @param panelDate the new date
+	 */
 	public void setDate(PanelDate panelDate) {
 		Calendar calendar = Calendar.getInstance();
 		calendar.set(Calendar.YEAR, year);
@@ -44,6 +60,14 @@ public class PanelDateProduct implements Serializable {
 		}
 	}
 
+	/**
+	 * Creates cell's.
+	 *
+	 * @param calendar the calendar
+	 * @param toDay the toDay
+	 * @param com the component
+	 * @return the cell
+	 */
 	private Cell cell(Calendar calendar, ToDay toDay, Component com) {
 		Cell cell = (Cell) com;
 		if (!cell.isTitle()) {

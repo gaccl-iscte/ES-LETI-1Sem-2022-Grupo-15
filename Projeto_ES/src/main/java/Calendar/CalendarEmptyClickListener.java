@@ -5,7 +5,6 @@ package Calendar;
 
 import java.util.EventListener;
 
-// TODO: Auto-generated Javadoc
 /**
  * The listener interface for receiving calendarEmptyClick events.
  * The class that is interested in processing a calendarEmptyClick
@@ -22,8 +21,7 @@ public interface CalendarEmptyClickListener extends EventListener {
     /**
      * Calendar empty click.
      *
-     * @param e the e
+     * @param e the CalendarEmptyClickEvent
      */
-    // Event dispatch methods
     void calendarEmptyClick(CalendarEmptyClickEvent e);
 }

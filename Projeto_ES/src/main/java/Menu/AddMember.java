@@ -30,46 +30,46 @@ import ES_2022_LETI_Grupo_15.Projeto_ES.txtToObject;
  */
 public class AddMember extends JFrame implements ActionListener{
 
-	/** The apelido. */
+	/** The JTextFiled's in use. */
 	JTextField url, nome, apelido;
 	
-	/** The lblmetting. */
+	/** The JLabel's in use. */
 	JLabel lblurl, lblnome, lblapelido, lblmembers, lblmetting;
 	
-	/** The adicionar. */
+	/** The JButton's in use. */
 	JButton file, adicionar;
 	
-	/** The metting. */
+	/** The JCheckBox to add to meeting. */
 	JCheckBox metting;
 	
-	/** The i. */
+	/** The number of members. */
 	int i;
 	
-	/** The file 1. */
+	/** The file to convert. */
 	File file1;
 	
-	/** The files. */
+	/** The list of files to convert. */
 	public static ArrayList<String> files = new ArrayList<String>();
 	
-	/** The nomes. */
+	/** The list of names. */
 	public static ArrayList<String> nomes = new ArrayList<String>();
 	
-	/** The files 2. */
+	/** The list of files converted. */
 	public static ArrayList<String> files2 = new ArrayList<String>();
 	
-	/** The files metting. */
+	/** The list of files of the members in meeting. */
 	public static ArrayList<String> filesMetting = new ArrayList<String>();
 	
-	/** The nomes metting. */
+	/** The list of names of the members in meeting. */
 	public static ArrayList<String> nomesMetting = new ArrayList<String>();
 	
-	/** The files 2 metting. */
+	/** The list of files converted of the members in meeting. */
 	public static ArrayList<String> files2Metting = new ArrayList<String>();
 
 	/**
 	 * Instantiates a new adds the member.
 	 *
-	 * @param i the i
+	 * @param i the number of members
 	 */
 	AddMember(int i){
 		this.i = i;
@@ -162,11 +162,10 @@ public class AddMember extends JFrame implements ActionListener{
 	/**
 	 * Action performed.
 	 *
-	 * @param e the e
+	 * @param e the action performed
 	 */
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		// TODO Auto-generated method stub
 
 		file1(e);
 		if( e.getSource() == adicionar) {
@@ -192,7 +191,6 @@ public class AddMember extends JFrame implements ActionListener{
 					nomesMetting.add(name+" "+lastname);
 				}
 			} catch (IOException e1) {
-				// TODO Auto-generated catch block
 				e1.printStackTrace();
 			}			
 			if(i==1) {
@@ -201,19 +199,23 @@ public class AddMember extends JFrame implements ActionListener{
 					files2 = txtToObject.convert(files, nomes);
 
 				} catch (FileNotFoundException e1) {
-					// TODO Auto-generated catch block
 					e1.printStackTrace();
 				}
 				try {
 					new GenerateMetting();
 				} catch (BadLocationException e1) {
-					// TODO Auto-generated catch block
 					e1.printStackTrace();
 				}
 			}
 		}
 	}
 
+	/**
+	 * Select file.
+	 *
+	 * @param e the action performed
+	 * @throws HeadlessException the headless exception
+	 */
 	private void file1(ActionEvent e) throws HeadlessException {
 		if (e.getSource() == adicionar) {
 		} else if (e.getSource() == file) {

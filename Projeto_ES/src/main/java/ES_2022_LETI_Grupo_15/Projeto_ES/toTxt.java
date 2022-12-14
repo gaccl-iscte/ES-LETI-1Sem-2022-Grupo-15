@@ -14,10 +14,10 @@ import java.nio.channels.ReadableByteChannel;
 public class toTxt {
 
 	/**
-	 * Convert.
+	 * Convert url to .txt file
 	 *
-	 * @param urlStr the url str
-	 * @param file the file
+	 * @param urlStr the url in string
+	 * @param file the destination file
 	 * @throws IOException Signals that an I/O exception has occurred.
 	 */
 	public static void convert(String urlStr, String file) throws IOException {
@@ -30,10 +30,10 @@ public class toTxt {
 	}
 
 	/**
-	 * Convert.
+	 * Convert .ics file to .txt file
 	 *
-	 * @param file the file
-	 * @param result the result
+	 * @param file the file to convert
+	 * @param result the destination file
 	 * @throws IOException Signals that an I/O exception has occurred.
 	 */
 	public static void convert(File file, String result) throws IOException {  

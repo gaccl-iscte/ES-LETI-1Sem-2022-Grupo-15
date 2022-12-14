@@ -10,7 +10,6 @@ import java.util.ArrayList;
 import Calendar.Calendar;
 import Calendar.CalendarEvent;
 
-// TODO: Auto-generated Javadoc
 /**
  * The Class DayCalendar.
  */
@@ -23,7 +22,7 @@ public class DayCalendar extends Calendar {
      * Instantiates a new day calendar.
      *
      * @param events the events
-     * @param data the data
+     * @param data the date
      */
     public DayCalendar(ArrayList<CalendarEvent> events, LocalDate data) {
         super(events);

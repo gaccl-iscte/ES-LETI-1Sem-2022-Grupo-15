@@ -74,7 +74,7 @@ public class ToDay {
     }
 
     /**
-     * Instantiates a new to day.
+     * Instantiates a new toDay.
      */
     public ToDay() {
     }

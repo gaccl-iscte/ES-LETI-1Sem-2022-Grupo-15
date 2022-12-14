@@ -4,7 +4,6 @@
 package Calendar;
 
 import javax.swing.*;
-import javax.swing.event.EventListenerList;
 import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
@@ -15,18 +14,18 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.time.format.TextStyle;
-import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.Locale;
 
-// TODO: Auto-generated Javadoc
 /**
  * The Class Calendar.
  */
 public abstract class Calendar extends JComponent {
 	
+	/** The calendar product 2. */
 	private CalendarProduct2 calendarProduct2 = new CalendarProduct2();
 
+	/** The calendar product. */
 	private CalendarProduct calendarProduct = new CalendarProduct();
 
 	/** The Constant START_TIME. */
@@ -47,18 +46,16 @@ public abstract class Calendar extends JComponent {
 	/** The Constant TIME_COL_WIDTH. */
 	protected static final int TIME_COL_WIDTH = 100;
 
-	// An estimate of the width of a single character (not exact but good
 	/** The Constant FONT_LETTER_PIXEL_WIDTH. */
-	// enough)
 	private static final int FONT_LETTER_PIXEL_WIDTH = 7;
 	
-	/** The events. */
+	/** The list of events. */
 	private ArrayList<CalendarEvent> events;
 	
 	/** The day width. */
 	private double dayWidth;
 	
-	/** The g 2. */
+	/** The graphics 2D. */
 	private Graphics2D g2;
 
 	/**
@@ -71,7 +68,7 @@ public abstract class Calendar extends JComponent {
 	/**
 	 * Instantiates a new calendar.
 	 *
-	 * @param events the events
+	 * @param events the list of events
 	 */
 	protected Calendar(ArrayList<CalendarEvent> events) {
 		this.events = events;
@@ -124,7 +121,7 @@ public abstract class Calendar extends JComponent {
 	/**
 	 * Check calendar event click.
 	 *
-	 * @param p the p
+	 * @param p the point
 	 * @return true, if successful
 	 */
 	private boolean checkCalendarEventClick(Point p) {
@@ -148,7 +145,7 @@ public abstract class Calendar extends JComponent {
 	/**
 	 * Check calendar empty click.
 	 *
-	 * @param p the p
+	 * @param p the point
 	 * @return true, if successful
 	 */
 	private boolean checkCalendarEmptyClick(Point p) {
@@ -172,13 +169,11 @@ public abstract class Calendar extends JComponent {
 	 * @return the date from day
 	 */
 	protected abstract LocalDate getDateFromDay(DayOfWeek day);
-
-	// CalendarEventClick methods
-
+	
 	/**
 	 * Adds the calendar event click listener.
 	 *
-	 * @param l the l
+	 * @param l the CalendarEventClickListener
 	 */
 	public void addCalendarEventClickListener(CalendarEventClickListener l) {
 		calendarProduct.addCalendarEventClickListener(l);
@@ -187,20 +182,16 @@ public abstract class Calendar extends JComponent {
 	/**
 	 * Removes the calendar event click listener.
 	 *
-	 * @param l the l
+	 * @param l the CalendarEventClickListener
 	 */
 	public void removeCalendarEventClickListener(CalendarEventClickListener l) {
 		calendarProduct.removeCalendarEventClickListener(l);
 	}
 
-	
-
-	// CalendarEmptyClick methods
-
 	/**
 	 * Adds the calendar empty click listener.
 	 *
-	 * @param l the l
+	 * @param l the CalendarEmptyClickListener
 	 */
 	public void addCalendarEmptyClickListener(CalendarEmptyClickListener l) {
 		calendarProduct.addCalendarEmptyClickListener(l);
@@ -209,7 +200,7 @@ public abstract class Calendar extends JComponent {
 	/**
 	 * Removes the calendar empty click listener.
 	 *
-	 * @param l the l
+	 * @param l the CalendarEmptyClickListener
 	 */
 	public void removeCalendarEmptyClickListener(CalendarEmptyClickListener l) {
 		calendarProduct.removeCalendarEmptyClickListener(l);
@@ -221,12 +212,16 @@ public abstract class Calendar extends JComponent {
 	private void calculateScaleVars() {
 		int width = width();
 		int height = height();
-		// Units are pixels per second
 		calendarProduct2.setTimeScale(
 				(double) (height - HEADER_HEIGHT) / (END_TIME.toSecondOfDay() - START_TIME.toSecondOfDay()));
 		dayWidth = (width - TIME_COL_WIDTH) / numDaysToShow();
 	}
 
+	/**
+	 * Gets the height.
+	 *
+	 * @return the height
+	 */
 	private int height() {
 		int height = getHeight();
 		if (height < MIN_HEIGHT) {
@@ -235,6 +230,11 @@ public abstract class Calendar extends JComponent {
 		return height;
 	}
 
+	/**
+	 * Gets the width.
+	 *
+	 * @return the width
+	 */
 	private int width() {
 		int width = getWidth();
 		if (width < MIN_WIDTH) {
@@ -244,9 +244,9 @@ public abstract class Calendar extends JComponent {
 	}
 
 	/**
-	 * Num days to show.
+	 * Number of  days to show.
 	 *
-	 * @return the int
+	 * @return the number of days to show
 	 */
 	protected abstract int numDaysToShow();
 
@@ -254,15 +254,15 @@ public abstract class Calendar extends JComponent {
 	 * Day to pixel.
 	 *
 	 * @param dayOfWeek the day of week
-	 * @return the double
+	 * @return the x value of left most pixel for day collumn
 	 */
-	// Gives x val of left most pixel for day col
+
 	protected abstract double dayToPixel(DayOfWeek dayOfWeek);
 
 	/**
 	 * Pixel to day.
 	 *
-	 * @param x the x
+	 * @param x the x coordinate
 	 * @return the day of week
 	 */
 	private DayOfWeek pixelToDay(double x) {
@@ -281,21 +281,18 @@ public abstract class Calendar extends JComponent {
 	/**
 	 * Paint component.
 	 *
-	 * @param g the g
+	 * @param g the graphics
 	 */
 	@Override
 	protected void paintComponent(Graphics g) {
 		calculateScaleVars();
 		g2 = (Graphics2D) g;
 
-		// Rendering hints try to turn anti-aliasing on which improves quality
 		g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
 
-		// Set background to white
 		g2.setColor(Color.white);
 		g2.fillRect(0, 0, getWidth(), getHeight());
 
-		// Set paint colour to black
 		g2.setColor(Color.black);
 
 		drawDayHeadings();
@@ -344,22 +341,18 @@ public abstract class Calendar extends JComponent {
 	 * Draw grid.
 	 */
 	private void drawGrid() {
-		// Save the original colour
 		final Color ORIG_COLOUR = g2.getColor();
 
-		// Set colour to grey with half alpha (opacity)
 		Color alphaGray = new Color(128, 128, 128, 128);
 		Color alphaGrayLighter = new Color(200, 200, 200, 128);
 		g2.setColor(alphaGray);
 
-		// Draw vertical grid lines
 		double x;
 		for (int i = getStartDay().getValue(); i <= getEndDay().getValue(); i++) {
 			x = dayToPixel(DayOfWeek.of(i));
 			g2.draw(new Line2D.Double(x, HEADER_HEIGHT, x, calendarProduct2.timeToPixel(END_TIME)));
 		}
 
-		// Draw horizontal grid lines
 		double y;
 		int x1=0;
 		for (LocalTime time = START_TIME; time.compareTo(END_TIME) <= 0; time = time.plusMinutes(30)) {
@@ -373,10 +366,16 @@ public abstract class Calendar extends JComponent {
 			g2.draw(new Line2D.Double(x1, y, dayToPixel(getEndDay()) + dayWidth, y));
 		}
 
-		// Reset the graphics context's colour
 		g2.setColor(ORIG_COLOUR);
 	}
 
+	/**
+	 * Gets the x coordinate.
+	 *
+	 * @param x1 the x coordinate
+	 * @param time the time
+	 * @return the x coordinate
+	 */
 	private int x1(int x1, LocalTime time) {
 		if (time.getMinute() == 0) {
 			x1 = 0;
@@ -392,7 +391,6 @@ public abstract class Calendar extends JComponent {
 	private void drawTodayShade() {
 		LocalDate today = LocalDate.now();
 
-		// Check that date range being viewed is current date range
 		if (!dateInRange(today)) return;
 
 		final double x = dayToPixel(today.getDayOfWeek());
@@ -413,7 +411,6 @@ public abstract class Calendar extends JComponent {
 	private void drawCurrentTimeLine() {
 		LocalDate today = LocalDate.now();
 
-		// Check that date range being viewed is current date range
 		if (!dateInRange(today)) return;
 
 		final double x0 = dayToPixel(today.getDayOfWeek());
@@ -457,33 +454,24 @@ public abstract class Calendar extends JComponent {
 			y0 = calendarProduct2.timeToPixel(event.getStart());
 			Rectangle2D rect = rect(x, y0, event);
 
-			//AQUI
-
 			Color origColor = g2.getColor();
 			g2.setColor(event.getColor());
 			g2.fill(rect);
 			g2.setColor(origColor);
 			g2.drawRect((int)x, (int)y0, (int)dayWidth / getNumEvents(event), (int)(calendarProduct2.timeToPixel(event.getEnd()) - calendarProduct2.timeToPixel(event.getStart())));
 
-			// Draw time header
-
-			// Store the current font state
 			Font origFont = g2.getFont();
 
 			final float fontSize = origFont.getSize() - 1.6F;
 
-			// Create a new font with same properties but bold
 			Font newFont = origFont.deriveFont(Font.BOLD, fontSize);
 			g2.setFont(newFont);
 
 			g2.drawString(event.getStart() + " - " + event.getEnd(), (int) x + 5, (int) y0 + 11);
 
-			// Unbolden
 			g2.setFont(origFont.deriveFont(fontSize));
 
-			// Draw the event's text
 			g2.drawString("Sumário: " + event.getText(), (int) x + 5, (int) y0 + 23);
-			// Draw the event's student
 
 			int j = 35;
 
@@ -494,11 +482,18 @@ public abstract class Calendar extends JComponent {
 				j+=12;
 			}
 
-			// Reset font
 			g2.setFont(origFont);            
 		}
 	}
 
+	/**
+	 * Dram the event rectangle.
+	 *
+	 * @param x the x coordinate
+	 * @param y0 the y coordinate
+	 * @param event the event
+	 * @return the event rectangle
+	 */
 	private Rectangle2D rect(double x, double y0, CalendarEvent event) {
 		x = event.getX();
 		y0 = calendarProduct2.timeToPixel(event.getStart());
@@ -509,10 +504,10 @@ public abstract class Calendar extends JComponent {
 
 
 	/**
-	 * Gets the num events.
+	 * Gets the number of events.
 	 *
-	 * @param e the e
-	 * @return the num events
+	 * @param e the event
+	 * @return the number events
 	 */
 	private int getNumEvents(CalendarEvent e) {
 		int count = 1;
@@ -542,7 +537,7 @@ public abstract class Calendar extends JComponent {
 	}
 
 	/**
-	 * Sets the X events.
+	 * Sets the X coordinates of the events.
 	 */
 	private void setXEvents() {
 		for(CalendarEvent event : events) {
@@ -583,7 +578,6 @@ public abstract class Calendar extends JComponent {
 	/**
 	 * Setup timer.
 	 */
-	// Repaints every minute to update the current time line
 	private void setupTimer() {
 		Timer timer = new Timer(1000*60, e -> repaint());
 		timer.start();

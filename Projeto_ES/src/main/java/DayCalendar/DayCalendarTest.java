@@ -14,7 +14,6 @@ import java.text.ParseException;
 import java.time.LocalDate;
 import java.util.ArrayList;
 
-// TODO: Auto-generated Javadoc
 /**
  * The Class DayCalendarTest.
  */
@@ -24,7 +23,7 @@ public class DayCalendarTest {
      * Instantiates a new day calendar test.
      *
      * @param events the list of events
-     * @param data the data
+     * @param data the date
      * @throws FileNotFoundException the file not found exception
      * @throws ParseException the parse exception
      */

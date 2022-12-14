@@ -32,13 +32,13 @@ import WeekCalendar.WeekCalendarTest;
  */
 public class Members extends JFrame implements ActionListener{
 
-	/** The lblcalendar. */
+	/** The JLabel's in use. */
 	JLabel lblmembers, lblselect, lblcalendar;
 	
-	/** The txt. */
+	/** The JButton's in use. */
 	JButton mensal, semanal, diario, back, txt;
 	
-	/** The members. */
+	/** The JComboBox to select members. */
 	JComboBox<String> members = new JComboBox<String>();
 
 	/**
@@ -122,11 +122,10 @@ public class Members extends JFrame implements ActionListener{
 	/**
 	 * Action performed.
 	 *
-	 * @param e the e
+	 * @param e the action performed
 	 */
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		// TODO Auto-generated method stub
 		ArrayList<String> member = new ArrayList<String>();
 		ArrayList<String> file = new ArrayList<String>();
 		if(e.getSource() == back) {
@@ -140,7 +139,6 @@ public class Members extends JFrame implements ActionListener{
 				file.add(AddMember.files2.get(members.getSelectedIndex()));
 				new Main(txtToObject.getList(file, member), member);
 			} catch (FileNotFoundException | ParseException e1) {
-				// TODO Auto-generated catch block
 				e1.printStackTrace();
 			}
 		}else if(e.getSource() == semanal) {
@@ -151,7 +149,6 @@ public class Members extends JFrame implements ActionListener{
 				file.add(AddMember.files2.get(members.getSelectedIndex()));
 				new WeekCalendarTest(txtToObject.getList(file, member));
 			} catch (FileNotFoundException | ParseException e1) {
-				// TODO Auto-generated catch block
 				e1.printStackTrace();
 			}
 		}else if(e.getSource() == diario) {
@@ -162,7 +159,6 @@ public class Members extends JFrame implements ActionListener{
 				file.add(AddMember.files2.get(members.getSelectedIndex()));
 				new DayCalendarTest(txtToObject.getList(file, member), LocalDate.now());
 			} catch (FileNotFoundException | ParseException e1) {
-				// TODO Auto-generated catch block
 				e1.printStackTrace();
 			}
 		}else if(e.getSource() == txt) {
@@ -174,10 +170,8 @@ public class Members extends JFrame implements ActionListener{
 				txtToObject.getList(file, member);
 				Desktop.getDesktop().open(new File("HorárioIndividual.txt"));
 			} catch (IOException e1) {
-				// TODO Auto-generated catch block
 				e1.printStackTrace();
 			} catch (ParseException e1) {
-				// TODO Auto-generated catch block
 				e1.printStackTrace();
 			}
 		}

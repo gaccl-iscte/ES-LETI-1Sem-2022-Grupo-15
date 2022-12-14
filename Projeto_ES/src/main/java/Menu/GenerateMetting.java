@@ -8,12 +8,9 @@ import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.FileNotFoundException;
-import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
-import java.time.LocalTime;
-import java.time.ZoneId;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
@@ -30,37 +27,36 @@ import org.jdesktop.swingx.JXDatePicker;
 import Calendar.CalendarEvent;
 import ES_2022_LETI_Grupo_15.Projeto_ES.txtToObject;
 
-
 /**
  * The Class GenerateMetting.
  */
 public class GenerateMetting extends JFrame implements ActionListener{
 
-	/** The lblsemanas. */
+	/** The JLabel's in use. */
 	JLabel lblmetting, lblperiodicidade, lbltempo, lblduracao, lbldata, lblhora, lblsemanas;
 	
-	/** The periodicidade. */
+	/** The JComboBox to select periodicity. */
 	static JComboBox<String> periodicidade = new JComboBox<String>();
 	
-	/** The tempo. */
+	/** The JComboBox to select time of day. */
 	JComboBox<String> tempo = new JComboBox<String>();
 	
-	/** The semanas. */
+	/** The JComboBox to select number of weeks. */
 	JComboBox<Integer> semanas = new JComboBox<Integer>();
 	
-	/** The manual. */
+	/** The JButton's in use. */
 	JButton gerar, auto, manual;
 	
-	/** The hora. */
+	/** The JSpinner's in use. */
 	JSpinner duracao, hora;
 	
-	/** The data. */
+	/** The JXDatePicker to select a date. */
 	JXDatePicker data;
 	
 	/** The instance. */
 	public static GenerateMetting instance;
 	
-	/** The events. */
+	/** The list of events. */
 	static ArrayList<CalendarEvent> events;
 
 	/**
@@ -220,22 +216,21 @@ public class GenerateMetting extends JFrame implements ActionListener{
 		this.setVisible(true);				
 	}
 
-	/** The format. */
+	/** The time format. */
 	SimpleDateFormat format = new SimpleDateFormat("HH:mm");
 	
-	/** The format 1. */
+	/** The date format. */
 	SimpleDateFormat format1 = new SimpleDateFormat("yyyy-MM-dd");
 
 
 	/**
 	 * Action performed.
 	 *
-	 * @param e the e
+	 * @param e the action performed
 	 */
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		data(e);
-		// TODO Auto-generated method stub
 		if(e.getSource() == gerar) {
 			if(!duracao.isVisible()) {					
 				System.out.println("erro");
@@ -252,7 +247,6 @@ public class GenerateMetting extends JFrame implements ActionListener{
 						new Metting();
 						this.setVisible(false);
 					} catch (FileNotFoundException | ParseException e1) {
-						// TODO Auto-generated catch block
 						e1.printStackTrace();
 					}
 
@@ -263,7 +257,6 @@ public class GenerateMetting extends JFrame implements ActionListener{
 							new Metting();
 							this.setVisible(false);
 						} catch (FileNotFoundException | ParseException e1) {
-							// TODO Auto-generated catch block
 							e1.printStackTrace();
 						}
 					}else if (periodicidade.getSelectedItem().equals((Object) "Semanal")){
@@ -272,7 +265,6 @@ public class GenerateMetting extends JFrame implements ActionListener{
 							new Metting();
 							this.setVisible(false);
 						} catch (FileNotFoundException | ParseException e1) {
-							// TODO Auto-generated catch block
 							e1.printStackTrace();
 						}
 					}
@@ -311,6 +303,11 @@ public class GenerateMetting extends JFrame implements ActionListener{
 		}
 	}
 
+	/**
+	 * Sets data visible.
+	 *
+	 * @param e the action performed
+	 */
 	private void data(ActionEvent e) {
 		if (e.getSource() == gerar) {
 		} else if (e.getSource() == auto) {

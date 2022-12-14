@@ -43,7 +43,6 @@ public class txtToObject {
 			PrintStream out = new PrintStream(nomes.get(i)+".txt");
 			System.setOut(out);
 
-			// criar os nomes do ficheiros
 			files2.add(nomes.get(i)+".txt");
 
 			File file2 = new File(files.get(i));
@@ -242,7 +241,6 @@ public class txtToObject {
 	 */
 	public static Boolean availableOrNot(String dataI, String dataF, ArrayList<CalendarEvent> eventos, ArrayList<String> nomes) throws FileNotFoundException, ParseException {
 
-		// converter as strings em datas
 		String[] dtstart = dataI.split(" ");
 		LocalDate date = LocalDate.parse(dtstart[0]);
 		LocalTime start = LocalTime.parse(dtstart[1]);
@@ -252,7 +250,6 @@ public class txtToObject {
 
 		for(CalendarEvent event : eventos) {
 
-			// verificar se as datas são iguais
 			if(event.getDate().equals(date)) {
 
 				if(event.getStart().isAfter(start) && event.getEnd().isBefore(end) && !Collections.disjoint(event.getNomes(), nomes) 
@@ -346,9 +343,6 @@ public class txtToObject {
 
 		int day = DayOfWeek.from(hoje).getValue();
 		CalendarEvent reuniao = null;
-
-		// manhã - 08:00 às 14:00
-		// tarde - 14:00 às 20:00
 
 		int horaI = horaI(alturaDoDia);
 		int horaF = horaF(alturaDoDia);
@@ -521,7 +515,6 @@ public class txtToObject {
 		try {
 			eventos = findBestTime(eventos, duracao, alturaDoDia, nomes, data);
 		} catch (FileNotFoundException | ParseException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 

@@ -1,31 +1,48 @@
 package MonthCalendar;
 
 
-import javax.swing.JButton;
-import javax.swing.JLayeredPane;
-import javax.swing.BorderFactory;
-import java.awt.Cursor;
-import javax.swing.GroupLayout;
-import javax.swing.LayoutStyle;
-import javax.swing.JLabel;
-import java.awt.event.ActionListener;
-import java.awt.event.ActionEvent;
 import java.io.Serializable;
 
+/**
+ * The Class CalendarCustomProduct2.
+ */
 public class CalendarCustomProduct2 implements Serializable {
+	
+	/** The calendar custom product. */
 	private CalendarCustomProduct calendarCustomProduct = new CalendarCustomProduct();
+	
+	/** The JButton cmdBack. */
 	private javax.swing.JButton cmdBack;
+	
+	/** The JButton cmdNext. */
 	private javax.swing.JButton cmdNext;
+	
+	/** The JLayeredPane jLayeredPane1. */
 	private javax.swing.JLayeredPane jLayeredPane1;
 
+	/**
+	 * Gets the calendar custom product.
+	 *
+	 * @return the calendar custom product
+	 */
 	public CalendarCustomProduct getCalendarCustomProduct() {
 		return calendarCustomProduct;
 	}
 
+	/**
+	 * Gets the JLayeredPane jLayeredPane1.
+	 *
+	 * @return the JLayeredPane jLayeredPane1
+	 */
 	public javax.swing.JLayeredPane getJLayeredPane1() {
 		return jLayeredPane1;
 	}
 
+	/**
+	 * Calendar custom product.
+	 *
+	 * @param calendarCustom the custom calendar 
+	 */
 	public void calendarCustomProduct(CalendarCustom calendarCustom) {
 		cmdBack(calendarCustom);
 		cmdNext.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
@@ -33,6 +50,11 @@ public class CalendarCustomProduct2 implements Serializable {
 		cmdNext.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
 	}
 
+	/**
+	 * Sets JLayeredPane jLayeredPane1.
+	 *
+	 * @param calendarCustom the custom calendar
+	 */
 	public void jLayeredPane1(CalendarCustom calendarCustom) {
 		calendarCustomProduct(calendarCustom);
 		jLayeredPane1 = new javax.swing.JLayeredPane();
@@ -67,6 +89,11 @@ public class CalendarCustomProduct2 implements Serializable {
 						.addContainerGap()));
 	}
 
+	/**
+	 * Sets JButton cmdBack.
+	 *
+	 * @param calendarCustom the calendar custom
+	 */
 	public void cmdBack(final CalendarCustom calendarCustom) {
 		calendarCustom.setSlide(new MonthCalendar.PanelSlide());
 		cmdBack = new javax.swing.JButton("<");
