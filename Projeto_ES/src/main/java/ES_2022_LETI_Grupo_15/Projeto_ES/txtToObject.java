@@ -411,7 +411,7 @@ public class txtToObject {
 	 */
 	private static int horaI(String alturaDoDia) {
 		int horaI = 0;
-		if (alturaDoDia.equals("manha")) {
+		if (alturaDoDia.equals("Manhã")) {
 			horaI = 8;
 		} else {
 			horaI = 14;
@@ -427,7 +427,7 @@ public class txtToObject {
 	 */
 	private static int horaF(String alturaDoDia) {
 		int horaF = 0;
-		if (alturaDoDia.equals("manha")) {
+		if (alturaDoDia.equals("Manhã")) {
 			horaF = 14;
 		} else {
 			horaF = 20;
