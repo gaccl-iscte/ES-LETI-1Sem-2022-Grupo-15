@@ -29,7 +29,7 @@ public class txtToObject {
 	/**
 	 * Filtra os ficheiros .txt obtidos pelo o url ou o ficheiro ics.
 	 *
-	 * @param files e a lista os nomes dos ficheiros que sao obtitos pelas as funções da classe toTxt
+	 * @param files e a lista os nomes dos ficheiros que sao obtitos pelas as funcoes da classe toTxt
 	 * @param nomes e a lista com o nomes do membros
 	 * @return ArrayList com o nome dos ficheiros com a informacao filtrada
 	 * @throws FileNotFoundException the file not found exception
@@ -277,7 +277,7 @@ public class txtToObject {
 	}
 
 	/**
-	 * Adiciona uma reuniao à lista de eventos
+	 * Adiciona uma reuniao a lista de eventos
 	 *
 	 * @param eventos e a lista de eventos
 	 * @param nomes e a lista com o nomes do membros
@@ -305,8 +305,8 @@ public class txtToObject {
 
 		if(availableOrNot(dateToString, endToString, eventos, nomes)) {
 
-			CalendarEvent reuniao = new CalendarEvent(date, start, end, "Reunião", nomes);
-
+			CalendarEvent reuniao = new CalendarEvent(date, start, end, "Reunião", null);
+			reuniao.setNomes(nomes);
 			eventos.add(reuniao);
 			reuniaoFinal = reuniao;
 			
@@ -372,7 +372,8 @@ public class txtToObject {
 					String dataF = dateFinal.toString() + " " + fim.toString();
 
 					if(availableOrNot(dataI, dataF, eventos, nomes)) {
-						reuniao = new CalendarEvent(dateFinal, inicio, fim, "Reunião", nomes);
+						reuniao = new CalendarEvent(dateFinal, inicio, fim, "Reunião", null);
+						reuniao.setNomes(nomes);
 						break outerloop;
 					}
 				}

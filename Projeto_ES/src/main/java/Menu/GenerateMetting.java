@@ -264,7 +264,7 @@ public class GenerateMetting extends JFrame implements ActionListener{
 
 				LocalTime horaFinal = LocalTime.parse(horasI).plusMinutes(LocalTime.parse(horas).get(ChronoField.MINUTE_OF_DAY));
 
-				if(horaFinal.isAfter(LocalTime.of(20, 00)) || horaFinal.isAfter(LocalTime.of(00, 00))) {
+				if(horaFinal.isAfter(LocalTime.of(20, 00))) {
 					JOptionPane.showMessageDialog(null,"Reunião ultrapassa as 20:00!");
 					return;
 				}
